@@ -42,7 +42,8 @@ namespace WeddingChecklistNew.Controllers
         // GET: Checklists/Create
         public ActionResult Create()
         {
-            ViewData["listChecklistMain"] =  new SelectList(mAPIChecklistMainController.GetChecklistMains().Select(m=>m.Name));
+            var list = mAPIChecklistMainController.GetChecklistMains().Select(m=> new {m.Name,m.Id});
+            ViewData["listChecklistMain"] =  new SelectList(list,"Id","Name");
             return View();
         }
 
@@ -51,7 +52,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority")] Checklist checklist)
+        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId")] Checklist checklist)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +66,8 @@ namespace WeddingChecklistNew.Controllers
         // GET: Checklists/Edit/5
         public ActionResult Edit(int? id)
         {
+            var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
+            ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -82,7 +85,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority")] Checklist checklist)
+        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId")] Checklist checklist)
         {
             if (ModelState.IsValid)
             {

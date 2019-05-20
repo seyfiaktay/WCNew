@@ -19,7 +19,8 @@ namespace WeddingChecklistNew.Controllers.APIController
         // GET: api/APIChecklists
         public IQueryable<Checklist> GetCheckLists()
         {
-            return db.CheckLists;
+            //return db.CheckLists;
+            return db.CheckLists.Include("ChecklistMain");
         }
 
         // GET: api/APIChecklists/5

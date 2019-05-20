@@ -14,6 +14,6 @@ namespace WeddingChecklistNew.Models
         public Int16 Priority { get; set; }
         public IEnumerable<ChecklistImage> CheckListImage { get; set; }
         public virtual ChecklistMain CheckListMain { get; set; }
-        public int ChecklistMainId { get; set; }
+        public int? ChecklistMainId { get; set; }
     }
 }

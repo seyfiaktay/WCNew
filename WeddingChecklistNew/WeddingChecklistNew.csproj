@@ -242,9 +242,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905161409031_lastmigration.cs" />
-    <Compile Include="Migrations\201905161409031_lastmigration.Designer.cs">
-      <DependentUpon>201905161409031_lastmigration.cs</DependentUpon>
+    <Compile Include="Migrations\201905201032094_seyfi.cs" />
+    <Compile Include="Migrations\201905201032094_seyfi.Designer.cs">
+      <DependentUpon>201905201032094_seyfi.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -404,8 +404,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905161409031_lastmigration.resx">
-      <DependentUpon>201905161409031_lastmigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905201032094_seyfi.resx">
+      <DependentUpon>201905201032094_seyfi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
