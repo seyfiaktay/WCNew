@@ -256,9 +256,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905220811574_seyfi.cs" />
-    <Compile Include="Migrations\201905220811574_seyfi.Designer.cs">
-      <DependentUpon>201905220811574_seyfi.cs</DependentUpon>
+    <Compile Include="Migrations\201905221217093_seyfi.cs" />
+    <Compile Include="Migrations\201905221217093_seyfi.Designer.cs">
+      <DependentUpon>201905221217093_seyfi.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -266,7 +266,6 @@
     <Compile Include="Models\Checklist.cs" />
     <Compile Include="Models\ChecklistImage.cs" />
     <Compile Include="Models\ChecklistMain.cs" />
-    <Compile Include="Models\CheckListModel.cs" />
     <Compile Include="Models\clsBase.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -593,8 +592,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905220811574_seyfi.resx">
-      <DependentUpon>201905220811574_seyfi.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905221217093_seyfi.resx">
+      <DependentUpon>201905221217093_seyfi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
