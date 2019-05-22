@@ -24,6 +24,7 @@ namespace WeddingChecklistNew.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            
         }
 
         

@@ -480,6 +480,10 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\UserFiles\Images\0c1097d4-d742-4e43-afb5-dfa06f1a9acf.jpg" />
+    <Content Include="Content\UserFiles\Images\790fb5bc-5dea-42fa-a229-56afa2550fdd.jpg" />
+    <Content Include="Content\UserFiles\Images\c732655a-672a-4f87-be86-56c07694244a.jpg" />
+    <Content Include="Content\UserFiles\Images\vesikalik2.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -507,6 +511,17 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\UserFiles\Images\48216267-1e78-42d5-95a0-f23cd823eb94.log" />
+    <Content Include="Content\UserFiles\Images\4c6eb6ac-4aa9-42bb-a357-3c5ddafa9294.log" />
+    <Content Include="Content\UserFiles\Images\62bcd4a2-06b4-48f8-9609-bbe508ab1b4e.log" />
+    <Content Include="Content\UserFiles\Images\73191e31-5685-4cce-969f-83aa636e609a.log" />
+    <Content Include="Content\UserFiles\Images\7ec91d97-0cf0-4c61-b459-985e60c632c4.json" />
+    <Content Include="Content\UserFiles\Images\bdfb8701-13a7-444f-9398-abd1ae18b057.log" />
+    <Content Include="Content\UserFiles\Images\cb3310ca-2b67-411d-8345-28a47f7a0064.log" />
+    <Content Include="Content\UserFiles\Images\d321361c-7df7-4853-9566-406af130c21c.log" />
+    <Content Include="Content\UserFiles\Images\fa8fbb0c-84d4-4b91-b225-04cca7f6a4d3.log" />
+    <Content Include="Content\UserFiles\Images\java_error_in_studio_672.log" />
+    <Content Include="Content\UserFiles\Images\package-lock.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -547,7 +562,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\UserFiles\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

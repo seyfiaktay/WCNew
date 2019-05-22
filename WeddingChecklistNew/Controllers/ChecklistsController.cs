@@ -17,7 +17,7 @@ namespace WeddingChecklistNew.Controllers
     {
         private APIChecklistsController mAPIChecklistController = new APIChecklistsController();
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
-        private APIChecklistImagesController aPIChecklistImagesController = new APIChecklistImagesController();
+        private APIChecklistImagesController mAPIChecklistImagesController = new APIChecklistImagesController();
 
         // GET: Checklists
         public ActionResult Index()
@@ -70,6 +70,8 @@ namespace WeddingChecklistNew.Controllers
         {
             var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
             ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x=> x.CheckListId == id).Select(m => new {m.Path, m.Id });
+            ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -140,9 +142,10 @@ namespace WeddingChecklistNew.Controllers
                 Guid guid = Guid.NewGuid();
                 string filename = Request.Files[i].FileName;
                 string type = filename.Substring(filename.IndexOf("."), filename.Length - filename.IndexOf("."));
-                string physicalPath = Server.MapPath("~/Content/UserFiles/Images/" + guid.ToString() + type);
+                string mapPath = "~/Content/UserFiles/Images/" + guid.ToString() + type;
+                string physicalPath = Server.MapPath(mapPath);
                 ChecklistImage checklistImage = new ChecklistImage();
-                checklistImage.Path = physicalPath;
+                checklistImage.Path = mapPath;
                 checklistImage.Type = 1;
                 checklistImage.CheckListId = checklist.Id;
                 lstImages.Add(checklistImage);
