@@ -34,7 +34,6 @@ namespace WeddingChecklistNew.Models
 
         public DbSet<Checklist> CheckLists { get; set; }
         public DbSet<ChecklistImage> CheckListImages { get; set; }
-
         public System.Data.Entity.DbSet<WeddingChecklistNew.Models.ChecklistMain> ChecklistMains { get; set; }
     }
 }

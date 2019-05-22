@@ -13,7 +13,7 @@ namespace WeddingChecklistNew.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201905201032094_seyfi"; }
+            get { return "201905220811574_seyfi"; }
         }
         
         string IMigrationMetadata.Source

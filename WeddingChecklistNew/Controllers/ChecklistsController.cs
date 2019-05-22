@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace WeddingChecklistNew.Controllers
     {
         private APIChecklistsController mAPIChecklistController = new APIChecklistsController();
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
+        private APIChecklistImagesController aPIChecklistImagesController = new APIChecklistImagesController();
 
         // GET: Checklists
         public ActionResult Index()
@@ -56,13 +58,13 @@ namespace WeddingChecklistNew.Controllers
         {
             if (ModelState.IsValid)
             {
+                SetCheckListImages_Upload(checklist);
                 mAPIChecklistController.PostChecklist(checklist);
                 return RedirectToAction("Index");
             }
-
             return View(checklist);
         }
-
+       
         // GET: Checklists/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -89,6 +91,7 @@ namespace WeddingChecklistNew.Controllers
         {
             if (ModelState.IsValid)
             {
+                SetCheckListImages_Upload(checklist);
                 mAPIChecklistController.PutChecklist(checklist.Id,checklist);
                 return RedirectToAction("Index");
             }
@@ -127,6 +130,25 @@ namespace WeddingChecklistNew.Controllers
             var contentResult = actionResult as OkNegotiatedContentResult<Checklist>;
             var checklist = contentResult.Content;
             return checklist;
+        }
+
+        private void SetCheckListImages_Upload(Checklist checklist)
+        {
+            List<ChecklistImage> lstImages = new List<ChecklistImage>();
+            for (int i = 0; i < Request.Files.Count; i++)
+            {
+                Guid guid = Guid.NewGuid();
+                string filename = Request.Files[i].FileName;
+                string type = filename.Substring(filename.IndexOf("."), filename.Length - filename.IndexOf("."));
+                string physicalPath = Server.MapPath("~/Content/UserFiles/Images/" + guid.ToString() + type);
+                ChecklistImage checklistImage = new ChecklistImage();
+                checklistImage.Path = physicalPath;
+                checklistImage.Type = 1;
+                checklistImage.CheckListId = checklist.Id;
+                lstImages.Add(checklistImage);
+                Request.Files[i].SaveAs(physicalPath);
+            }
+            checklist.CheckListImage = lstImages;
         }
     }
 }

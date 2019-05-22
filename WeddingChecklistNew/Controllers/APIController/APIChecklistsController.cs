@@ -51,24 +51,26 @@ namespace WeddingChecklistNew.Controllers.APIController
                 return BadRequest();
             }
 
-            db.Entry(checklist).State = EntityState.Modified;
-
-            try
+            using (DbContextTransaction transaction = db.Database.BeginTransaction())
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ChecklistExists(id))
+                try
                 {
-                    return NotFound();
+                    //DELETE ALL IMAGES BEFORE
+                    db.CheckListImages.RemoveRange(db.CheckListImages.Where(x => x.CheckListId == checklist.Id));
+                    db.Entry(checklist).State = EntityState.Modified;
+                    foreach (ChecklistImage item in checklist.CheckListImage) 
+                    {
+                        db.CheckListImages.Add(item);
+                    }
+                    db.SaveChanges();
+                    transaction.Commit();
                 }
-                else
+                catch (Exception ex)
                 {
+                    transaction.Rollback();
                     throw;
                 }
             }
-
             return StatusCode(HttpStatusCode.NoContent);
         }
 
@@ -80,10 +82,24 @@ namespace WeddingChecklistNew.Controllers.APIController
             {
                 return BadRequest(ModelState);
             }
-
-            db.CheckLists.Add(checklist);
-            db.SaveChanges();
-
+            using (DbContextTransaction transaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    db.CheckLists.Add(checklist);
+                    foreach (ChecklistImage item in checklist.CheckListImage)
+                    {
+                        db.CheckListImages.Add(item);
+                    }
+                    db.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
+            }
+            
             return CreatedAtRoute("DefaultApi", new { id = checklist.Id }, checklist);
         }
 

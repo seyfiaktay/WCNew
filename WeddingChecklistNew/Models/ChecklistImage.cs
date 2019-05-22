@@ -11,5 +11,6 @@ namespace WeddingChecklistNew.Models
         public string Path { get; set; }
         public virtual Checklist CheckList { get; set; }
         public int CheckListId { get; set; }
+        public byte Type { get; set; }
     }
 }
