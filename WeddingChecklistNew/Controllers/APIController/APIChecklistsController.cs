@@ -108,14 +108,24 @@ namespace WeddingChecklistNew.Controllers.APIController
         public IHttpActionResult DeleteChecklist(int id)
         {
             Checklist checklist = db.CheckLists.Find(id);
-            if (checklist == null)
+            using (DbContextTransaction transaction = db.Database.BeginTransaction())
             {
-                return NotFound();
+                try
+                {
+                    if (checklist == null)
+                    {
+                        throw new Exception("item not found");
+                    }
+                    db.CheckListImages.RemoveRange(db.CheckListImages.Where(x => x.CheckListId == id));
+                    db.CheckLists.Remove(checklist);
+                    db.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();
+                }
             }
-
-            db.CheckLists.Remove(checklist);
-            db.SaveChanges();
-
             return Ok(checklist);
         }
 
