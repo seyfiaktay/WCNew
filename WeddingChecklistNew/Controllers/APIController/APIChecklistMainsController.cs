@@ -39,8 +39,6 @@ namespace WeddingChecklistNew.Controllers.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutChecklistMain(int id, ChecklistMain checklistMain)
         {
-            checklistMain.LogDate = DateTime.Now;
-            checklistMain.UserId = "seyfi";
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -76,8 +74,7 @@ namespace WeddingChecklistNew.Controllers.APIController
         [ResponseType(typeof(ChecklistMain))]
         public IHttpActionResult PostChecklistMain(ChecklistMain checklistMain)
         {
-            checklistMain.LogDate = DateTime.Now;
-            checklistMain.UserId = "seyfi";
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

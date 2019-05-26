@@ -50,8 +50,17 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate")] ChecklistMain checklistMain)
         {
-            mAPIChecklistMainController.PostChecklistMain(checklistMain);
-            return RedirectToAction("Index");
+            checklistMain.LogDate = DateTime.Now;
+            checklistMain.UserId = "seyfi";
+            checklistMain.checklists = new List<Checklist>();
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            if (ModelState.IsValid)
+            {
+                mAPIChecklistMainController.PostChecklistMain(checklistMain);
+                TempData["message"] = "success";
+                return RedirectToAction("Index");
+            }
+            return View(checklistMain);
         }
 
         // GET: ChecklistMains/Edit/5
@@ -76,8 +85,15 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate")] ChecklistMain checklistMain)
         {
-            mAPIChecklistMainController.PutChecklistMain(checklistMain.Id, checklistMain);
-            return RedirectToAction("Index");
+            checklistMain.LogDate = DateTime.Now;
+            checklistMain.UserId = "seyfi";
+            if (ModelState.IsValid)
+            {
+                mAPIChecklistMainController.PutChecklistMain(checklistMain.Id, checklistMain);
+                TempData["message"] = "success";
+                return RedirectToAction("Index");
+            }
+            return View(checklistMain);
         }
 
         // GET: ChecklistMains/Delete/5
@@ -102,6 +118,7 @@ namespace WeddingChecklistNew.Controllers
         {
             ChecklistMain checklistMain = GetChecklistMain(id);
             mAPIChecklistMainController.DeleteChecklistMain(id);
+            TempData["message"] = "success";
             return RedirectToAction("Index");
         }
 

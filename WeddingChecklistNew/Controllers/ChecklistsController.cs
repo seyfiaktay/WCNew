@@ -56,10 +56,13 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId")] Checklist checklist)
         {
+            var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
+            ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
             if (ModelState.IsValid)
             {
                 SetCheckListImages_Upload(checklist);
                 mAPIChecklistController.PostChecklist(checklist);
+                TempData["message"] = "success";
                 return RedirectToAction("Index");
             }
             return View(checklist);
@@ -95,6 +98,7 @@ namespace WeddingChecklistNew.Controllers
             {
                 SetCheckListImages_Upload(checklist);
                 mAPIChecklistController.PutChecklist(checklist.Id,checklist);
+                TempData["message"] = "success";
                 return RedirectToAction("Index");
             }
             return View(checklist);
@@ -122,6 +126,7 @@ namespace WeddingChecklistNew.Controllers
         {
             Checklist checklist = GetChecklist(id);
             mAPIChecklistController.DeleteChecklist(id);
+            TempData["message"] = "success";
             return RedirectToAction("Index");
         }
 

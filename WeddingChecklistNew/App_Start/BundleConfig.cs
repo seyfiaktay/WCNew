@@ -10,7 +10,8 @@ namespace WeddingChecklistNew
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").
                 Include("~/Scripts/jquery-3.3.1.min.js", 
-                        "~/Scripts/jquery-ui-1.12.1.js"));
+                        "~/Scripts/jquery-ui-1.12.1.js", 
+                        "~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -20,9 +21,13 @@ namespace WeddingChecklistNew
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/toastr").
+                Include("~/Scripts/toastr.min.js"));
+
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/site.css", 
+                      "~/Content/toastr.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                     "~/Content/themes/base/jquery-ui.css", "~/Content/themes/base/datepicker.css"));

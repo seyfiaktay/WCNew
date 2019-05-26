@@ -256,9 +256,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201905221217093_seyfi.cs" />
-    <Compile Include="Migrations\201905221217093_seyfi.Designer.cs">
-      <DependentUpon>201905221217093_seyfi.cs</DependentUpon>
+    <Compile Include="Migrations\201905261044169_seyfi.cs" />
+    <Compile Include="Migrations\201905261044169_seyfi.Designer.cs">
+      <DependentUpon>201905261044169_seyfi.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -479,6 +479,8 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="Content\UserFiles\Images\0c1097d4-d742-4e43-afb5-dfa06f1a9acf.jpg" />
     <Content Include="Content\UserFiles\Images\790fb5bc-5dea-42fa-a229-56afa2550fdd.jpg" />
     <Content Include="Content\UserFiles\Images\c732655a-672a-4f87-be86-56c07694244a.jpg" />
@@ -521,6 +523,8 @@
     <Content Include="Content\UserFiles\Images\fa8fbb0c-84d4-4b91-b225-04cca7f6a4d3.log" />
     <Content Include="Content\UserFiles\Images\java_error_in_studio_672.log" />
     <Content Include="Content\UserFiles\Images\package-lock.json" />
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -534,6 +538,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\toastr.js" />
+    <Content Include="Scripts\toastr.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -592,8 +598,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905221217093_seyfi.resx">
-      <DependentUpon>201905221217093_seyfi.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905261044169_seyfi.resx">
+      <DependentUpon>201905261044169_seyfi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -615,6 +621,8 @@
           <DevelopmentServerPort>55465</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:55465/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:55465/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

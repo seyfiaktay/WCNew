@@ -7,7 +7,7 @@ namespace WeddingChecklistNew.Models
 {
     public class clsBase
     {
-        public DateTime LogDate { get; set; }
+        public DateTime? LogDate { get; set; }
         public string UserId { get; set; }
     }
 }

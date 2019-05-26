@@ -1,70 +1,180 @@
-﻿@model WeddingChecklistNew.Models.Checklist
+﻿@*@model WeddingChecklistNew.Models.Checklist
+
+    <div class="comment-post">
+        <h4>Leave a comment</h4>
+        <form action="#" method="post" class="comment-form" name="comment-form" id="form">
+            <div class="row">
+                <div class="span3">
+                    <label>Name <span>*</span></label>
+                    <input type="text" class="input-block-level" name="Name" id="Name" value="@Model.Name">
+                </div>
+                <div class="span3">
+                    <label>Url <span>*</span></label>
+                    <input type="url" class="input-block-level" name="Url" id="Url" value="@Model.Url">
+                </div>
+                <div class="span3">
+                    <label>price</label>
+                    <input type="number" class="input-block-level" name="Price" id="Price" value="@Model.Price">
+                </div>
+                <div class="span3">
+                    <label>Priority</label>
+                    <input type="number" class="input-block-level" name="Priority" id="Priority" value="@Model.Priority">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="file" name="Files" id="file" multiple="multiple" />
+                </div>
+            </div>
+            <button class="btn btn-medium btn-success" type="button" onclick="Save()">Submit comment</button>
+        </form>
+    </div>
+    @Html.ActionLink("Back to List", "Index")
+
+    <script>
+
+        function Save() {
+            debugger;
+            var formdata = new FormData(); //FormData object
+            var fileInput = document.getElementById('file');
+            //Iterating through each files selected in fileInput
+            for (i = 0; i < fileInput.files.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(fileInput.files[i].name, fileInput.files[i]);
+            }
+
+            var model={
+                Name: $("#Name").val(),
+                Url: $("#Url").val(),
+                Price:$("#Price").val(),
+                Priority: $("#Priority").val()
+            }
+            $.ajax({
+                url: "/Checklists/Create",
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(model)
+                //success: ajaxOnSuccess,
+                //error: function (jqXHR, exception) {
+                //    alert('Error message.');
+                //}
+            });
+        }
+    </script>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@model WeddingChecklistNew.Models.Checklist
 
 @{
     ViewBag.Title = "Create";
-    
+    var mainselectlist = (SelectList)ViewData["listChecklistMain"];
 }
+
 
 <h2>Create</h2>
 
-@using (Html.BeginForm("Create", "Checklists", FormMethod.Post, new{enctype = "multipart/form-data"})) 
+@using (Html.BeginForm("Create", "Checklists", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>Checklist</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(model => model.ChecklistMainId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.ChecklistMainId, (SelectList)ViewData["listChecklistMain"], new { htmlAttributes = new { @class = "form-control dropdown" } })
-            @Html.ValidationMessageFor(model => model.ChecklistMainId, "", new { @class = "text-danger" })
+
+    <div class="form-horizontal">
+        <h4>Checklist</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ChecklistMainId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.ChecklistMainId, mainselectlist, new { htmlAttributes = new { @class = "form-control dropdown" } })
+                @Html.ValidationMessageFor(model => model.ChecklistMainId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @type = "url", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @type = "number", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2"></label>
+            <div class="col-md-10">
+                <input type="file" name="Files" multiple="multiple" />
+            </div>
+        </div>
+        <div class="btn-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-success" />
+            </div>
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-2"></label>
-        <div class="col-md-10">
-            <input type="file" name="Files" multiple="multiple" />
-        </div>
-    </div>
-    <div class="btn-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-success" />
-        </div>
-    </div>
- </div>
- }
 
- <div>
-     @Html.ActionLink("Back to List", "Index")
- </div>
+
+}
+
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

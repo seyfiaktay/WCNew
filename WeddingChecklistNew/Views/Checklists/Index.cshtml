@@ -55,3 +55,14 @@
 }
 
 </table>
+
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        if ('@TempData["message"]' == "success") {
+        toastr.options.timeOut = 2000; // 2s
+        toastr.success('done!');
+       }
+        else{ }
+    })
+</script>
