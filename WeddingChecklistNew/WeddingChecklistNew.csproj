@@ -245,6 +245,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\APIController\APIAccountController.cs" />
     <Compile Include="Controllers\APIController\APIChecklistImagesController.cs" />
     <Compile Include="Controllers\APIController\APIChecklistMainsController.cs" />
     <Compile Include="Controllers\APIController\APIChecklistsController.cs" />
@@ -526,6 +527,7 @@
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -564,6 +566,7 @@
     <Content Include="Views\ChecklistMains\Details.cshtml" />
     <Content Include="Views\ChecklistMains\Edit.cshtml" />
     <Content Include="Views\ChecklistMains\Index.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

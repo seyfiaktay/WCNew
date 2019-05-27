@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+<script src="~/Scripts/custom.js"></script>
+<h2>Register</h2>
+<div class="row form-horizontal">
+
+
+    <form  id="RegisterFormId">
+        <div id="result"></div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Email</label>
+            <div class="col-md-10">
+                <input type="text" name="Email" data-req="Email is Required" value="" id="email" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Password</label>
+            <div class="col-md-10">
+                <input type="password" name="Password" data-req="password is Required" value="" id="password" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Confirm Password</label>
+            <div class="col-md-10">
+                <input type="password" name="ConfirmPassword" data-req="confirm password is Required" value="" id="confirmpassword" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" onclick="Save()" class="btn btn-success" value="Register" />
+            </div>
+        </div>
+    </form>
+
+</div>
+<script>
+    function Save() {
+        
+        
+        var validateResult = validate.control({
+            element: $('#RegisterFormId .required'),
+            cElement: '#result'
+        });
+        if (validateResult) {
+            var model = $("#RegisterFormId").serialize();
+            console.log(model);
+            $.ajax({
+                type: "POST",
+                url: "/api/Account/Register",
+                data: model,
+                success: function (data) {
+                    toastr.success("done!");
+                    location.href = "/Home/Index";
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    toastr.error(xhr.responseText)
+                }
+            });
+        }
+    }
+</script>
