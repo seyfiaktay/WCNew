@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<div class="row form-horizontal">
+
+
+    <form id="LoginFormId">
+        <div id="result"></div>
+        <input type="hidden" name="grant_type" value="password" />
+        <div class="form-group">
+            <label class="col-md-2 control-label">Email</label>
+            <div class="col-md-10">
+                <input type="email" name="userName" required data-req="Email is Required" value="" id="email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Password</label>
+            <div class="col-md-10">
+                <input type="password" name="password" required data-req="password is Required" value="" id="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" onclick="Save()" class="btn btn-success" value="Login" />
+            </div>
+        </div>
+    </form>
+
+</div>
+<script>
+    function Save() {
+        $("#LoginFormId").validate({
+            rules: {
+                'userName': {
+                    //required: true,
+                    email: true 
+                },
+                //'password': {
+                //    required: true 
+                //}
+            },
+            messages: {
+                required: 'Please enter valid value',
+                email: 'Please enter valid email'
+            },
+            showErrors: function (errorMap, errorList) {
+                this.defaultShowErrors();
+            },
+            submitHandler: function () {
+                var model = $("#LoginFormId").serialize();
+                $.ajax({
+                        type: "POST",
+                        url: "/token",
+                        data: model,
+                        success: function (data_token) {
+                            toastr.success("login success");
+                            localStorage.setItem('Token', JSON.stringify(data_token));
+                            window.location.href = "/Home/Index";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            toastr.error(xhr.responseText);
+                        }
+                 });
+            }
+        });
+    }
+</script>
