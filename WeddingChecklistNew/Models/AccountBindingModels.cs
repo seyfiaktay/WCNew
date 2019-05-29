@@ -81,4 +81,17 @@ namespace WeddingChecklistNew.Models
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
+
+
+    public class ResetPasswordModel
+    {
+        [Required]
+        public string userid { get; set; }
+        [Required]
+        public string code { get; set; }
+        [Required]
+        public string newpassword { get; set; }
+        [Required]
+        public string confirmpassword { get; set; }
+    }
 }

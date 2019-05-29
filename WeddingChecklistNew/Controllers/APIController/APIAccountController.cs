@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Net.Security;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -487,6 +491,54 @@ namespace WeddingChecklistNew.Controllers
                 _random.GetBytes(data);
                 return HttpServerUtility.UrlTokenEncode(data);
             }
+        }
+
+        [Route("SendForgotPasswordEmail")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IHttpActionResult SendForgotPasswordEmail(string email)
+        {
+            var user = UserManager.FindByEmail(email);
+            if (user != null)
+            {
+                // Send an email with this link
+                string code = UserManager.GeneratePasswordResetToken(user.Id);
+                var callbackUrl = string.Format("http://localhost:55465/Account/ForgotPasswordEmail/?userid={0}&code={1}", user.Id, code);
+                using (SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com"))
+                {
+                    MailMessage mail = new MailMessage();
+                    SmtpServer.Port = 587;
+                    SmtpServer.UseDefaultCredentials = false;
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("seyfiaktay@gmail.com", "s@hnbjm361565");
+                    SmtpServer.EnableSsl = true;
+                    SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    mail.From = new MailAddress("seyfiaktay@gmail.com");
+                    mail.To.Add(user.Email);
+                    mail.Subject = "Reset Password";
+                    mail.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
+                    ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
+                    //SmtpServer.Send(mail);
+                }
+                //UserManager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return Ok();
+            }
+            return NotFound();
+        }
+
+
+        [Route("ResetPassword")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IHttpActionResult ResetPassword(ResetPasswordModel model)
+        {
+            var user = UserManager.FindById(model.userid);
+            if (user != null)
+            {
+                UserManager.ResetPassword(model.userid, model.code, model.newpassword);
+                return Ok();
+            }
+
+            return NotFound();
         }
 
         #endregion

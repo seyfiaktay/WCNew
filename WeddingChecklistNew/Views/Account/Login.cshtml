@@ -27,8 +27,12 @@
                 <input type="submit" onclick="Save()" class="btn btn-success" value="Login" />
             </div>
         </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.ActionLink("Forgot Password", "SendEmail", "Account")
+            </div>
+        </div>
     </form>
-
 </div>
 <script>
     function Save() {

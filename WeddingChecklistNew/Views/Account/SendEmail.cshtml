@@ -1,0 +1,51 @@
+﻿@{
+     ViewBag.Title = "SendEmail";
+}
+
+<h2>SendEmail</h2>
+
+<div class="row form-horizontal">
+    <form id="LoginFormId">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Email</label>
+            <div class="col-md-10">
+                <input type="email" name="email" required data-req="Email is Required" value="" id="id_email">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" onclick="Save()" class="btn btn-success" value="Send Email" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+        function Save() {
+            $("#LoginFormId").validate({
+                rules: {
+                    email: "required"
+                },
+                messages: {
+                    required: 'Please enter valid value'
+                },
+                showErrors: function (errorMap, errorList) {
+                    this.defaultShowErrors();
+                },
+                submitHandler: function () {
+                    var id_email = $("#id_email").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Account/SendForgotPasswordEmail?email=" + id_email,
+                        success: function (data) {
+                            toastr.success("mail sent");
+                            window.location.href = "/Home/Index";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            toastr.error(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        }
+ </script>

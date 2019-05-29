@@ -14,21 +14,49 @@ namespace WeddingChecklistNew.Controllers
 {
     public class AccountController : Controller
     {
-        private APIAccountController mAPIAccountController = new APIAccountController();
+        private APIAccountController aPIAccountController = new APIAccountController();
         // GET: Account
+        [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
+        [HttpGet]
         public ActionResult Logout()
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ForgotPasswordEmail(string userId,string code)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SendEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SendEmail(string email)
+        {
+            return View();
+        }
+
     }
 }
