@@ -509,15 +509,14 @@ namespace WeddingChecklistNew.Controllers
                     MailMessage mail = new MailMessage();
                     SmtpServer.Port = 587;
                     SmtpServer.UseDefaultCredentials = false;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("seyfiaktay@gmail.com", "s@hnbjm361565");
+                    SmtpServer.Credentials = new System.Net.NetworkCredential("weddingchecklst@gmail.com", "sa1306070009");
                     SmtpServer.EnableSsl = true;
                     SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    mail.From = new MailAddress("seyfiaktay@gmail.com");
+                    mail.From = new MailAddress("weddingchecklst@gmail.com");
                     mail.To.Add(user.Email);
                     mail.Subject = "Reset Password";
-                    mail.Body = "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>";
-                    ServicePointManager.ServerCertificateValidationCallback = delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) { return true; };
-                    //SmtpServer.Send(mail);
+                    mail.Body = "Please reset your password by clicking <a href= " + callbackUrl + ">";
+                    SmtpServer.Send(mail);
                 }
                 //UserManager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return Ok();
@@ -531,6 +530,8 @@ namespace WeddingChecklistNew.Controllers
         [AllowAnonymous]
         public IHttpActionResult ResetPassword(ResetPasswordModel model)
         {
+            
+            model.code = model.code.Replace(' ', '+');
             var user = UserManager.FindById(model.userid);
             if (user != null)
             {
