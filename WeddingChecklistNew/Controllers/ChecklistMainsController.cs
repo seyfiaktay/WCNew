@@ -48,7 +48,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate")] ChecklistMain checklistMain)
+        public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
             checklistMain.UserId = "seyfi";
@@ -83,7 +83,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate")] ChecklistMain checklistMain)
+        public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
             checklistMain.UserId = "seyfi";

@@ -18,5 +18,12 @@ namespace WeddingChecklistNew.Models
         [DataType(DataType.Date)]
         public DateTime DueDate { get; set; }
         public IEnumerable<Checklist> checklists { get; set; }
+        [DisplayName("Private")]
+        [Required]
+        public bool Private { get; set; }
+        [DisplayName("Definition")]
+        [Required]
+        [DataType(DataType.MultilineText)]
+        public string Definition { get; set; }
     }
 }
