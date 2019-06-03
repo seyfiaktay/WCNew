@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using static WeddingChecklistNew.Models.Enum.clsEnum;
 
 namespace WeddingChecklistNew.Models
 {
@@ -21,7 +22,8 @@ namespace WeddingChecklistNew.Models
         public decimal Price { get; set; }
         [Required]
         [DisplayName("Product Priority")]
-        public Int16 Priority { get; set; }
+        [Range(1, int.MaxValue, ErrorMessage = "The Priority field is required.")]
+        public ProductPriority Priority { get; set; }
         public virtual ChecklistMain CheckListMain { get; set; }
         [Required]
         [DisplayName("CheckList Name")]

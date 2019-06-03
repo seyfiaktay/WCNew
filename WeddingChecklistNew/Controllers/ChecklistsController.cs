@@ -58,9 +58,9 @@ namespace WeddingChecklistNew.Controllers
         {
             var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
             ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {
-                SetCheckListImages_Upload(checklist);
                 mAPIChecklistController.PostChecklist(checklist);
                 TempData["message"] = "success";
                 return RedirectToAction("Index");
@@ -94,9 +94,9 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId")] Checklist checklist)
         {
+            SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {
-                SetCheckListImages_Upload(checklist);
                 mAPIChecklistController.PutChecklist(checklist.Id,checklist);
                 TempData["message"] = "success";
                 return RedirectToAction("Index");
@@ -146,6 +146,7 @@ namespace WeddingChecklistNew.Controllers
             {
                 Guid guid = Guid.NewGuid();
                 string filename = Request.Files[i].FileName;
+                if (filename == "") return;
                 string type = filename.Substring(filename.IndexOf("."), filename.Length - filename.IndexOf("."));
                 string mapPath = "~/Content/UserFiles/Images/" + guid.ToString() + type;
                 string physicalPath = Server.MapPath(mapPath);
