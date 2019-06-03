@@ -35,7 +35,7 @@
                 <div class="container">
                     <!-- logo -->
                     <a class="brand logo" href="@Url.Action("Index", "Home")">
-                        <img src="~/Content/Scaffold/assets/img/logo.png" alt="" />
+                        <img style="width:70px" src="~/Content/Scaffold/assets/img/icon_new.jpg" alt="" />
                     </a>
                     <!-- end logo -->
                     <!-- top menu -->
@@ -51,9 +51,20 @@
                                 <li class="dropdown primary">
                                     <a href="#"><i class="icon-star icon-white"></i> Features</a>
                                     <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                                        <li>@Html.ActionLink("ChecklistMain", "Index", "ChecklistMains", new { area = "" }, null)</li>
-                                        <li>@Html.ActionLink("Checklist", "Index", "Checklists", new { area = "" }, null)</li>
+                                        <li id="checklistmain" hidden="hidden">
+                                            <a href="/ChecklistMains/Index">
+                                                Checklist Main
+                                            </a>
+                                        </li>
+                                        <li id="checklist" hidden="hidden">
+                                            <a href="/Checklists/Index">
+                                                Checklist
+                                            </a>
+                                        </li>
+
+                                        @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "", hidden="hidden" }, null)</li>
+                                        <li>@Html.ActionLink("ChecklistMain", "Index", "ChecklistMains", new { area = "",hidden="hidden" }, null)</li>
+                                        <li>@Html.ActionLink("Checklist", "Index", "Checklists", new { area = "",hidden="hidden" }, null)</li>*@
                                     </ul>
                                 </li>
                                 <li class="dropdown primary">
@@ -163,6 +174,8 @@
                 $("#aemail").text(token.userName);
                 $("#email").removeAttr("hidden");
                 $("#logout").removeAttr("hidden");
+                $("#checklistmain").removeAttr("hidden");
+                $("#checklist").removeAttr("hidden");
             }
 
             //var item = document.getElementById("email");

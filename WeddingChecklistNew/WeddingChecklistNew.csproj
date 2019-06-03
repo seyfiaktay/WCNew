@@ -349,6 +349,7 @@
     <Content Include="Content\Scaffold\assets\img\icons\syncfusion-icons.png" />
     <Content Include="Content\Scaffold\assets\img\icons\wp-icon.png" />
     <Content Include="Content\Scaffold\assets\img\icons\zoom_icon.png" />
+    <Content Include="Content\Scaffold\assets\img\icon_new.jpg" />
     <Content Include="Content\Scaffold\assets\img\image_hover.png" />
     <Content Include="Content\Scaffold\assets\img\list\arrow.png" />
     <Content Include="Content\Scaffold\assets\img\list\check-dark.png" />
