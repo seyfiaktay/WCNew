@@ -58,9 +58,12 @@ namespace WeddingChecklistNew.Controllers.APIController
                     //DELETE ALL IMAGES BEFORE
                     db.CheckListImages.RemoveRange(db.CheckListImages.Where(x => x.CheckListId == checklist.Id));
                     db.Entry(checklist).State = EntityState.Modified;
-                    foreach (ChecklistImage item in checklist.CheckListImage) 
+                    if (checklist.CheckListImage != null)
                     {
-                        db.CheckListImages.Add(item);
+                        foreach (ChecklistImage item in checklist.CheckListImage)
+                        {
+                            db.CheckListImages.Add(item);
+                        }
                     }
                     db.SaveChanges();
                     transaction.Commit();
@@ -87,9 +90,12 @@ namespace WeddingChecklistNew.Controllers.APIController
                 try
                 {
                     db.CheckLists.Add(checklist);
-                    foreach (ChecklistImage item in checklist.CheckListImage)
+                    if (checklist.CheckListImage != null)
                     {
-                        db.CheckListImages.Add(item);
+                        foreach (ChecklistImage item in checklist.CheckListImage)
+                        {
+                            db.CheckListImages.Add(item);
+                        }
                     }
                     db.SaveChanges();
                     transaction.Commit();
@@ -97,6 +103,7 @@ namespace WeddingChecklistNew.Controllers.APIController
                 catch (Exception ex)
                 {
                     transaction.Rollback();
+                    throw;
                 }
             }
             
