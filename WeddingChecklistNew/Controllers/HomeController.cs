@@ -15,5 +15,9 @@ namespace WeddingChecklistNew.Controllers
             ViewBag.Title = "Home Page";
             return View();
         }
+        public PartialViewResult GetSlider()
+        {
+            return PartialView("_GetSlider");
+        }
     }
 }
