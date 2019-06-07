@@ -57,13 +57,14 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId")] Checklist checklist)
+        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId")] Checklist checklist)
         {
             var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
             ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             SetCheckListImages_Upload(checklist);
+            checklist.LogDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 mAPIChecklistController.PostChecklist(checklist);
@@ -99,7 +100,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId")] Checklist checklist)
+        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId")] Checklist checklist)
         {
             var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
             ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
@@ -107,7 +108,7 @@ namespace WeddingChecklistNew.Controllers
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
-
+            checklist.LogDate = DateTime.Now;
             SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {

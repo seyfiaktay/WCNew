@@ -62,7 +62,13 @@
                         success: function (data_token) {
                             toastr.success("login success");
                             localStorage.setItem('Token', JSON.stringify(data_token));
-                            window.location.href = "/Home/Index";
+
+                            //var name = 'username', value = data_token.userName, path = 'path', domain = 'domain',
+                            //    ATS_getExpire = function () { return 'ATS_getExpire'; };
+
+                            //var curCookie = name + "=" + value;
+                            //document.cookie = curCookie;
+                            //window.location.href = "/Home/Index";
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             toastr.error(xhr.responseText);

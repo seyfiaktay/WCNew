@@ -51,7 +51,6 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
-            checklistMain.UserId = "seyfi";
             checklistMain.checklists = new List<Checklist>();
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
@@ -86,7 +85,6 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
-            checklistMain.UserId = "seyfi";
             if (ModelState.IsValid)
             {
                 mAPIChecklistMainController.PutChecklistMain(checklistMain.Id, checklistMain);

@@ -7,13 +7,13 @@ namespace WeddingChecklistNew.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class seyfi2 : IMigrationMetadata
+    public sealed partial class seyfi : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(seyfi2));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(seyfi));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906071206551_seyfi2"; }
+            get { return "201906071721417_seyfi"; }
         }
         
         string IMigrationMetadata.Source

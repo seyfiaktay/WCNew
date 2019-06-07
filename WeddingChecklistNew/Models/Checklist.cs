@@ -8,7 +8,7 @@ using static WeddingChecklistNew.Models.Enum.clsEnum;
 
 namespace WeddingChecklistNew.Models
 {
-    public class Checklist
+    public class Checklist : clsBase
     {
         public int Id { get; set; }
         [Required]

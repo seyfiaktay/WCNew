@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    
+
     <div class="form-group">
         @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -50,7 +50,7 @@
             @Html.ValidationMessageFor(model => model.Priority, "", new { @class = "text-danger" })
         </div>
     </div>
-    
+
     <div class="form-group">
         @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -67,8 +67,20 @@
         </div>
     </div>
 
-    
 
+    <div class="form-group">
+        @Html.HiddenFor(model => model.LogDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.LogDate, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.HiddenFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2", @id = "userid" })
+        <div class="col-md-10">
+            @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+    </div>
 
 
     <div class="form-group">
@@ -92,6 +104,17 @@
     </div>
 </div>
 }
+
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        var token = $.parseJSON(localStorage.getItem('Token'));
+        if (token != null) {
+            $("#userid").val(token.userName);
+            return;
+        }
+    })
+</script>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
