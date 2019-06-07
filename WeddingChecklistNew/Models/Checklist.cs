@@ -17,9 +17,11 @@ namespace WeddingChecklistNew.Models
         [Required]
         [DisplayName("Product Url")]
         public string Url { get; set; }
-        [Required]
         [DisplayName("Product Price")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
+        public virtual Currency Currency { get; set; }
+        [DisplayName("Product Currency")]
+        public int? CurrencyId { get; set; }
         [Required]
         [DisplayName("Product Priority")]
         [Range(1, int.MaxValue, ErrorMessage = "The Priority field is required.")]
@@ -29,5 +31,6 @@ namespace WeddingChecklistNew.Models
         [DisplayName("CheckList Name")]
         public int ChecklistMainId { get; set; }
         public IEnumerable<ChecklistImage> CheckListImage { get; set; }
+        
     }
 }

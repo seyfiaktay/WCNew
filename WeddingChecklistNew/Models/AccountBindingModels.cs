@@ -90,8 +90,14 @@ namespace WeddingChecklistNew.Models
         [Required]
         public string code { get; set; }
         [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        [Display(Name = "New password")]
         public string newpassword { get; set; }
         [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "Confirm new password")]
+        [Compare("newpassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string confirmpassword { get; set; }
     }
 }

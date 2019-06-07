@@ -18,6 +18,7 @@ namespace WeddingChecklistNew.Controllers
         private APIChecklistsController mAPIChecklistController = new APIChecklistsController();
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
         private APIChecklistImagesController mAPIChecklistImagesController = new APIChecklistImagesController();
+        private APIControllerGenel mAPIControllerGenel = new APIControllerGenel();
 
         // GET: Checklists
         public ActionResult Index()
@@ -46,6 +47,8 @@ namespace WeddingChecklistNew.Controllers
         {
             var list = mAPIChecklistMainController.GetChecklistMains().Select(m=> new {m.Name,m.Id});
             ViewData["listChecklistMain"] =  new SelectList(list,"Id","Name");
+            var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
+            ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             return View();
         }
 
@@ -54,10 +57,12 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId")] Checklist checklist)
+        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId")] Checklist checklist)
         {
             var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
             ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
+            ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {
@@ -75,6 +80,8 @@ namespace WeddingChecklistNew.Controllers
             ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x=> x.CheckListId == id).Select(m => new {m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
+            var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
+            ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -92,8 +99,15 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId")] Checklist checklist)
+        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId")] Checklist checklist)
         {
+            var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
+            ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x => x.CheckListId == checklist.Id).Select(m => new { m.Path, m.Id });
+            ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
+            var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
+            ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
+
             SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {
