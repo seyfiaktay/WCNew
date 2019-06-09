@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Http.Results;
 using System.Web.Mvc;
+using System.Web.Routing;
 using WeddingChecklistNew.Controllers.APIController;
 using WeddingChecklistNew.Models;
 
@@ -19,11 +20,14 @@ namespace WeddingChecklistNew.Controllers
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
         private APIChecklistImagesController mAPIChecklistImagesController = new APIChecklistImagesController();
         private APIControllerGenel mAPIControllerGenel = new APIControllerGenel();
+        private AccountController mAccountController = new AccountController();
 
         // GET: Checklists
         public ActionResult Index()
         {
-            return View(mAPIChecklistController.GetCheckLists());
+            mAccountController.InitializeController(this.Request.RequestContext);
+            string username = mAccountController.GetLoginUserName();
+            return View(mAPIChecklistController.GetCheckLists().Where(x=>x.UserId == username));
         }
 
         // GET: Checklists/Details/5

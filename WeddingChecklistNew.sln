@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeddingChecklistNew", "WeddingChecklistNew\WeddingChecklistNew.csproj", "{1798939B-E122-46E4-A0EB-0A7FE2018954}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeddingChecklistNew.Tests", "WeddingChecklistNew.Tests\WeddingChecklistNew.Tests.csproj", "{CCC76E35-D2DC-4AE0-BE37-B80AF4A298D3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1798939B-E122-46E4-A0EB-0A7FE2018954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1798939B-E122-46E4-A0EB-0A7FE2018954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1798939B-E122-46E4-A0EB-0A7FE2018954}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CCC76E35-D2DC-4AE0-BE37-B80AF4A298D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCC76E35-D2DC-4AE0-BE37-B80AF4A298D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCC76E35-D2DC-4AE0-BE37-B80AF4A298D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCC76E35-D2DC-4AE0-BE37-B80AF4A298D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

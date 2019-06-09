@@ -9,17 +9,16 @@
 
     <form id="LoginFormId">
         <div id="result"></div>
-        <input type="hidden" name="grant_type" value="password" />
         <div class="form-group">
             <label class="col-md-2 control-label">Email</label>
             <div class="col-md-10">
-                <input type="email" name="userName" required data-req="Email is Required" value="" id="email">
+                <input type="email" name="Email" required data-req="Email is Required" value="" id="email">
             </div>
         </div>
         <div class="form-group">
             <label class="col-md-2 control-label">Password</label>
             <div class="col-md-10">
-                <input type="password" name="password" required data-req="password is Required" value="" id="password">
+                <input type="password" name="Password" required data-req="password is Required" value="" id="password">
             </div>
         </div>
         <div class="form-group">
@@ -57,18 +56,11 @@
                 var model = $("#LoginFormId").serialize();
                 $.ajax({
                         type: "POST",
-                        url: "/token",
+                        url: "/Account/Login",
                         data: model,
                         success: function (data_token) {
                             toastr.success("login success");
-                            localStorage.setItem('Token', JSON.stringify(data_token));
-
-                            //var name = 'username', value = data_token.userName, path = 'path', domain = 'domain',
-                            //    ATS_getExpire = function () { return 'ATS_getExpire'; };
-
-                            //var curCookie = name + "=" + value;
-                            //document.cookie = curCookie;
-                            //window.location.href = "/Home/Index";
+                            window.location.href = "/Home/Index";
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             toastr.error(xhr.responseText);

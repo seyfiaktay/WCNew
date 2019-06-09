@@ -52,12 +52,12 @@
                                 <li class="dropdown primary">
                                     <a href="#"><i class="icon-star icon-white"></i> Features</a>
                                     <ul class="dropdown-menu">
-                                        <li id="checklistmain" hidden="hidden">
+                                        <li hidden="hidden" id="checklistmain" >
                                             <a href="/ChecklistMains/Index">
                                                 Checklist Main
                                             </a>
                                         </li>
-                                        <li id="checklist" hidden="hidden">
+                                        <li hidden="hidden" id="checklist">
                                             <a href="/Checklists/Index">
                                                 Checklist
                                             </a>
@@ -82,10 +82,9 @@
                                             </a>
                                         </li>
                                         <li hidden="hidden" id="logout">
-                                            <a onclick="Logout()">
-                                                Logout
-                                            </a>
+                                            @Html.ActionLink("Logout", "Logout", "Account", new { area = "" }, null)
                                         </li>
+
                                         <li id="register">
                                             <a href="/Account/Register">
                                                 Register
@@ -134,14 +133,14 @@
 
     <script type="text/javascript">
         $(function () { // will trigger when the document is ready
-            var token = $.parseJSON(localStorage.getItem('Token'));
-            if (token == null) {
+            var token = '@TempData["username"]'
+            if (token == '') {
                 //toastr.error("Unauthorized Request");
                 $("#login").removeAttr("hidden");
                 return;
             }
             else {
-                $("#aemail").text(token.userName);
+                $("#aemail").text(token);
                 $("#email").removeAttr("hidden");
                 $("#logout").removeAttr("hidden");
                 $("#checklistmain").removeAttr("hidden");
@@ -153,20 +152,8 @@
         })
 
     </script>
-    @* LOGOUT *@
-    <script>
-        function Logout() {
-            if (localStorage.getItem('Token') == null) {
-                toastr.info("You already logged out");
-                return;
-            }
-            toastr.success("Logged out successfully");
-            localStorage.removeItem('Token');
-            window.location.href = "/Home/Index";
-        }
-    </script>
 
-    <div class="">
+    <div class="" style="padding : 80px">
         @RenderBody()
         <hr />
         <!-- Footer
