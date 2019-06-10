@@ -62,8 +62,8 @@
                             toastr.success("login success");
                             window.location.href = "/Home/Index";
                         },
-                        error: function (xhr, textStatus, errorThrown) {
-                            toastr.error(xhr.responseText);
+                    error: function (xhr, textStatus, errorThrown) {
+                        toastr.error(errorThrown);
                         }
                  });
             }

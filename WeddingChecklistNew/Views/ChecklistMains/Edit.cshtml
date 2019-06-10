@@ -71,17 +71,6 @@
 </div>
 }
 
-
-<script type="text/javascript">
-    $(function () { // will trigger when the document is ready
-        var token = $.parseJSON(localStorage.getItem('Token'));
-        if (token != null) {
-            $("#userid").val(token.userName);
-            return;
-        }
-    })
-</script>
-
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>

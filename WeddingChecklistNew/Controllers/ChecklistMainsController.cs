@@ -15,11 +15,12 @@ namespace WeddingChecklistNew.Controllers
     public class ChecklistMainsController : Controller
     {
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
-
+        private AccountController mAccountController = new AccountController();
         // GET: ChecklistMains
         public ActionResult Index()
         {
-            return View(mAPIChecklistMainController.GetChecklistMains());
+            string username = GetUserName();
+            return View(mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username));
         }
 
         // GET: ChecklistMains/Details/5
@@ -51,6 +52,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
+            checklistMain.UserId = GetUserName();
             checklistMain.checklists = new List<Checklist>();
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
@@ -85,6 +87,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
+            checklistMain.UserId = GetUserName();
             if (ModelState.IsValid)
             {
                 mAPIChecklistMainController.PutChecklistMain(checklistMain.Id, checklistMain);
@@ -126,6 +129,16 @@ namespace WeddingChecklistNew.Controllers
             var contentResult = actionResult as OkNegotiatedContentResult<ChecklistMain>;
             var checklistmain = contentResult.Content;
             return checklistmain;
+        }
+
+
+
+        private string GetUserName()
+        {
+            string username;
+            mAccountController.InitializeController(this.Request.RequestContext);
+            username = mAccountController.GetLoginUserName();
+            return username;
         }
     }
 }

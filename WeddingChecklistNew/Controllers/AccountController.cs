@@ -75,15 +75,6 @@ namespace WeddingChecklistNew.Controllers
         [HttpPost]
         public ActionResult Login(LoginBindingModel model)
         {
-            if (!PostLogin(model)) {
-                return View("Error");
-            };
-            return View();
-        }
-
-
-        private bool PostLogin(LoginBindingModel model)
-        {
             try
             {
                 string baseAddress = "http://localhost:55465";
@@ -96,16 +87,20 @@ namespace WeddingChecklistNew.Controllers
                        {"password", model.Password},
                     };
                     var tokenResponse = client.PostAsync(baseAddress + "/token", new FormUrlEncodedContent(form)).Result;
+                    if (tokenResponse.StatusCode != HttpStatusCode.OK)
+                    {
+                        return new HttpStatusCodeResult(tokenResponse.StatusCode,"please check your email and password");
+                    }
                     var token = tokenResponse.Content.ReadAsAsync<Token>(new[] { new JsonMediaTypeFormatter() }).Result;
                     HttpCookie httpCookie = new HttpCookie("token", token.AccessToken);
                     httpCookie.Expires = DateTime.Now.AddDays(14);
                     Response.Cookies.Add(httpCookie);
-                    return true;
+                    return View();
                 }
             }
             catch
             {
-                return false;
+                return View("Error");
             }
         }
 

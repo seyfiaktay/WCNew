@@ -73,7 +73,7 @@
                                     <ul id="accountlist" class="dropdown-menu">
                                         <li hidden="hidden" id="email">
                                             <a id="aemail" href="/Account/ChangePassword">
-                                                Email
+                                                Change Password
                                             </a>
                                         </li>
                                         <li hidden="hidden" id="login">
@@ -133,14 +133,13 @@
 
     <script type="text/javascript">
         $(function () { // will trigger when the document is ready
-            var token = '@TempData["username"]'
-            if (token == '') {
+            var x = document.cookie;
+            var token = x.includes("token");
+            if (token==false) {
                 //toastr.error("Unauthorized Request");
                 $("#login").removeAttr("hidden");
-                return;
             }
             else {
-                $("#aemail").text(token);
                 $("#email").removeAttr("hidden");
                 $("#logout").removeAttr("hidden");
                 $("#checklistmain").removeAttr("hidden");

@@ -49,8 +49,7 @@ namespace WeddingChecklistNew.Controllers
         // GET: Checklists/Create
         public ActionResult Create()
         {
-            var list = mAPIChecklistMainController.GetChecklistMains().Select(m=> new {m.Name,m.Id});
-            ViewData["listChecklistMain"] =  new SelectList(list,"Id","Name");
+            ViewData["listChecklistMain"] = GetMainList();
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             return View();
@@ -63,12 +62,12 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId")] Checklist checklist)
         {
-            var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
-            ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            ViewData["listChecklistMain"] = GetMainList();
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             SetCheckListImages_Upload(checklist);
             checklist.LogDate = DateTime.Now;
+            checklist.UserId = GetUserName();
             if (ModelState.IsValid)
             {
                 mAPIChecklistController.PostChecklist(checklist);
@@ -81,8 +80,7 @@ namespace WeddingChecklistNew.Controllers
         // GET: Checklists/Edit/5
         public ActionResult Edit(int? id)
         {
-            var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
-            ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            ViewData["listChecklistMain"] = GetMainList();
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x=> x.CheckListId == id).Select(m => new {m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
@@ -106,13 +104,13 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId")] Checklist checklist)
         {
-            var list = mAPIChecklistMainController.GetChecklistMains().Select(m => new { m.Name, m.Id });
-            ViewData["listChecklistMain"] = new SelectList(list, "Id", "Name");
+            ViewData["listChecklistMain"] = GetMainList();
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x => x.CheckListId == checklist.Id).Select(m => new { m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             checklist.LogDate = DateTime.Now;
+            checklist.UserId = GetUserName();
             SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {
@@ -177,6 +175,24 @@ namespace WeddingChecklistNew.Controllers
                 Request.Files[i].SaveAs(physicalPath);
             }
             checklist.CheckListImage = lstImages;
+        }
+
+
+        private SelectList GetMainList()
+        {
+            SelectList selectlists;
+            string username = GetUserName();
+            var list = mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username).Select(m => new { m.Name, m.Id });
+            selectlists = new SelectList(list, "Id", "Name");
+            return selectlists;
+        }
+
+        private string GetUserName()
+        {
+            string username;
+            mAccountController.InitializeController(this.Request.RequestContext);
+            username = mAccountController.GetLoginUserName();
+            return username;
         }
     }
 }
