@@ -270,6 +270,8 @@
     <Compile Include="Models\ChecklistMain.cs" />
     <Compile Include="Models\clsBase.cs" />
     <Compile Include="Models\Currency.cs" />
+    <Compile Include="Models\ValidationAttribute\ImageValidationAttribute.cs" />
+    <Compile Include="Models\Domain\Checklistdo.cs" />
     <Compile Include="Models\Enum\clsEnum.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Token.cs" />

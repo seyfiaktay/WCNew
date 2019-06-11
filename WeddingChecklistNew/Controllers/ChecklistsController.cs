@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -60,21 +63,23 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId")] Checklist checklist)
+        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl")] Checklistdo checklistdo)
         {
+            Checklist checklist;
+            checklist = GetModel(checklistdo);
             ViewData["listChecklistMain"] = GetMainList();
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
-            SetCheckListImages_Upload(checklist);
             checklist.LogDate = DateTime.Now;
             checklist.UserId = GetUserName();
             if (ModelState.IsValid)
             {
+                SetCheckListImages_Upload(checklist, checklistdo.ImageUrl);
                 mAPIChecklistController.PostChecklist(checklist);
                 TempData["message"] = "success";
                 return RedirectToAction("Index");
             }
-            return View(checklist);
+            return View(checklistdo);
         }
        
         // GET: Checklists/Edit/5
@@ -94,7 +99,8 @@ namespace WeddingChecklistNew.Controllers
             {
                 return HttpNotFound();
             }
-            return View(checklist);
+            Checklistdo checklistdo = GetDomain(checklist);
+            return View(checklistdo);
         }
 
         // POST: Checklists/Edit/5
@@ -102,8 +108,10 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId")] Checklist checklist)
+        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl")] Checklistdo checklistdo)
         {
+            Checklist checklist;
+            checklist = GetModel(checklistdo);
             ViewData["listChecklistMain"] = GetMainList();
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x => x.CheckListId == checklist.Id).Select(m => new { m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
@@ -111,14 +119,14 @@ namespace WeddingChecklistNew.Controllers
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             checklist.LogDate = DateTime.Now;
             checklist.UserId = GetUserName();
-            SetCheckListImages_Upload(checklist);
             if (ModelState.IsValid)
             {
+                SetCheckListImages_Upload(checklist, checklistdo.ImageUrl);
                 mAPIChecklistController.PutChecklist(checklist.Id,checklist);
                 TempData["message"] = "success";
                 return RedirectToAction("Index");
             }
-            return View(checklist);
+            return View(checklistdo);
         }
 
         // GET: Checklists/Delete/5
@@ -156,14 +164,15 @@ namespace WeddingChecklistNew.Controllers
             return checklist;
         }
 
-        private void SetCheckListImages_Upload(Checklist checklist)
+        private void SetCheckListImages_Upload(Checklist checklist,string ImageURL)
         {
             List<ChecklistImage> lstImages = new List<ChecklistImage>();
+            //Local Images
             for (int i = 0; i < Request.Files.Count; i++)
             {
                 Guid guid = Guid.NewGuid();
                 string filename = Request.Files[i].FileName;
-                if (filename == "") return;
+                if (filename == "") break;
                 string type = filename.Substring(filename.IndexOf("."), filename.Length - filename.IndexOf("."));
                 string mapPath = "~/Content/UserFiles/Images/" + guid.ToString() + type;
                 string physicalPath = Server.MapPath(mapPath);
@@ -173,6 +182,11 @@ namespace WeddingChecklistNew.Controllers
                 checklistImage.CheckListId = checklist.Id;
                 lstImages.Add(checklistImage);
                 Request.Files[i].SaveAs(physicalPath);
+            }
+            //URL Images
+            if (ImageURL!=null)
+            {
+                SaveImageURL(lstImages, ImageURL, checklist.Id);
             }
             checklist.CheckListImage = lstImages;
         }
@@ -193,6 +207,58 @@ namespace WeddingChecklistNew.Controllers
             mAccountController.InitializeController(this.Request.RequestContext);
             username = mAccountController.GetLoginUserName();
             return username;
+        }
+
+        private Checklist GetModel(Checklistdo checklistdo)
+        {
+            Checklist checklist = new Checklist();
+            checklist.CheckListImage = checklistdo.CheckListImage;
+            checklist.CheckListMain = checklistdo.CheckListMain;
+            checklist.ChecklistMainId = checklistdo.ChecklistMainId;
+            checklist.Currency = checklistdo.Currency;
+            checklist.CurrencyId = checklistdo.CurrencyId;
+            checklist.Id = checklistdo.Id;
+            checklist.LogDate = checklistdo.LogDate;
+            checklist.Name = checklistdo.Name;
+            checklist.Price = checklistdo.Price;
+            checklist.Priority = checklistdo.Priority;
+            checklist.Url = checklistdo.Url;
+            checklist.UserId = checklistdo.UserId;
+            return checklist;
+        }
+
+
+        private Checklistdo GetDomain(Checklist checklist)
+        {
+            Checklistdo checklistdo = new Checklistdo();
+            checklistdo.CheckListImage = checklist.CheckListImage;
+            checklistdo.CheckListMain = checklist.CheckListMain;
+            checklistdo.ChecklistMainId = checklist.ChecklistMainId;
+            checklistdo.Currency = checklist.Currency;
+            checklistdo.CurrencyId = checklist.CurrencyId;
+            checklistdo.Id = checklist.Id;
+            checklistdo.LogDate = checklist.LogDate;
+            checklistdo.Name = checklist.Name;
+            checklistdo.Price = checklist.Price;
+            checklistdo.Priority = checklist.Priority;
+            checklistdo.Url = checklist.Url;
+            checklistdo.UserId = checklist.UserId;
+            return checklistdo;
+        }
+
+        public void SaveImageURL(List<ChecklistImage> lstImages,string imageURL,int checklistid)
+        {
+            using (WebClient client = new WebClient())
+            {
+                Guid guid = Guid.NewGuid();
+                string filename = Server.MapPath("~/Content/UserFiles/Images/" + guid.ToString() + ".jpg");
+                client.DownloadFile(new Uri(imageURL), filename);
+                ChecklistImage checklistImage = new ChecklistImage();
+                checklistImage.Path = "~/Content/UserFiles/Images/" + guid.ToString() + ".jpg";
+                checklistImage.Type = 1;
+                checklistImage.CheckListId = checklistid;
+                lstImages.Add(checklistImage);
+            }
         }
     }
 }
