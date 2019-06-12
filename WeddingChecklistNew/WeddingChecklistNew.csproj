@@ -415,6 +415,10 @@
     <Content Include="Content\Scaffold\assets\img\slides\flexslider\img2.jpg" />
     <Content Include="Content\Scaffold\assets\img\slides\flexslider\img3.jpg" />
     <Content Include="Content\Scaffold\assets\img\slides\flexslider\img4.jpg" />
+    <Content Include="Content\Scaffold\assets\img\slides\marriage\img1.jpg" />
+    <Content Include="Content\Scaffold\assets\img\slides\marriage\img2.jpg" />
+    <Content Include="Content\Scaffold\assets\img\slides\marriage\img3.jpg" />
+    <Content Include="Content\Scaffold\assets\img\slides\marriage\img4.jpg" />
     <Content Include="Content\Scaffold\assets\img\slides\nivo\arrows.png" />
     <Content Include="Content\Scaffold\assets\img\slides\nivo\bullets.png" />
     <Content Include="Content\Scaffold\assets\img\slides\nivo\dark-trans.png" />

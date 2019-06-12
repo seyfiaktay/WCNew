@@ -60,7 +60,6 @@ namespace WeddingChecklistNew.Controllers
         // GET: Checklists/Create
         public ActionResult Create(int checklistmainid)
         {
-            ViewData["listChecklistMain"] = GetMainList(checklistmainid);
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             return View();
@@ -75,11 +74,11 @@ namespace WeddingChecklistNew.Controllers
         {
             Checklist checklist;
             checklist = GetModel(checklistdo);
-            ViewData["listChecklistMain"] = GetMainList(checklistmainid);
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             checklist.LogDate = DateTime.Now;
             checklist.UserId = GetUserName();
+            checklist.ChecklistMainId = checklistmainid;
             if (ModelState.IsValid)
             {
                 SetCheckListImages_Upload(checklist, checklistdo.ImageUrl);
@@ -93,7 +92,6 @@ namespace WeddingChecklistNew.Controllers
         // GET: Checklists/Edit/5
         public ActionResult Edit(int checklistmainid, int? id)
         {
-            ViewData["listChecklistMain"] = GetMainList(checklistmainid);
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x=> x.CheckListId == id).Select(m => new {m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
@@ -120,13 +118,13 @@ namespace WeddingChecklistNew.Controllers
         {
             Checklist checklist;
             checklist = GetModel(checklistdo);
-            ViewData["listChecklistMain"] = GetMainList(checklistmainid);
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x => x.CheckListId == checklist.Id).Select(m => new { m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             checklist.LogDate = DateTime.Now;
             checklist.UserId = GetUserName();
+            checklist.ChecklistMainId = checklistmainid;
             if (ModelState.IsValid)
             {
                 SetCheckListImages_Upload(checklist, checklistdo.ImageUrl);
@@ -197,16 +195,6 @@ namespace WeddingChecklistNew.Controllers
                 SaveImageURL(lstImages, ImageURL, checklist.Id);
             }
             checklist.CheckListImage = lstImages;
-        }
-
-
-        private SelectList GetMainList(int checklistmainid)
-        {
-            SelectList selectlists;
-            string username = GetUserName();
-            var list = mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username && x.Id == checklistmainid).Select(m => new { m.Name, m.Id });
-            selectlists = new SelectList(list, "Id", "Name");
-            return selectlists;
         }
 
         private string GetUserName()
