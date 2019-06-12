@@ -34,7 +34,7 @@ namespace WeddingChecklistNew.Models
         public IEnumerable<ChecklistImage> CheckListImage { get; set; }
 
         [DisplayName("Image Url")]
-        [ImageValidationAttribute(ErrorMessage = "Image must be .jpg")]
+        [ImageValidationAttribute(ErrorMessage = "Image must be .jpg or .png and link must be valid")]
         public string ImageUrl { get; set; }
     }
 }
