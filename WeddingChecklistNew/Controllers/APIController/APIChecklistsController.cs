@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WeddingChecklistNew.Models;
+using WeddingChecklistNew.Models.Domain;
 
 namespace WeddingChecklistNew.Controllers.APIController
 {
@@ -148,6 +149,47 @@ namespace WeddingChecklistNew.Controllers.APIController
         private bool ChecklistExists(int id)
         {
             return db.CheckLists.Count(e => e.Id == id) > 0;
+        }
+
+
+
+        // GET: api/GetRecentlyCheckLists
+        [Route("api/APIChecklists/GetRecentlyCheckLists")]
+        public List<RecentlyChecklist> GetRecentlyCheckLists()
+        {
+            var list = from checklist in db.CheckLists
+                        join checklistmain in db.ChecklistMains on checklist.ChecklistMainId equals checklistmain.Id
+                        join currency in db.Currencies on checklist.CurrencyId equals currency.Id
+                        //where checklistmain.Private == false
+                        orderby checklist.LogDate descending
+                        select new RecentlyChecklist { Name = checklist.Name,
+                                                       Url = checklist.Url,
+                                                       Price = checklist.Price,
+                                                       CurrencyName = currency.code,
+                                                       Priority = checklist.Priority,
+                                                       ImagePath = (from cp in db.CheckListImages
+                                                                     where cp.CheckListId == checklist.Id
+                                                                     orderby cp.Id descending
+                                                                     select cp.Path).FirstOrDefault()
+                        };
+            return list.Take(10).ToList();
+        }
+
+
+        // GET: api/GetRecentlyCheckLists
+        [Route("api/APIChecklists/GetRecentlyCheckListMains")]
+        public List<RecentlyChecklist> GetRecentlyCheckListMains()
+        {
+            var list = from checklistmain in db.ChecklistMains
+                       //where checklistmain.Private == false
+                       orderby checklistmain.LogDate descending
+                       select new RecentlyChecklist
+                       {
+                           MainName = checklistmain.Name,
+                           DueDate = checklistmain.DueDate,
+                           Description = checklistmain.Definition
+                       };
+            return list.Take(10).ToList();
         }
     }
 }

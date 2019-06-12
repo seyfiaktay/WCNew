@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using WeddingChecklistNew.Models;
+﻿using System.Web.Mvc;
+using WeddingChecklistNew.Controllers.APIController;
 
 namespace WeddingChecklistNew.Controllers
 {
@@ -22,6 +18,14 @@ namespace WeddingChecklistNew.Controllers
         public PartialViewResult GetSlider()
         {
             return PartialView("_GetSlider");
+        }
+        public PartialViewResult GetWidget()
+        {
+            var service = new APIChecklistsController();
+            var model = new Models.WidgetModel();
+            model.Checklists = service.GetRecentlyCheckLists();
+            model.ChecklistMain= service.GetRecentlyCheckListMains();
+            return PartialView("_GetWidget",model);
         }
     }
 }
