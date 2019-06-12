@@ -28,8 +28,11 @@ namespace WeddingChecklistNew.Models.Data_Attribute
                     {
                         return false;
                     }
-                }
-                
+                }    
+            }
+            else
+            {
+                return true;
             }
             return false;
         }
