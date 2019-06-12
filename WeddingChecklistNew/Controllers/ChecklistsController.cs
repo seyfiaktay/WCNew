@@ -155,12 +155,12 @@ namespace WeddingChecklistNew.Controllers
         // POST: Checklists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int checklistmainid, int id)
         {
             Checklist checklist = GetChecklist(id);
             mAPIChecklistController.DeleteChecklist(id);
             TempData["message"] = "success";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { checklistmainid = checklistmainid });
         }
 
 

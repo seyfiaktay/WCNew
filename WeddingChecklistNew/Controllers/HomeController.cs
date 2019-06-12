@@ -13,11 +13,10 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            if (Request.Cookies["token"]!= null)
-            {
-                mAccountController.InitializeController(this.Request.RequestContext);
-                TempData["username"] = mAccountController.GetLoginUserName();
-            }
+            //if (Request.Cookies["token"]!= null)
+            //{
+            //    mAccountController.InitializeController(this.Request.RequestContext);
+            //}
             return View();
         }
         public PartialViewResult GetSlider()

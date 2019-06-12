@@ -32,6 +32,12 @@ namespace WeddingChecklistNew
            );
 
             routes.MapRoute(
+               "Checklists/Delete",                                           // Route name
+               "Checklists/Delete/{checklistmainid}/{Id}",                            // URL with parameters
+               new { controller = "Checklists", action = "Delete", checklistmainid = UrlParameter.Optional, Id = UrlParameter.Optional }  // Parameter defaults
+           );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index",id=UrlParameter.Optional}
