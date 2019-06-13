@@ -16,7 +16,7 @@
                             <img src="~/Content/Scaffold/assets/img/dummies/80x80/img1.jpg" class="alignleft"  />
                         
                         </a>
-                        <h6><a href="#">@item.MainName</a></h6>
+                        <h6><a href=@item.Link>@item.MainName</a></h6>
                         <p>
                            @item.Description
                         </p>
@@ -29,9 +29,9 @@
                 @foreach (var item in Model.Checklists)
                 {
                 <li>
-                    <a href="#"><img src="@Href(item.ImagePath)" class="alignleft" style="width:3%" alt=""></a>
-                    <h6><a href="#">@item.Name</a></h6>
-                    <a href="@item.Url">@item.Url</a>
+                    <a href=@item.Link><img src="@Href(item.ImagePath)" class="alignleft" style="width:3%" alt=""></a>
+                    <h6><a href=@item.Link>@item.Name</a></h6>
+                    <a href=@item.Url>@item.Url</a>
                 </li>
                 }
             </ul>

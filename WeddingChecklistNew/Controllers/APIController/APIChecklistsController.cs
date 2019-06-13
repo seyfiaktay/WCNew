@@ -160,7 +160,7 @@ namespace WeddingChecklistNew.Controllers.APIController
             var list = from checklist in db.CheckLists
                         join checklistmain in db.ChecklistMains on checklist.ChecklistMainId equals checklistmain.Id
                         join currency in db.Currencies on checklist.CurrencyId equals currency.Id
-                        //where checklistmain.Private == false
+                        where checklistmain.Private == false
                         orderby checklist.LogDate descending
                         select new RecentlyChecklist { Name = checklist.Name,
                                                        Url = checklist.Url,
@@ -170,7 +170,8 @@ namespace WeddingChecklistNew.Controllers.APIController
                                                        ImagePath = (from cp in db.CheckListImages
                                                                      where cp.CheckListId == checklist.Id
                                                                      orderby cp.Id descending
-                                                                     select cp.Path).FirstOrDefault()
+                                                                     select cp.Path).FirstOrDefault(),
+                                                       Link = "http://localhost:55465/Checklists/Details/" + checklist.Id
                         };
             return list.Take(10).ToList();
         }
@@ -181,13 +182,14 @@ namespace WeddingChecklistNew.Controllers.APIController
         public List<RecentlyChecklist> GetRecentlyCheckListMains()
         {
             var list = from checklistmain in db.ChecklistMains
-                       //where checklistmain.Private == false
+                       where checklistmain.Private == false
                        orderby checklistmain.LogDate descending
                        select new RecentlyChecklist
                        {
                            MainName = checklistmain.Name,
                            DueDate = checklistmain.DueDate,
-                           Description = checklistmain.Definition
+                           Description = checklistmain.Definition,
+                           Link = "http://localhost:55465/Checklists/Index/" + checklistmain.Id
                        };
             return list.Take(10).ToList();
         }
