@@ -7,14 +7,12 @@ namespace WeddingChecklistNew.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Checklists", "LogDate", c => c.DateTime());
-            AddColumn("dbo.Checklists", "UserId", c => c.String());
+            AddColumn("dbo.Checklists", "Done", c => c.Boolean(nullable: false));
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Checklists", "UserId");
-            DropColumn("dbo.Checklists", "LogDate");
+            DropColumn("dbo.Checklists", "Done");
         }
     }
 }

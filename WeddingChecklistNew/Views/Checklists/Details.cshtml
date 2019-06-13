@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Details";
+    SelectList imagelist = (SelectList)ViewData["listChecklistImage"];
 }
 
 <h2>Details</h2>
@@ -58,9 +59,25 @@
             @Html.DisplayFor(model => model.Priority)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Done)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Done)
+        </dd>
+
     </dl>
 </div>
+
+<div class="form-group">
+    @foreach (var item in imagelist)
+    {
+        <img src="@Href(item.Text)" width="250" height="250" />
+    }
+</div>
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { checklistmainid = Model.ChecklistMainId, id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index",new { checklistmainid = Model.ChecklistMainId })
+    @Html.ActionLink("Back to List", "Index", new { checklistmainid = Model.ChecklistMainId })
 </p>

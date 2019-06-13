@@ -36,5 +36,7 @@ namespace WeddingChecklistNew.Models
         [DisplayName("Image Url")]
         [ImageValidationAttribute(ErrorMessage = "Image must be .jpg or .png and link must be valid")]
         public string ImageUrl { get; set; }
+
+        public bool Done { get; set; }
     }
 }

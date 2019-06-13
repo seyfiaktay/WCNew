@@ -31,6 +31,7 @@ namespace WeddingChecklistNew.Models
         [DisplayName("CheckList Name")]
         public int ChecklistMainId { get; set; }
         public IEnumerable<ChecklistImage> CheckListImage { get; set; }
-        
+        [DisplayName("Done")]
+        public bool Done { get; set; }
     }
 }

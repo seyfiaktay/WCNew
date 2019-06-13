@@ -49,11 +49,12 @@ namespace WeddingChecklistNew.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Checklist checklist = GetChecklist(id);
-            /*Checklist checklist = db.CheckLists.Find(id);*/
             if (checklist == null)
             {
                 return HttpNotFound();
             }
+            var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x => x.CheckListId == id).Select(m => new { m.Path, m.Id });
+            ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             return View(checklist);
         }
 
@@ -70,7 +71,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl")] int checklistmainid, Checklistdo checklistdo)
+        public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl,Done")] int checklistmainid, Checklistdo checklistdo)
         {
             Checklist checklist;
             checklist = GetModel(checklistdo);
@@ -114,7 +115,7 @@ namespace WeddingChecklistNew.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl")] int checklistmainid, Checklistdo checklistdo)
+        public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl,Done")] int checklistmainid, Checklistdo checklistdo)
         {
             Checklist checklist;
             checklist = GetModel(checklistdo);
@@ -220,6 +221,7 @@ namespace WeddingChecklistNew.Controllers
             checklist.Priority = checklistdo.Priority;
             checklist.Url = checklistdo.Url;
             checklist.UserId = checklistdo.UserId;
+            checklist.Done = checklistdo.Done;
             return checklist;
         }
 
@@ -239,6 +241,7 @@ namespace WeddingChecklistNew.Controllers
             checklistdo.Priority = checklist.Priority;
             checklistdo.Url = checklist.Url;
             checklistdo.UserId = checklist.UserId;
+            checklistdo.Done = checklist.Done;
             return checklistdo;
         }
 
