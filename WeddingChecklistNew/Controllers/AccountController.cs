@@ -8,9 +8,14 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
+using System.Security.Principal;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.Security;
 using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
@@ -44,6 +49,12 @@ namespace WeddingChecklistNew.Controllers
             var c = new HttpCookie("token");
             c.Expires = DateTime.Now.AddDays(-1);
             Response.Cookies.Add(c);
+
+            Request.Cookies["email"].Expires = DateTime.Now.AddDays(-1);
+            var cemail = new HttpCookie("email");
+            cemail.Expires = DateTime.Now.AddDays(-1);
+            Response.Cookies.Add(cemail);
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -95,6 +106,12 @@ namespace WeddingChecklistNew.Controllers
                     HttpCookie httpCookie = new HttpCookie("token", token.AccessToken);
                     httpCookie.Expires = DateTime.Now.AddDays(14);
                     Response.Cookies.Add(httpCookie);
+
+                    var encryptedValue = Convert.ToBase64String(MachineKey.Protect(Encoding.UTF8.GetBytes(model.Email), "ProtectCookie"));
+                    HttpCookie httpCookieUser = new HttpCookie("email", encryptedValue);
+                    httpCookieUser.Expires = DateTime.Now.AddDays(14);
+                    Response.Cookies.Add(httpCookieUser);
+
                     return View();
                 }
             }
@@ -116,6 +133,6 @@ namespace WeddingChecklistNew.Controllers
                 var userinfo = responseMessage.Content.ReadAsAsync<UserInfoViewModel>(new[] { new JsonMediaTypeFormatter() }).Result;
                 return userinfo.Email;
             }
-        }
+        }   
     }
 }

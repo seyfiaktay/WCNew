@@ -12,6 +12,7 @@ using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
 {
+    [Authorize]
     public class ChecklistMainsController : Controller
     {
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
@@ -19,7 +20,7 @@ namespace WeddingChecklistNew.Controllers
         // GET: ChecklistMains
         public ActionResult Index()
         {
-            string username = GetUserName();
+            string username = HttpContext.User.Identity.Name;
             return View(mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username));
         }
 
@@ -52,7 +53,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
-            checklistMain.UserId = GetUserName();
+            checklistMain.UserId = HttpContext.User.Identity.Name;
             checklistMain.checklists = new List<Checklist>();
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
@@ -87,7 +88,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
-            checklistMain.UserId = GetUserName();
+            checklistMain.UserId = HttpContext.User.Identity.Name;
             if (ModelState.IsValid)
             {
                 mAPIChecklistMainController.PutChecklistMain(checklistMain.Id, checklistMain);
@@ -132,13 +133,5 @@ namespace WeddingChecklistNew.Controllers
         }
 
 
-
-        private string GetUserName()
-        {
-            string username;
-            mAccountController.InitializeController(this.Request.RequestContext);
-            username = mAccountController.GetLoginUserName();
-            return username;
-        }
     }
 }

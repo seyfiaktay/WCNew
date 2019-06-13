@@ -542,6 +542,20 @@ namespace WeddingChecklistNew.Controllers
             return NotFound();
         }
 
+
+        [Route("GetRoles")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IEnumerable<IdentityUserRole> GetRoles(string username)
+        {
+            var user = UserManager.FindByEmail(username);
+            if (user != null)
+            {
+                return user.Roles;
+            }
+            return null;
+        }
+
         #endregion
     }
 }
