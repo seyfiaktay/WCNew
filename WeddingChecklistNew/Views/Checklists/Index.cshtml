@@ -29,8 +29,8 @@
                             <td>@item.Name</td>
                             <td>@item.Url</td>
                             <td>@item.Price</td>
+                            <td>@(item.Currency.code)</td>
                             <td>@(item.Priority)</td>
-                            <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
                                 <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit">
                                     <i class="glyphicon glyphicon-pencil m-r-5"></i>
@@ -115,6 +115,7 @@
         else { }
     });
     function Create() {
-        location.href = "/Checklists/Create";
+        var id =@Model.Select(x => x.ChecklistMainId).FirstOrDefault();
+        location.href = "/Checklists/Create/" + id;
     };
 </script>
