@@ -1,39 +1,99 @@
-﻿@model WeddingChecklistNew.Models.WidgetModel 
+﻿@model WeddingChecklistNew.Models.WidgetModel
 
 
 <div class="widget">
-    <ul id="myTab" class="nav nav-tabs">
-        <li class="active"><a href="#recent" data-toggle="tab">Lastest Products</a></li>
-        <li class=""><a href="#popular" data-toggle="tab">Popular Lists</a></li>
-    </ul>
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="recent">
-            <ul class="recent">
-                @foreach (var item in Model.Checklists)
-                {
-                    <li>
-                        <a href=@item.Link><img src="@Href(item.ImagePath)" class="alignleft" style="width:3%" alt=""></a>
-                        <h6><a href=@item.Link>@item.Name</a></h6>
-                        <a href=@item.Url>@item.Url</a>
-                    </li>
-                }
-            </ul>
-        </div>
-        <div class="tab-pane fade" id="popular">
-            <ul class="recent">
-                @foreach (var item in Model.ChecklistMain)
-                {
-                    <li>
-                        <a href=@item.Link>
-                            <img src="~/Content/Scaffold/assets/img/dummies/80x80/img1.jpg" class="alignleft" />
-                        </a>
-                        <h6><a href=@item.Link>@item.MainName</a></h6>
-                        <p>
-                            @item.Description
-                        </p>
-                    </li>
-                }
-            </ul>
-        </div>
+    <div class="col-md-6">
+        <h4><a href="#">Latest</a></h4>
+
+        <ul class="recent">
+            @foreach (var item in Model.ChecklistMain)
+            {
+                <li>
+                    <a href=@item.Link>
+                        <img src="~/Content/Scaffold/assets/img/dummies/80x80/img1.jpg" class="alignleft" />
+                    </a>
+                    <h6>
+                        <a href=@item.Link>@item.MainName</a>
+                    </h6>
+                    <p>
+                        @item.Description
+                    </p>
+                </li>
+            }
+        </ul>
     </div>
+    <div class="col-md-6">
+        <h4><a href="#">Product List</a></h4>
+        <ul class="recent">
+            @foreach (var item in Model.Checklists)
+            {
+            <li>
+                <a href=@item.Link>
+                    <img src="@Href(item.ImagePath)" class="alignleft" style="width:60px;height:60px">
+                </a>
+                <h6>
+                    <a href=@item.Link>@item.Name</a>
+                </h6>
+               
+                <a class="element" href=@item.Url>@item.Url</a>
+            </li>
+            }
+        </ul>
+    </div>
+    @*<div class="col-md-6">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#recent" data-toggle="tab">Lastest Products</a></li>
+                <li class=""><a href="#popular" data-toggle="tab">Popular Lists</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="recent">
+                    <ul class="recent">
+                        @foreach (var item in Model.Checklists)
+                        {
+                            <li>
+                                <a href=@item.Link><img src="@Href(item.ImagePath)" class="alignleft" style="width:3%" alt=""></a>
+                                <h6><a href=@item.Link>@item.Name</a></h6>
+                                <a href=@item.Url>@item.Url</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="popular">
+                    <ul class="recent">
+                        @foreach (var item in Model.ChecklistMain)
+                        {
+                            <li>
+                                <a href=@item.Link>
+                                    <img src="~/Content/Scaffold/assets/img/dummies/80x80/img1.jpg" class="alignleft" />
+                                </a>
+                                <h6><a href=@item.Link>@item.MainName</a></h6>
+                                <p>
+                                    @item.Description
+                                </p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#recent" data-toggle="tab">Lastest Products</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="recent">
+                    <ul class="recent">
+                        @foreach (var item in Model.Checklists)
+                        {
+                            <li>
+                                <a href=@item.Link><img src="@Href(item.ImagePath)" class="alignleft" style="width:3%" alt=""></a>
+                                <h6><a href=@item.Link>@item.Name</a></h6>
+                                <a href=@item.Url>@item.Url</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+
 </div>
