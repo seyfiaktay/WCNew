@@ -4,71 +4,117 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<button type="button" class="btn waves-effect waves-light btn-primary" onclick="Create()">Create New</button>
+<br />
+<br />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CheckListMain.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Currency.code)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Priority)
-        </th>
-        <th></th>
-    </tr>
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive m-t-40">
+            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>url</th>
+                        <th>Price</th>
+                        <th>Currency</th>
+                        <th>Priority</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach (var item in Model)
+                        {
+                            <td>@item.Name</td>
+                            <td>@item.Url</td>
+                            <td>@item.Price</td>
+                            <td>@(item.Priority)</td>
+                            <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
+                            <td class="text-nowrap">
+                                <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit">
+                                    <i class="glyphicon glyphicon-pencil m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Details", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail">
+                                    <i class="glyphicon glyphicon-search m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete">
+                                    <i class="glyphicon glyphicon-trash m-r-5"></i>
+                                </a>
+                            </td>
+                        }
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckListMain.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency.code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CheckListMain.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Currency.code)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Priority)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckListMain.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Currency.code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
-</table>
+    </table>*@
 
 
 <script type="text/javascript">
     $(function () { // will trigger when the document is ready
         if ('@TempData["message"]' == "success") {
-        toastr.options.timeOut = 2000; // 2s
-        toastr.success('done!');
-       }
-        else{ }
-    })
+            toastr.options.timeOut = 2000; // 2s
+            toastr.success('done!');
+        }
+        else { }
+    });
+    function Create() {
+        location.href = "/Checklists/Create";
+    };
 </script>

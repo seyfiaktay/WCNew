@@ -4,10 +4,9 @@
     ViewBag.Title = "CheckList";
 }
 
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<button type="button" class="btn waves-effect waves-light btn-primary" onclick="Create()">Create New</button>
+<br />
+<br />
 <div class="card">
     <div class="card-body">
         <div class="table-responsive m-t-40">
@@ -30,73 +29,39 @@
                             <td>@item.DueDate.ToShortDateString()</td>
                             <td>@item.Definition</td>
                             <td>@(item.Private)</td>
-                            <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString():"")</td>
+                            <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
-                                <a href="javascript:void(0)" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a>
-                                <a href="javascript:void(0)" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit">
+                                    <i class="glyphicon glyphicon-pencil m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Details", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail">
+                                    <i class="glyphicon glyphicon-search m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete">
+                                    <i class="glyphicon glyphicon-trash m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Index", "Checklists",new { checklistmainid = item.Id })" data-toggle="tooltip" data-original-title="Go to List">
+                                    <i class="glyphicon glyphicon-shopping-cart m-r-5   "></i>
+                                </a>
                             </td>
                         }
-                    </tr>    
+                    </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DueDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Definition)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Private)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LogDate)
-            </th>
-            <th></th>
-        </tr>
-
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Definition)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Private)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LogDate)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                @Html.ActionLink("Go to List", "Index", "Checklists", new { checklistmainid = item.Id }, null)
-            </td>
-        </tr>
-    }
-
-    </table>*@
 
 <script type="text/javascript">
-    $(function () { // will trigger when the document is ready
+    $(function () { 
         if ('@TempData["message"]' == "success") {
         toastr.options.timeOut = 2000; // 2s
         toastr.success('done!');
        }
         else{ }
     })
+    function Create() {
+        location.href = "/ChecklistMains/Create";
+    };
 </script>

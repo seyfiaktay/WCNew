@@ -19,7 +19,9 @@
     <link href="~/Content/Scaffold/assets/css/style.css" rel="stylesheet">
     <link href="~/Content/Scaffold/assets/color/success.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/eliteadmin/dist/css/pages/icon-page.css" rel="stylesheet" />
     <link href="~/Content/Scaffold/assets/js/jquery.bxslider.min.css" rel="stylesheet" />
+    <link href="~/Content/eliteadmin/dist/css/pages/tab-page.css" rel="stylesheet" />
     @*<link href="~/Content/eliteadmin/dist/css/style.min.css" rel="stylesheet" />*@
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="~/Content/Scaffold/assets/ico/favicon.ico">
@@ -53,7 +55,7 @@
                                 <li class="dropdown primary">
                                     <a href="#"><i class="icon-star icon-white"></i> Features</a>
                                     <ul class="dropdown-menu">
-                                        <li hidden="hidden" id="checklistmain" >
+                                        <li hidden="hidden" id="checklistmain">
                                             <a href="/ChecklistMains/Index">
                                                 Checklist Main
                                             </a>
@@ -116,8 +118,10 @@
     <script src="~/Content/Scaffold/assets/js/hover/setting.js"></script>
     <script src="~/Content/Scaffold/assets/js/custom.js"></script>
     <script src="~/Scripts/custom.js"></script>
+
+    <script src="~/Content/eliteadmin/dist/js/custom.js"></script>
     <script type="text/javascript">
-        $(function () { 
+        $(function () {
 
             $(".datepicker").datepicker({
                 dateFormat: 'dd.mm.yy'
@@ -129,7 +133,7 @@
         $(function () { // will trigger when the document is ready
             var x = document.cookie;
             var token = x.includes("token");
-            if (token==false) {
+            if (token == false) {
                 //toastr.error("Unauthorized Request");
                 $("#login").removeAttr("hidden");
             }
