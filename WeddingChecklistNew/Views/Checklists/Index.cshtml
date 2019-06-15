@@ -31,7 +31,7 @@
                             <td>@item.Name</td>
                             <td>@item.Url</td>
                             <td>@item.Price</td>
-                            <td>@(item.Currency.code)</td>
+                            <td>@(item.Currency == null ? "" : item.Currency.code)</td>
                             <td>@(item.Priority)</td>
                             <td class="text-nowrap">
                                 <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit">
