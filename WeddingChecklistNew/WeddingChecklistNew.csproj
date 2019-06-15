@@ -249,10 +249,12 @@
     <Compile Include="Controllers\APIController\APIChecklistImagesController.cs" />
     <Compile Include="Controllers\APIController\APIChecklistMainsController.cs" />
     <Compile Include="Controllers\APIController\APIChecklistsController.cs" />
+    <Compile Include="Controllers\APIController\APICommentsController.cs" />
     <Compile Include="Controllers\APIController\APIControllerGenel.cs" />
     <Compile Include="Controllers\ChecklistImagesController.cs" />
     <Compile Include="Controllers\ChecklistMainsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -4879,6 +4881,7 @@
     <Content Include="Views\Account\SendEmail.cshtml" />
     <Content Include="Views\Home\_GetSlider.cshtml" />
     <Content Include="Views\Home\_GetWidget.cshtml" />
+    <Content Include="Views\Home\_CommentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
