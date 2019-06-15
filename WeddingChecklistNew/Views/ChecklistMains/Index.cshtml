@@ -22,9 +22,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        @foreach (var item in Model)
-                        {
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
                             <td>@item.Name</td>
                             <td>@item.DueDate.ToShortDateString()</td>
                             <td>@item.Definition</td>
@@ -44,8 +45,9 @@
                                     <i class="glyphicon glyphicon-shopping-cart m-r-5   "></i>
                                 </a>
                             </td>
-                        }
-                    </tr>
+                        </tr>
+                    }
+
                 </tbody>
             </table>
         </div>
@@ -54,7 +56,7 @@
 
 
 <script type="text/javascript">
-    $(function () { 
+    $(function () {
         if ('@TempData["message"]' == "success") {
         toastr.options.timeOut = 2000; // 2s
         toastr.success('done!');

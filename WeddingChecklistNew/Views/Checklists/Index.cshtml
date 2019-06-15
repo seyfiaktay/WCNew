@@ -23,9 +23,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        @foreach (var item in Model)
-                        {
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
                             <td>@item.Name</td>
                             <td>@item.Url</td>
                             <td>@item.Price</td>
@@ -42,8 +44,9 @@
                                     <i class="glyphicon glyphicon-trash m-r-5"></i>
                                 </a>
                             </td>
-                        }
-                    </tr>
+                        </tr>
+                    }
+
                 </tbody>
             </table>
         </div>
