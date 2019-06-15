@@ -49,13 +49,14 @@ namespace WeddingChecklistNew.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Text,ChecklistMainId,Type,LogDate,UserId")] Comment comment)
         {
+            comment.UserId = HttpContext.User.Identity.Name;
+            comment.LogDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 mAPICommentController.PostComment(comment);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
             }
             return View(comment);
         }
@@ -82,10 +83,12 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Text,ChecklistMainId,Type,LogDate,UserId")] Comment comment)
         {
+            comment.UserId = HttpContext.User.Identity.Name;
+            comment.LogDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 mAPICommentController.PutComment(comment.Id,comment);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
             }
             return View(comment);
         }
@@ -112,7 +115,7 @@ namespace WeddingChecklistNew.Controllers
         {
             Comment comment = GetComment(id);
             mAPICommentController.DeleteComment(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
         }
 
 

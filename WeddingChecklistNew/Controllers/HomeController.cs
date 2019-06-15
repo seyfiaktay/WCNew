@@ -27,11 +27,5 @@ namespace WeddingChecklistNew.Controllers
             model.ChecklistMain= service.GetRecentlyCheckListMains();
             return PartialView("_GetWidget",model);
         }
-
-        public PartialViewResult CommentView()
-        {
-            ViewBag.UserName = HttpContext.User.Identity.Name;
-            return PartialView("_CommentView");
-        }
     }
 }
