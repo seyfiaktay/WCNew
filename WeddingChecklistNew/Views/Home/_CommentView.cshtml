@@ -1,6 +1,6 @@
 ﻿@model WeddingChecklistNew.Models.Comment
 
-@*<div class="card">
+<div class="card">
     <div class="card-body">
         <h4 class="card-title">Recent Comments</h4>
     </div>
@@ -10,67 +10,82 @@
     <div class="comment-widgets m-b-20">
         <!-- Comment Row -->
         <div class="d-flex flex-row comment-row">
-            <div class="p-2"><span class="round"><img src="../assets/images/users/1.jpg" alt="user" width="50"></span></div>
+            <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/1.jpg" alt="user" width="50"></span></div>
             <div class="comment-text w-100">
                 <h5>James Anderson</h5>
                 <div class="comment-footer">
                     <span class="date">April 14, 2016</span>
-                    <span class="label label-info">Pending</span> <span class="action-icons">
-                        <a href="javascript:void(0)"><i class="mdi mdi-pencil-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-checkbox-marked-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-heart"></i></a>
-                    </span>
                 </div>
                 <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
             </div>
         </div>
         <!-- Comment Row -->
         <div class="d-flex flex-row comment-row ">
-            <div class="p-2"><span class="round"><img src="../assets/images/users/2.jpg" alt="user" width="50"></span></div>
+            <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/2.jpg" alt="user" width="50"></span></div>
             <div class="comment-text active w-100">
                 <h5>Michael Jorden</h5>
                 <div class="comment-footer">
                     <span class="date">April 14, 2016</span>
-                    <span class="label label-success">Approved</span> <span class="action-icons active">
-                        <a href="javascript:void(0)"><i class="mdi mdi-pencil-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-checkbox-marked-circle text-success"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-heart text-danger"></i></a>
-                    </span>
                 </div>
                 <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry..</p>
             </div>
         </div>
         <!-- Comment Row -->
         <div class="d-flex flex-row comment-row">
-            <div class="p-2"><span class="round"><img src="../assets/images/users/3.jpg" alt="user" width="50"></span></div>
+            <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/3.jpg" alt="user" width="50"></span></div>
             <div class="comment-text w-100">
                 <h5>Johnathan Doeting</h5>
                 <div class="comment-footer">
                     <span class="date">April 14, 2016</span>
-                    <span class="label label-danger">Rejected</span> <span class="action-icons">
-                        <a href="javascript:void(0)"><i class="mdi mdi-pencil-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-checkbox-marked-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-heart"></i></a>
-                    </span>
+
                 </div>
                 <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
             </div>
         </div>
         <!-- Comment Row -->
         <div class="d-flex flex-row comment-row">
-            <div class="p-2"><span class="round"><img src="../assets/images/users/4.jpg" alt="user" width="50"></span></div>
+            <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/4.jpg" alt="user" width="50"></span></div>
             <div class="comment-text w-100">
                 <h5>James Anderson</h5>
                 <div class="comment-footer">
                     <span class="date">April 14, 2016</span>
-                    <span class="label label-info">Pending</span> <span class="action-icons">
-                        <a href="javascript:void(0)"><i class="mdi mdi-pencil-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-checkbox-marked-circle"></i></a>
-                        <a href="javascript:void(0)"><i class="mdi mdi-heart"></i></a>
-                    </span>
                 </div>
                 <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry..</p>
             </div>
         </div>
+
+        <!-- Comment Row -->
+        <div class="d-flex flex-row comment-row">
+            <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/1.jpg" alt="user" width="50"></span></div>
+            <div class="comment-text w-100">
+                <h5>@ViewBag.UserName</h5>
+                <div class="comment-footer">
+                    <span class="date">April 14, 2016</span>
+                </div>
+                <textarea class="m-b-5 m-t-10" id="newtext">deneme12345</textarea>
+            </div>
+            <input type="button" id="newtext" onclick="Save()" class="btn btn-success" value="Login" />
+        </div>
+
+
+
     </div>
-</div>*@
+</div>
+
+<script>
+    function Save() {
+        debugger;
+        $.ajax({
+            type: "POST",
+            url: "/Comments/Create",
+            data: { text: $("#newtext").val(), ChecklistMainId = 1, Type = 1 },
+            success: function (data) {
+                toastr.success("done!");
+                location.href = "/Home/Index";
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                toastr.error(xhr.responseText)
+            }
+        });
+    }
+</script>
