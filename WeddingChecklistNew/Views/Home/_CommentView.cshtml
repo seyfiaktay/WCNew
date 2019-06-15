@@ -78,7 +78,7 @@
         $.ajax({
             type: "POST",
             url: "/Comments/Create",
-            data: { text: $("#newtext").val(), ChecklistMainId = 1, Type = 1 },
+            data: { text: $("#newtext").val(), ChecklistMainId : 1, Type : 1 },
             success: function (data) {
                 toastr.success("done!");
                 location.href = "/Home/Index";
