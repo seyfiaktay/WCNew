@@ -17,6 +17,7 @@ namespace WeddingChecklistNew.Controllers
     {
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
         private AccountController mAccountController = new AccountController();
+        private APICommentsController mAPICommentsController = new APICommentsController();
         // GET: ChecklistMains
         public ActionResult Index()
         {
@@ -122,6 +123,16 @@ namespace WeddingChecklistNew.Controllers
             mAPIChecklistMainController.DeleteChecklistMain(id);
             TempData["message"] = "success";
             return RedirectToAction("Index");
+        }
+
+
+        public PartialViewResult CommentView(int id)
+        {
+            ViewBag.UserName = HttpContext.User.Identity.Name;
+            ViewBag.ChecklistMainId = id; 
+            List<Comment> commentList;
+            commentList = mAPICommentsController.GetComments().Where(x => x.ChecklistMainId == id).ToList();
+            return PartialView("_CommentView", commentList);
         }
 
         private ChecklistMain GetChecklistMain(int? id)

@@ -1,4 +1,4 @@
-﻿@model WeddingChecklistNew.Models.Comment
+﻿@model List<WeddingChecklistNew.Models.Comment>
 
 <div class="card">
     <div class="card-body">
@@ -8,7 +8,7 @@
     <!-- Comment widgets -->
     <!-- ============================================================== -->
     <div class="comment-widgets m-b-20">
-        <!-- Comment Row -->
+        @*<!-- Comment Row -->
         <div class="d-flex flex-row comment-row">
             <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/1.jpg" alt="user" width="50"></span></div>
             <div class="comment-text w-100">
@@ -41,18 +41,22 @@
                 </div>
                 <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
             </div>
-        </div>
-        <!-- Comment Row -->
-        <div class="d-flex flex-row comment-row">
-            <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/4.jpg" alt="user" width="50"></span></div>
-            <div class="comment-text w-100">
-                <h5>James Anderson</h5>
-                <div class="comment-footer">
-                    <span class="date">April 14, 2016</span>
+        </div>*@
+
+        @foreach (var item in Model)
+        {
+            <!-- Comment Row -->
+            <div class="d-flex flex-row comment-row">
+                <div class="p-2"><span class="round"><img src="~/Content/eliteadmin/assets/images/users/4.jpg" alt="user" width="50"></span></div>
+                <div class="comment-text w-100">
+                    <h5>@item.UserId</h5>
+                    <div class="comment-footer">
+                        <span class="date">@item.LogDate.ToString()</span>
+                    </div>
+                    <p class="m-b-5 m-t-10">@item.Text</p>
                 </div>
-                <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry..</p>
             </div>
-        </div>
+        }
 
         <!-- Comment Row -->
         <div class="d-flex flex-row comment-row">
@@ -62,26 +66,23 @@
                 <div class="comment-footer">
                     <span class="date">April 14, 2016</span>
                 </div>
-                <textarea class="m-b-5 m-t-10" id="newtext">deneme12345</textarea>
+                <textarea class="m-b-5 m-t-10" id="newtext"></textarea>
             </div>
-            <input type="button" id="newtext" onclick="Save()" class="btn btn-success" value="Login" />
+            <input type="button" id="newtext" onclick="Save()" class="btn btn-success" value="Save" />
         </div>
-
-
-
     </div>
 </div>
 
 <script>
     function Save() {
-        debugger;
+        var checklistmainid = @ViewBag.ChecklistMainId;
         $.ajax({
             type: "POST",
             url: "/Comments/Create",
-            data: { text: $("#newtext").val(), ChecklistMainId : 1, Type : 1 },
+            data: { text: $("#newtext").val(), ChecklistMainId: checklistmainid, Type : 1 },
             success: function (data) {
                 toastr.success("done!");
-                location.href = "/Home/Index";
+                $("#commentpartial").load("/ChecklistMains/CommentView", { id: checklistmainid });
             },
             error: function (xhr, textStatus, errorThrown) {
                 toastr.error(xhr.responseText)

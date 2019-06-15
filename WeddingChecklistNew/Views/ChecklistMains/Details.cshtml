@@ -64,3 +64,11 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<div class="row" id="commentpartial"></div>
+<script>
+    $(function () {
+        var item = @Model.Id;
+        $("#commentpartial").load("/ChecklistMains/CommentView", {id:item});
+    });
+</script>
