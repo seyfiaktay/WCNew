@@ -37,5 +37,6 @@ namespace WeddingChecklistNew.Models
         public DbSet<ChecklistImage> CheckListImages { get; set; }
         public DbSet<ChecklistMain> ChecklistMains { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }
