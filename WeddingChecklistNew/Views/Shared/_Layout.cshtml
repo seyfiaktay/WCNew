@@ -20,7 +20,7 @@
     <link href="~/Content/Scaffold/assets/color/success.css" rel="stylesheet">
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/Scaffold/assets/js/jquery.bxslider.min.css" rel="stylesheet" />
-    <link href="~/Content/eliteadmin/dist/css/style.min.css" rel="stylesheet" />
+    @*<link href="~/Content/eliteadmin/dist/css/style.min.css" rel="stylesheet" />*@
     <!-- fav and touch icons -->
     <link rel="shortcut icon" href="~/Content/Scaffold/assets/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/Scaffold/assets/ico/apple-touch-icon-144-precomposed.png">
@@ -28,8 +28,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/Scaffold/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="~/Content/Scaffold/assets/ico/apple-touch-icon-57-precomposed.png">
 </head>
-<body>
-    <header>
+<body style=" background-color: #edf1f5 !important">
+    <header class="topbar">
         <!-- Navbar
         ================================================== -->
         <div class="navbar navbar-fixed-top">
@@ -108,7 +108,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/toastr")
     @RenderSection("scripts", required: false)
-
+    <script src="~/Content/eliteadmin/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
     <script src="~/Content/Scaffold/assets/js/jquery.bxslider.min.js"></script>
     <script src="~/Content/Scaffold/assets/js/jquery.elastislide.js"></script>
     <script src="~/Content/Scaffold/assets/js/jquery.prettyPhoto.js"></script>
@@ -117,10 +117,9 @@
     <script src="~/Content/Scaffold/assets/js/custom.js"></script>
     <script src="~/Scripts/custom.js"></script>
     <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
+        $(function () { 
 
             $(".datepicker").datepicker({
-                //dateFormat: 'yy-mm-dd'
                 dateFormat: 'dd.mm.yy'
             });
         })
@@ -139,14 +138,11 @@
                 $("#logout").removeAttr("hidden");
                 $("#checklistmain").removeAttr("hidden");
             }
-
-            //var item = document.getElementById("email");
-            //$("#email").text(token.userName);
         })
 
     </script>
 
-    <div class="container m-t-50">
+    <div class="container m-t-50 p-l-0 p-r-0 p25" style="background-color:white!important; ">
         @RenderBody()
         <hr />
         <!-- Footer
