@@ -255,6 +255,7 @@
     <Compile Include="Controllers\ChecklistMainsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -4886,6 +4887,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Comments\" />
+    <Folder Include="Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

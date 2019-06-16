@@ -5,9 +5,20 @@
     <title>Error</title>
 </head>
 <body>
-    <hgroup>
-        <h1>Error.</h1>
-        <h2>An error occurred while processing your request.</h2>
-    </hgroup>
+    <div class="error-box">
+        <div class="error-body text-center">
+            <h1>@ViewBag.error_code</h1>
+            <h3 class="text-uppercase">@ViewBag.message</h3>
+            <p class="text-muted m-t-30 m-b-30">Please try after some time</p>
+            @*<a href="index.html" class="btn btn-info btn-rounded waves-effect waves-light m-b-40">Back to home</a>*@
+            @Html.ActionLink("Back to home","Index","Home",null, new { @class = "btn btn-info btn-rounded waves-effect waves-light m-b-40" })
+        </div>
+
+    </div>
 </body>
 </html>
+
+
+
+
+
