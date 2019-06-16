@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using log4net;
+using System.Web.Mvc;
 using WeddingChecklistNew.Controllers.APIController;
 
 namespace WeddingChecklistNew.Controllers
@@ -9,10 +10,6 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home Page";
-            //if (Request.Cookies["token"]!= null)
-            //{
-            //    mAccountController.InitializeController(this.Request.RequestContext);
-            //}
             return View();
         }
         public PartialViewResult GetSlider()
