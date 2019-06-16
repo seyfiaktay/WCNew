@@ -56,7 +56,8 @@ namespace WeddingChecklistNew.Controllers
             if (ModelState.IsValid)
             {
                 mAPICommentController.PostComment(comment);
-                return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
+                //return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
+                return Json("Done");
             }
             return View(comment);
         }
@@ -110,12 +111,16 @@ namespace WeddingChecklistNew.Controllers
 
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = GetComment(id);
+            if (comment.UserId != User.Identity.Name)
+            {
+                return Json(new { returntype = 0, message = "you can not do that transaction" });
+            }
             mAPICommentController.DeleteComment(id);
-            return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
+            //return RedirectToAction("Details", "ChecklistMains", new { id = comment.ChecklistMainId });
+            return Json(new { returntype=1,message="done" });
         }
 
 
