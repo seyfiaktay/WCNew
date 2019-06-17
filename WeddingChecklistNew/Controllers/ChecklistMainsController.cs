@@ -22,10 +22,11 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index()
         {
             string username = HttpContext.User.Identity.Name;
-            return View(mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username));
+            return View(mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username || x.Private == false));
         }
 
         // GET: ChecklistMains/Details/5
+        [AllowAnonymous]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -56,7 +57,6 @@ namespace WeddingChecklistNew.Controllers
             checklistMain.LogDate = DateTime.Now;
             checklistMain.UserId = HttpContext.User.Identity.Name;
             checklistMain.checklists = new List<Checklist>();
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 mAPIChecklistMainController.PostChecklistMain(checklistMain);
@@ -88,6 +88,7 @@ namespace WeddingChecklistNew.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
+            AddCustomError(checklistMain.UserId);
             checklistMain.LogDate = DateTime.Now;
             checklistMain.UserId = HttpContext.User.Identity.Name;
             if (ModelState.IsValid)
@@ -120,9 +121,14 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ChecklistMain checklistMain = GetChecklistMain(id);
-            mAPIChecklistMainController.DeleteChecklistMain(id);
-            TempData["message"] = "success";
-            return RedirectToAction("Index");
+            AddCustomError(checklistMain.UserId);
+            if (ModelState.IsValid)
+            {
+                mAPIChecklistMainController.DeleteChecklistMain(id);
+                TempData["message"] = "success";
+                return RedirectToAction("Index");
+            }
+            return View(checklistMain);
         }
 
 
@@ -141,6 +147,15 @@ namespace WeddingChecklistNew.Controllers
             var contentResult = actionResult as OkNegotiatedContentResult<ChecklistMain>;
             var checklistmain = contentResult.Content;
             return checklistmain;
+        }
+
+
+        private void AddCustomError(string userid)
+        {
+            if (userid != User.Identity.Name)
+            {
+                ModelState.AddModelError(string.Empty, "You can not edit someone's list");
+            }
         }
 
 

@@ -38,7 +38,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index(int checklistmainid)
         {
             string username = HttpContext.User.Identity.Name;
-            return View(mAPIChecklistController.GetCheckLists().Where(x => x.UserId == username && x.ChecklistMainId == checklistmainid));
+            return View(mAPIChecklistController.GetCheckLists().Where(x => x.ChecklistMainId == checklistmainid && (x.CheckListMain.Private == false || x.UserId == username)));
         }
 
         // GET: Checklists/Details/5
@@ -75,9 +75,12 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl,Done")] int checklistmainid, Checklistdo checklistdo)
         {
             Checklist checklist;
+            ChecklistMain checklistMain;
             checklist = GetModel(checklistdo);
+            checklistMain = GetChecklistMain(checklistmainid);
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
+            AddCustomError(checklistMain.UserId);
             checklist.LogDate = DateTime.Now;
             checklist.UserId = GetUserName();
             checklist.ChecklistMainId = checklistmainid;
@@ -88,6 +91,7 @@ namespace WeddingChecklistNew.Controllers
                 TempData["message"] = "success";
                 return RedirectToAction("Index");
             }
+            
             return View(checklistdo);
         }
        
@@ -124,6 +128,7 @@ namespace WeddingChecklistNew.Controllers
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
+            AddCustomError(checklist.UserId);
             checklist.LogDate = DateTime.Now;
             checklist.UserId = GetUserName();
             checklist.ChecklistMainId = checklistmainid;
@@ -158,9 +163,14 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult DeleteConfirmed(int checklistmainid, int id)
         {
             Checklist checklist = GetChecklist(id);
-            mAPIChecklistController.DeleteChecklist(id);
-            TempData["message"] = "success";
-            return RedirectToAction("Index",new { checklistmainid = checklistmainid });
+            AddCustomError(checklist.UserId);
+            if (ModelState.IsValid)
+            {
+                mAPIChecklistController.DeleteChecklist(id);
+                TempData["message"] = "success";
+                return RedirectToAction("Index", new { checklistmainid = checklistmainid });
+            }
+            return View(checklist);
         }
 
 
@@ -168,6 +178,14 @@ namespace WeddingChecklistNew.Controllers
         {
             var actionResult = mAPIChecklistController.GetChecklist(id);
             var contentResult = actionResult as OkNegotiatedContentResult<Checklist>;
+            var checklist = contentResult.Content;
+            return checklist;
+        }
+
+        private ChecklistMain GetChecklistMain(int? id)
+        {
+            var actionResult = mAPIChecklistMainController.GetChecklistMain(id);
+            var contentResult = actionResult as OkNegotiatedContentResult<ChecklistMain>;
             var checklist = contentResult.Content;
             return checklist;
         }
@@ -258,6 +276,14 @@ namespace WeddingChecklistNew.Controllers
                 checklistImage.Type = 1;
                 checklistImage.CheckListId = checklistid;
                 lstImages.Add(checklistImage);
+            }
+        }
+
+        private void AddCustomError(string userid)
+        {
+            if (userid != User.Identity.Name)
+            {
+                ModelState.AddModelError(string.Empty, "You can not edit someone's list");
             }
         }
     }

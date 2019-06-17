@@ -28,5 +28,6 @@ namespace WeddingChecklistNew.Models.Domain
         public ProductPriority Priority { get; set; }
         public string ImagePath { get; set; }
         public string Link { get; set; }
+        public string UserId { get; set; }
     }
 }
