@@ -263,15 +263,19 @@
         <script src="~/Content/Scaffold/assets/js/custom.js"></script>
         <script src="~/Scripts/custom.js"></script>
 
-        <script src="~/Content/eliteadmin/dist/js/custom.js"></script>
-        <script type="text/javascript">
-            $(function () {
-
-                $(".datepicker").datepicker({
-                    dateFormat: 'dd.mm.yy'
-                });
+    <script src="~/Content/eliteadmin/dist/js/custom.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $(".datepicker").datepicker({
+                dateFormat: 'dd.mm.yy'
+            });
+            $('.zoom')
+                .wrap('<span style="display:inline-block"></span>')
+                .css('display', 'block')
+                .parent()
+                .zoom();
             })
-        </script>
+    </script>
 
 
         <div class="container m-t-50 p-l-0 p-r-0 p25" style="background-color:white!important; ">

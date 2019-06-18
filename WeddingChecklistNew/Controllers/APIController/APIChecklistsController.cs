@@ -171,7 +171,8 @@ namespace WeddingChecklistNew.Controllers.APIController
                                                                      where cp.CheckListId == checklist.Id
                                                                      orderby cp.Id descending
                                                                      select cp.Path).FirstOrDefault(),
-                                                       Link = "http://localhost:55465/Checklists/Details/" + checklist.Id
+                                                       Link = "http://localhost:55465/Checklists/Details/" + checklist.Id,
+                                                       UserId = checklist.UserId
                         };
             return list.Take(10).ToList();
         }
@@ -189,7 +190,8 @@ namespace WeddingChecklistNew.Controllers.APIController
                            MainName = checklistmain.Name,
                            DueDate = checklistmain.DueDate,
                            Description = checklistmain.Definition,
-                           Link = "http://localhost:55465/Checklists/Index/" + checklistmain.Id
+                           Link = "http://localhost:55465/Checklists/Index/" + checklistmain.Id,
+                           UserId = checklistmain.UserId
                        };
             return list.Take(10).ToList();
         }
