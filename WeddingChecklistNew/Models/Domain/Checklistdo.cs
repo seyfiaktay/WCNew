@@ -19,6 +19,7 @@ namespace WeddingChecklistNew.Models
         [DisplayName("Product Url")]
         public string Url { get; set; }
         [DisplayName("Product Price")]
+        [DataType(DataType.Currency)]
         public decimal? Price { get; set; }
         public virtual Currency Currency { get; set; }
         [DisplayName("Product Currency")]

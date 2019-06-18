@@ -60,11 +60,9 @@
                         data: model,
                         success: function (data_token) {
                             toastr.success("login success");
-                            debugger;
                             window.location.href = "/Home/Index";
                         },
                     error: function (xhr, textStatus, errorThrown) {
-                        debugger;
                         toastr.error(errorThrown);
                         }
                  });
