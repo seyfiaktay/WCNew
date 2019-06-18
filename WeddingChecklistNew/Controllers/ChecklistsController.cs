@@ -17,7 +17,7 @@ using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class ChecklistsController : Controller
     {
         private APIChecklistsController mAPIChecklistController = new APIChecklistsController();
@@ -38,7 +38,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index(int checklistmainid)
         {
             string username = HttpContext.User.Identity.Name;
-            return View(mAPIChecklistController.GetCheckLists().Where(x => x.UserId == username && x.ChecklistMainId == checklistmainid));
+            return View(mAPIChecklistController.GetCheckLists().Where(x =>  x.ChecklistMainId == checklistmainid));
         }
 
         // GET: Checklists/Details/5

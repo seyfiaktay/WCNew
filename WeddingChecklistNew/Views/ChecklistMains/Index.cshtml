@@ -32,19 +32,16 @@
                             <td>@(item.Private)</td>
                             <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
-                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit">
-                                    <i class="glyphicon glyphicon-pencil m-r-5"></i>
-                                </a>
-                                <a href="@Url.Action("Details", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail">
-                                    <i class="glyphicon glyphicon-search m-r-5"></i>
-                                </a>
-                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete">
-                                    <i class="glyphicon glyphicon-trash m-r-5"></i>
-                                </a>
+                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit"> 
+                                <i class="fa fa-pencil text-inverse m-r-5"></i> </a>
+                                <a href="@Url.Action("Details", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail"> 
+                                <i class="fa fa-search text-inverse m-r-5"></i> </a>
+                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete"> 
+                                <i class="fa fa-close text-inverse m-r-5"></i> </a>
                                 <a href="@Url.Action("Index", "Checklists",new { checklistmainid = item.Id })" data-toggle="tooltip" data-original-title="Go to List">
-                                    <i class="glyphicon glyphicon-shopping-cart m-r-5   "></i>
-                                </a>
+                                <i class="fa fa-share text-inverse m-r-5"></i> </a>
                             </td>
+                          
                         </tr>
                     }
 

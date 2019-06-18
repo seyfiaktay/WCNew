@@ -1,8 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
-
+﻿
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -24,94 +20,15 @@ margin-top:50px !important;
 .p30{
     padding:30px;
 }
-.bx-wrapper, .bx-viewport {
-    height: 500px !important;
+.p50{
+    padding:50px!important;
 }
-.element {
-    display: block;
-    width: 250px;
-    overflow: hidden;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    max-height: 16px;
-    line-height: 16px;
+.card {
+    flex-direction:row !important;
 }
-.p-l-0{
-    padding-left:0;
+.mt20{
+    margin-top:20px;
 }
-.p-r-0 {
-    padding-right: 0;
-}
-.p25{
-    padding:25px;
-}
-.fa {
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-.fa-pencil:before {
-    content: "\f040";
-}
-a {
-    color: #fb9678;
-}
-.m-r-5{
-    margin-right:5px;
-}
-.btn {
-    display: inline-block;
-    text-align: center;
-    vertical-align: middle;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: .875rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
-.btn-primary {
-    background-color: #fb9678;
-    border-color: #fb9678;
-}
-.waves-effect {
-    position: relative;
-    cursor: pointer;
-    display: inline-block;
-    overflow: hidden;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    z-index: 1;
-    will-change: opacity,transform;
-    -webkit-transition: all .1s ease-out;
-    -moz-transition: all .1s ease-out;
-    -o-transition: all .1s ease-out;
-    -ms-transition: all .1s ease-out;
-    transition: all .1s ease-out;
-}
-.button-group .btn {
-    margin-bottom: 5px;
-    margin-right: 5px;
-}
-
-.error-box {
-    height: 100%;
-    position: fixed;
-    background: url(eliteadmin/assets/images/background/error-bg.jpg) no-repeat center center #fff; width: 100%;
-}
-
-.error-body {
-    padding-top: 5%;
-}
-
-
-.error-body h1 {
-    font-size: 210px;
-    font-weight: 900;
-    text-shadow: 4px 4px 0 #fff, 6px 6px 0 #343a40;
-    line-height: 210px;
+.footer{
+    margin-left:0px !important;
 }

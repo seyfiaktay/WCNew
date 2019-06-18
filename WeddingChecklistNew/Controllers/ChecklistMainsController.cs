@@ -12,7 +12,7 @@ using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class ChecklistMainsController : Controller
     {
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
@@ -22,7 +22,7 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index()
         {
             string username = HttpContext.User.Identity.Name;
-            return View(mAPIChecklistMainController.GetChecklistMains().Where(x => x.UserId == username));
+            return View(mAPIChecklistMainController.GetChecklistMains());
         }
 
         // GET: ChecklistMains/Details/5

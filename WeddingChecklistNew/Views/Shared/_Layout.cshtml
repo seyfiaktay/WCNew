@@ -1,160 +1,288 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @*@Styles.Render("~/Content/css")*@
-    @Styles.Render("~/Content/themes/base/css")
-    @Styles.Render("~/bundles/css")
-    <!-- styles -->
-    <link href="~/Content/Scaffold/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/css/docs.css" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/css/prettyPhoto.css" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/css/camera.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Open+Sans:400,300,300italic,400italic" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/css/style.css" rel="stylesheet">
-    <link href="~/Content/Scaffold/assets/color/success.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon.png">
+    <title>Elite Admin Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="~/Content/eliteadmin/dist/css/style.min.css" rel="stylesheet" />
+    <link href="~/assets/node_modules/prism/prism.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/eliteadmin/dist/css/pages/icon-page.css" rel="stylesheet" />
-    <link href="~/Content/Scaffold/assets/js/jquery.bxslider.min.css" rel="stylesheet" />
-    <link href="~/Content/eliteadmin/dist/css/pages/tab-page.css" rel="stylesheet" />
-    @*<link href="~/Content/eliteadmin/dist/css/style.min.css" rel="stylesheet" />*@
-    <!-- fav and touch icons -->
-    <link rel="shortcut icon" href="~/Content/Scaffold/assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/Scaffold/assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/Scaffold/assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/Scaffold/assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="~/Content/Scaffold/assets/ico/apple-touch-icon-57-precomposed.png">
+
+    <link href="~/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+    <script src="~/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
 </head>
-<body style=" background-color: #edf1f5 !important">
-    <header class="topbar">
-        <!-- Navbar
-        ================================================== -->
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <!-- logo -->
-                    <a class="brand logo" href="@Url.Action("Index", "Home")">
-                        <img style="width:30px" src="~/Content/Scaffold/assets/img/icon_new.jpg" alt="" />
+
+<body class="skin-blue fix-header single-column card-no-border fix-sidebar">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Elite admin</p>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/Home/Index">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src="~/assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="~/assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text --><span>
+                            <!-- dark Logo text -->
+                            <img src="~/assets/images/logo-text.png" alt="homepage" class="dark-logo" />
+                            <!-- Light Logo text -->
+                            <img src="~/assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                        </span>
                     </a>
-                    <!-- end logo -->
-                    <!-- top menu -->
-                    <div>
-                        <nav>
-                            <ul class="nav topnav">
-                                <li class="dropdown success active">
-                                    <a href="@Url.Action("Index", "Home")"><i class="icon-home icon-white"></i> Home</a>
-                                    <ul class="dropdown-menu">
-                                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown primary">
-                                    <a href="#"><i class="icon-star icon-white"></i> Features</a>
-                                    <ul class="dropdown-menu">
-                                        <li hidden="hidden" id="checklistmain">
-                                            <a href="/ChecklistMains/Index">
-                                                Checklist Main
-                                            </a>
-                                        </li>
-                                        @*<li>@Html.ActionLink("API", "Index", "Help", new { area = "", hidden="hidden" }, null)</li>
-                                            <li>@Html.ActionLink("ChecklistMain", "Index", "ChecklistMains", new { area = "",hidden="hidden" }, null)</li>
-                                            <li>@Html.ActionLink("Checklist", "Index", "Checklists", new { area = "",hidden="hidden" }, null)</li>*@
-                                    </ul>
-                                </li>
-                                <li class="dropdown primary">
-                                    <a href="#"><i class="icon-star icon-white"></i> Account</a>
-                                    <ul id="accountlist" class="dropdown-menu">
-                                        <li hidden="hidden" id="email">
-                                            <a id="aemail" href="/Account/ChangePassword">
-                                                Change Password
-                                            </a>
-                                        </li>
-                                        <li hidden="hidden" id="login">
-                                            <a href="/Account/Login">
-                                                Login
-                                            </a>
-                                        </li>
-                                        <li hidden="hidden" id="logout">
-                                            @Html.ActionLink("Logout", "Logout", "Account", new { area = "" }, null)
-                                        </li>
+                </div>
+                <div class="navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <!-- This is  -->
+                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-sm-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item">
+                            <form class="app-search d-none d-md-block d-lg-block">
+                                <input type="text" class="form-control" placeholder="Search & enter">
+                            </form>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav my-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="/ChecklistMains/Index">
+                                CheckList <i class="ti-pencil"></i>
+                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                            </a>
+                        </li>
 
-                                        <li id="register">
-                                            <a href="/Account/Register">
-                                                Register
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/assets/images/users/1.jpg" alt="user" class=""> <span class="hidden-md-down">Mark &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                            <div class="dropdown-menu dropdown-menu-right animated flipInY">
+                                <!-- text-->
+                                <a href="/Account/ChangePassword" hidden="hidden" id="email" class="dropdown-item"><i class="ti-user"></i>ChangePassword</a>
+                                <a href="/Account/Login" hidden="hidden" id="login" class="dropdown-item"><i class="ti-user"></i>Login</a>
+                                <!-- text-->
+                                <a href="/Account/Logout" hidden="hidden" id="logout" class="dropdown-item"><i class="ti-wallet"></i> Logout</a>
+                                <!-- text-->
+                                <a href="/Account/Register" id="register" class="dropdown-item"><i class="ti-email"></i> Register</a>
+                                <!-- text-->
 
-                                <li class="inverse">
-                                    <a href="contact.html"><i class="icon-envelope icon-white"></i> Contact</a>
-                                </li>
-                            </ul>
-                        </nav>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div class="page-wrapper p30">
+            @RenderBody()
+        </div>
+        <footer class="footer">
+            © 2018 Eliteadmin by themedesigner.in
+        </footer>
+    </div>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/assets/node_modules/popper/popper.min.js"></script>
+    <script src="~/assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="~/Content/eliteadmin/dist/js/perfect-scrollbar.jquery.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Content/eliteadmin/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/Content/eliteadmin/dist/js/sidebarmenu.js"></script>
+    <!--stickey kit -->
+    <script src="~/assets/node_modules/sticky-kit-master/dist/sticky-kit.min.js"></script>
+    <script src="~/assets/node_modules/sparkline/jquery.sparkline.min.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/Content/eliteadmin/dist/js/custom.min.js"></script>
+    <script src="~/assets/node_modules/prism/prism.js"></script>
+
+    <script src="~/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/eliteadmin/dist/js/pages/jasny-bootstrap.js"></script>
+    <script src="~/assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        var x = document.cookie;
+        var token = x.includes("token");
+        if (token == false) {
+            //toastr.error("Unauthorized Request");
+            $("#login").removeAttr("hidden");
+        }
+        else {
+            $("#email").removeAttr("hidden");
+            $("#logout").removeAttr("hidden");
+            $("#checklistmain").removeAttr("hidden");
+        }
+
+        $(".datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        });
+
+    })
+
+</script>
+@*<!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>@ViewBag.Title</title>
+        @Styles.Render("~/Content/themes/base/css")
+        @Styles.Render("~/bundles/css")
+        <!-- styles -->z
+        <link href="~/Content/Scaffold/assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="~/Content/Scaffold/assets/css/docs.css" rel="stylesheet">
+        <link href="~/Content/Scaffold/assets/css/prettyPhoto.css" rel="stylesheet">
+        <link href="~/Content/Scaffold/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+        <link href="~/Content/Scaffold/assets/css/camera.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Open+Sans:400,300,300italic,400italic" rel="stylesheet">
+        <link href="~/Content/Scaffold/assets/css/style.css" rel="stylesheet">
+        <link href="~/Content/Scaffold/assets/color/success.css" rel="stylesheet">
+        <link href="~/Content/Site.css" rel="stylesheet" />
+        <link href="~/Content/eliteadmin/dist/css/pages/icon-page.css" rel="stylesheet" />
+        <link href="~/Content/Scaffold/assets/js/jquery.bxslider.min.css" rel="stylesheet" />
+        <link href="~/Content/eliteadmin/dist/css/pages/tab-page.css" rel="stylesheet" />
+        <link rel="shortcut icon" href="~/Content/Scaffold/assets/ico/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/Scaffold/assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/Scaffold/assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/Scaffold/assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="~/Content/Scaffold/assets/ico/apple-touch-icon-57-precomposed.png">
+    </head>
+    <body style=" background-color: #edf1f5 !important">
+        <header class="topbar">
+            <!-- Navbar
+            ================================================== -->
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <!-- logo -->
+                        <a class="brand logo" href="@Url.Action("Index", "Home")">
+                            <img style="width:30px" src="~/Content/Scaffold/assets/img/icon_new.jpg" alt="" />
+                        </a>
+                        <!-- end logo -->
+                        <!-- top menu -->
+                        <div>
+                            <nav>
+                                <ul class="nav topnav">
+                                    <li class="dropdown success active">
+                                        <a href="@Url.Action("Index", "Home")"><i class="icon-home icon-white"></i> Home</a>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown primary">
+                                        <a href="#"><i class="icon-star icon-white"></i> Features</a>
+                                        <ul class="dropdown-menu">
+                                            <li hidden="hidden" id="checklistmain">
+                                                <a href="/ChecklistMains/Index">
+                                                    Checklist Main
+                                                </a>
+                                            </li>
+                                             </ul>
+                                    </li>
+                                    <li class="dropdown primary">
+                                        <a href="#"><i class="icon-star icon-white"></i> Account</a>
+                                        <ul id="accountlist" class="dropdown-menu">
+                                            <li hidden="hidden" id="email">
+                                                <a id="aemail" href="/Account/ChangePassword">
+                                                    Change Password
+                                                </a>
+                                            </li>
+                                            <li hidden="hidden" id="login">
+                                                <a href="/Account/Login">
+                                                    Login
+                                                </a>
+                                            </li>
+                                            <li hidden="hidden" id="logout">
+                                                @Html.ActionLink("Logout", "Logout", "Account", new { area = "" }, null)
+                                            </li>
+
+                                            <li id="register">
+                                                <a href="/Account/Register">
+                                                    Register
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="inverse">
+                                        <a href="contact.html"><i class="icon-envelope icon-white"></i> Contact</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- end menu -->
                     </div>
-                    <!-- end menu -->
                 </div>
             </div>
+
+        </header>
+
+        <script src="~/Scripts/jquery-3.3.1.js"></script>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/toastr")
+        @RenderSection("scripts", required: false)
+        <script src="~/Content/eliteadmin/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
+        <script src="~/Content/Scaffold/assets/js/jquery.bxslider.min.js"></script>
+        <script src="~/Content/Scaffold/assets/js/jquery.elastislide.js"></script>
+        <script src="~/Content/Scaffold/assets/js/jquery.prettyPhoto.js"></script>
+        <script src="~/Content/Scaffold/assets/js/hover/jquery-hover-effect.js"></script>
+        <script src="~/Content/Scaffold/assets/js/hover/setting.js"></script>
+        <script src="~/Content/Scaffold/assets/js/custom.js"></script>
+        <script src="~/Scripts/custom.js"></script>
+
+        <script src="~/Content/eliteadmin/dist/js/custom.js"></script>
+        <script type="text/javascript">
+            $(function () {
+
+                $(".datepicker").datepicker({
+                    dateFormat: 'dd.mm.yy'
+                });
+            })
+        </script>
+
+
+        <div class="container m-t-50 p-l-0 p-r-0 p25" style="background-color:white!important; ">
+            @RenderBody()
+            <hr />
+            <!-- Footer
+            ================================================== -->
+            <footer> </footer>
         </div>
-
-    </header>
-
-    @* javascripts *@
-    <script src="~/Scripts/jquery-3.3.1.js"></script>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/toastr")
-    @RenderSection("scripts", required: false)
-    <script src="~/Content/eliteadmin/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/Content/Scaffold/assets/js/jquery.bxslider.min.js"></script>
-    <script src="~/Content/Scaffold/assets/js/jquery.elastislide.js"></script>
-    <script src="~/Content/Scaffold/assets/js/jquery.prettyPhoto.js"></script>
-    <script src="~/Content/Scaffold/assets/js/hover/jquery-hover-effect.js"></script>
-    <script src="~/Content/Scaffold/assets/js/hover/setting.js"></script>
-    <script src="~/Content/Scaffold/assets/js/custom.js"></script>
-    <script src="~/Scripts/custom.js"></script>
-
-    <script src="~/Content/eliteadmin/dist/js/custom.js"></script>
-    <script type="text/javascript">
-        $(function () {
-
-            $(".datepicker").datepicker({
-                dateFormat: 'dd.mm.yy'
-            });
-        })
-    </script>
-
-    <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
-            var x = document.cookie;
-            var token = x.includes("token");
-            if (token == false) {
-                //toastr.error("Unauthorized Request");
-                $("#login").removeAttr("hidden");
-            }
-            else {
-                $("#email").removeAttr("hidden");
-                $("#logout").removeAttr("hidden");
-                $("#checklistmain").removeAttr("hidden");
-            }
-        })
-
-    </script>
-
-    <div class="container m-t-50 p-l-0 p-r-0 p25" style="background-color:white!important; ">
-        @RenderBody()
-        <hr />
-        <!-- Footer
-        ================================================== -->
-        <footer> </footer>
-    </div>
-</body>
-</html>
+    </body>
+    </html>*@
 
 
 
