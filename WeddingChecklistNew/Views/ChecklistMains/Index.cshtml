@@ -25,6 +25,8 @@
 
                     @foreach (var item in Model)
                     {
+                        bool sameuser = false;
+                        if (item.UserId == User.Identity.Name) { sameuser = true; }
                         <tr>
                             <td>@item.Name</td>
                             <td>@item.DueDate.ToShortDateString()</td>
@@ -32,11 +34,11 @@
                             <td>@(item.Private)</td>
                             <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
-                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit"> 
+                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser?"":"hidden='hidden'")> 
                                 <i class="fa fa-pencil text-inverse m-r-5"></i> </a>
                                 <a href="@Url.Action("Details", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail"> 
                                 <i class="fa fa-search text-inverse m-r-5"></i> </a>
-                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete"> 
+                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser?"":"hidden='hidden'")> 
                                 <i class="fa fa-close text-inverse m-r-5"></i> </a>
                                 <a href="@Url.Action("Index", "Checklists",new { checklistmainid = item.Id })" data-toggle="tooltip" data-original-title="Go to List">
                                 <i class="fa fa-share text-inverse m-r-5"></i> </a>

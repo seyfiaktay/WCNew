@@ -17,7 +17,7 @@ using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
 {
-   // [Authorize]
+    [Authorize]
     public class ChecklistsController : Controller
     {
         private APIChecklistsController mAPIChecklistController = new APIChecklistsController();
@@ -35,6 +35,7 @@ namespace WeddingChecklistNew.Controllers
         //}
 
         //GET: Checklists/1
+        [AllowAnonymous]
         public ActionResult Index(int checklistmainid)
         {
             string username = HttpContext.User.Identity.Name;

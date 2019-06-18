@@ -2,11 +2,18 @@
 
 @{
     ViewBag.Title = "Index";
+    string userid = Model.Select(x => x.CheckListMain.UserId).FirstOrDefault();
+    bool sameuser = false;
+    if (userid != null)
+    {
+        if (userid == User.Identity.Name) { sameuser = true; }
+    }
 }
 
-<button type="button" class="btn waves-effect waves-light btn-primary" onclick="Create()">Create New</button>
+<button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(sameuser?"":"hidden='hidden'") onclick="Create()">Create New</button>
 <br />
 <br />
+
 
 <div class="card">
     <div class="card-body">
@@ -34,13 +41,14 @@
                             <td>@(item.Currency == null ? "" : item.Currency.code)</td>
                             <td>@(item.Priority)</td>
                             <td class="text-nowrap">
-                                <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit">
-                                    <i class="fa fa-pencil text-inverse m-r-5"></i>
+                                <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser?"":"hidden='hidden'")  >
+
+<i class="fa fa-pencil text-inverse m-r-5"></i>
                                 </a>
                                 <a href="@Url.Action("Details", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Details">
                                     <i class="fa fa-search text-inverse m-r-5"></i>
                                 </a>
-                                <a href="@Url.Action("Delete", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete">
+                                <a href="@Url.Action("Delete", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser?"":"hidden='hidden'")>
                                     <i class="fa fa-close text-inverse m-r-5"></i>
                                 </a>
                             </td>
@@ -121,4 +129,5 @@
         var id =@Model.Select(x => x.ChecklistMainId).FirstOrDefault();
         location.href = "/Checklists/Create/" + id;
     };
+
 </script>

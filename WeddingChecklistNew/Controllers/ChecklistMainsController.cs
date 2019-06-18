@@ -12,7 +12,7 @@ using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
 {
-   // [Authorize]
+    [Authorize]
     public class ChecklistMainsController : Controller
     {
         private APIChecklistMainsController mAPIChecklistMainController = new APIChecklistMainsController();
