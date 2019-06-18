@@ -102,7 +102,7 @@
             @RenderBody()
         </div>
         <footer class="footer">
-            © 2018 Eliteadmin by themedesigner.in
+            © 2019 Wedding Checklist
         </footer>
     </div>
     <!-- Bootstrap tether Core JavaScript -->
@@ -123,6 +123,7 @@
 
     <script src="~/assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <script src="~/Content/eliteadmin/dist/js/pages/jasny-bootstrap.js"></script>
+    <script src="~/Scripts/jquery.zoom.min.js"></script>
 </body>
 
 </html>
@@ -146,6 +147,11 @@
             todayHighlight: true
         });
 
+        $('.zoom')
+            .wrap('<span style="display:inline-block"></span>')
+            .css('display', 'block')
+            .parent()
+            .zoom();
     })
 </script>
 @*<!DOCTYPE html>
