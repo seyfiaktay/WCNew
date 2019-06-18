@@ -1,4 +1,77 @@
-﻿@{
+﻿<head>
+    <link href="~/Content/eliteadmin/dist/css/pages/login-register-lock.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader" style="display: none;">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Wedding Checklist</p>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" id="LoginFormId" action="index.html">
+                        <h3 class="box-title m-b-20">Recover Password</h3>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="email" name="email" required data-req="Email is Required" value="" placeholder="Email" id="id_email">
+                            </div>
+                        </div>
+                        <div class="form-group text-center p-b-10">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit" onclick="Save()">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(function() {
+            $(".preloader").fadeOut();
+        });
+
+        function Save() {
+            $("#LoginFormId").validate({
+                rules: {
+                    email: "required"
+                },
+                messages: {
+                    required: 'Please enter valid value'
+                },
+                showErrors: function (errorMap, errorList) {
+                    this.defaultShowErrors();
+                },
+                submitHandler: function () {
+                    var id_email = $("#id_email").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Account/SendForgotPasswordEmail?email=" + id_email,
+                        success: function (data) {
+                            toastr.success("mail sent");
+                            window.location.href = "/Home/Index";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            toastr.error(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+
+
+@*@{
      ViewBag.Title = "SendEmail";
 }
 
@@ -48,4 +121,4 @@
                 }
             });
         }
- </script>
+ </script>*@
