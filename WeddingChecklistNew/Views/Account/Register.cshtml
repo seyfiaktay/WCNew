@@ -1,5 +1,131 @@
-﻿
-@{
+﻿<head>
+    <link href="~/Content/eliteadmin/dist/css/pages/login-register-lock.css" rel="stylesheet" />
+</head>
+
+
+<body class="skin-default card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader" style="display: none;">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Wedding Checklist</p>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+        <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+            <div class="login-box card">
+                <div class="card-body">
+                    <form class="form-horizontal form-material" id="RegisterFormId" action="index.html">
+                        <h3 class="box-title m-b-20">Sign Up</h3>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="email" name="Email" required data-req="Email is Required" value="" id="email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="password" name="Password" required data-req="password is Required" value="" id="password" placeholder="Password" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="password" name="ConfirmPassword" required data-req="confirm password is Required" value="" id="confirmpassword" placeholder="Confirm Password" />
+                            </div>
+                        </div>
+                        <div class="form-group text-center p-b-20">
+                            <div class="col-xs-12">
+                                <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit" onclick="Save()">Sign Up</button>
+                            </div>
+                        </div>
+                        <div class="form-group m-b-0">
+                            <div class="col-sm-12 text-center">
+                                Already have an account? <a href="~/Account/Login" class="text-info m-l-5"><b>Sign In</b></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="../assets/node_modules/popper/popper.min.js"></script>
+    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(".preloader").fadeOut();
+        });
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+        // ==============================================================
+        // Login and Recover Password
+        // ==============================================================
+        $('#to-recover').on("click", function() {
+            $("#RegisterFormId").slideUp();
+        });
+
+
+
+        function Save() {
+            $("#RegisterFormId").validate({
+                rules: {
+                    Password: "required",
+                    ConfirmPassword: "required",
+                    Email: {
+                        required: true,
+                        email: true
+                    }
+                },
+                messages: {
+                    required: 'Please enter valid value',
+                    email: 'Please enter valid email'
+                },
+                showErrors: function (errorMap, errorList) {
+                    this.defaultShowErrors();
+                },
+                submitHandler: function () {
+                    var model = $("#RegisterFormId").serialize();
+                    console.log(model);
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/Account/Register",
+                        data: model,
+                        success: function (data) {
+                            toastr.success("done!");
+                            location.href = "/Account/Login";
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log(xhr.responseText);
+                            toastr.error(xhr.responseText);
+                        }
+                    });
+                }
+            });
+        }
+
+    </script>
+
+
+</body>
+
+
+
+
+
+
+@*@{
     ViewBag.Title = "Register";
 }
 <h2>Register</h2>
@@ -69,4 +195,4 @@
             }
         });
     }
-</script>
+</script>*@
