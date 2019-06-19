@@ -44,14 +44,15 @@ namespace WeddingChecklistNew.Controllers
         // GET: ChecklistMains/Create
         public ActionResult Create()
         {
-            return View();
+            ChecklistMain checklistMain = new ChecklistMain();
+            checklistMain.DueDate = DateTime.Now;
+            return View(checklistMain);
         }
 
         // POST: ChecklistMains/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             checklistMain.LogDate = DateTime.Now;
@@ -85,7 +86,6 @@ namespace WeddingChecklistNew.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,LogDate,UserId,DueDate,Private,Definition")] ChecklistMain checklistMain)
         {
             AddCustomError(checklistMain.UserId);

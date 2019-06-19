@@ -3452,6 +3452,7 @@
     <Content Include="Content\eliteadmin\dist\css\pages\dashboard3.css" />
     <Content Include="Content\eliteadmin\dist\css\pages\dashboard4.css" />
     <Content Include="Content\eliteadmin\dist\css\pages\easy-pie-chart.css" />
+    <Content Include="Content\eliteadmin\dist\css\pages\ecommerce.css" />
     <Content Include="Content\eliteadmin\dist\css\pages\error-pages.css" />
     <Content Include="Content\eliteadmin\dist\css\pages\file-upload.css" />
     <Content Include="Content\eliteadmin\dist\css\pages\float-chart.css" />

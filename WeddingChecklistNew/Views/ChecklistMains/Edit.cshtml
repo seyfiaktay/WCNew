@@ -1,72 +1,74 @@
 ﻿@model WeddingChecklistNew.Models.ChecklistMain
-
 @{
     ViewBag.Title = "Edit";
 }
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
-    <h4>ChecklistMain</h4>
-    <hr />
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">List edit</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.DueDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @*@Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control datepicker" } })*@
-            @Html.TextBoxFor(m => m.DueDate, new { @Value = Model.DueDate.ToString("dd/MM/yyyy"), @class = "form-control datepicker" })
+    <div class="row">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" id="ChecklistForm" enctype="multipart/form-data">
+                        <div class="form-body">
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.LogDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                            <h5 class="card-title">Checklist</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Name</label>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">DueDate</label>
+                                        @Html.TextBoxFor(m => m.DueDate, new { @Value = Model.DueDate.ToString("dd/MM/yyyy"), @class = "form-control datepicker" })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Definition</label>
+                                        @Html.TextAreaFor(model => model.Definition, new { @class = "form-control", @rows = "4"})
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Private</label>
+                                        @Html.CheckBoxFor(model => model.Private, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                        </div>
+                        <div class="form-actions m-t-40">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
+        <!-- Column -->
     </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Definition, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Definition, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Private, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.CheckBoxFor(model => model.Private, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.HiddenFor(model => model.LogDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.LogDate, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.HiddenFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2",@id="userid" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-success" />
-        </div>
-    </div>
-</div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

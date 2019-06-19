@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Product Name</label>
-                                        <input type="text" name="Name" value=@Model.Name class="form-control" placeholder="Product Name">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                 </div>
                                 <!--/span-->
