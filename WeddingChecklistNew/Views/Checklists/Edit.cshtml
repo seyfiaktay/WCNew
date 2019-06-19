@@ -1,122 +1,258 @@
 ﻿@model WeddingChecklistNew.Models.Checklistdo
-
 @{
     ViewBag.Title = "Edit";
     SelectList imagelist = (SelectList)ViewData["listChecklistImage"];
     var currencylist = (SelectList)ViewData["listCurrency"];
 }
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm("Edit", "Checklists", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-<div class="form-horizontal">
-    <h4>Checklist</h4>
-    <hr />
-    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">Products edit</h4>
+        </div>
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </div>
         </div>
     </div>
+    <div class="row">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" id="ChecklistForm" enctype="multipart/form-data">
+                        <div class="form-body">
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.LogDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                            <h5 class="card-title">Checklist</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @foreach (var item in imagelist)
+                                        {
+                                            <span class="zoom" style="position: relative; overflow: hidden;">
+                                                <img src="@Href(item.Text)" width="250" height="250">
+                                                <img role="presentation" src="@Href(item.Text)" class="zoomImg" style="position: absolute; top: -64px; left: -373.5px; opacity: 0; width: 1110px; height: 640px; border: none; max-width: none; max-height: none;">
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Product Name</label>
+                                        <input type="text" name="Name" value=@Model.Name class="form-control" placeholder="Product Name">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Url</label>
+                                        <input type="text" name="Url" value=@Model.Url class="form-control" placeholder="Product Url">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Priority</label>
+                                        @Html.EnumDropDownListFor(model => model.Priority,"",new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Price</label>
+                                        <input type="text" name="Price" value=@Model.Price class="form-control" placeholder="Product Price">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Currency</label>
+                                        @Html.DropDownListFor(model => model.CurrencyId, currencylist, "", new {@class = "form-control" })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Done</label>
+                                        @Html.CheckBoxFor(model => model.Done, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Image Url</label>
+                                        <input type="text" name="ImageUrl" value=@Model.ImageUrl class="form-control" placeholder="Image URL">
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <h5 class="card-title m-t-20">Upload Image</h5>
+                                    <div class="fileupload btn btn-info waves-effect waves-light">
+                                        <span><i class="ion-upload m-r-5"></i>Upload Anonther Image</span>
+                                        @*<input type="file" class="upload">*@
+                                        <input type="file" name="Files" multiple="multiple" class="upload" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="form-actions m-t-40">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EnumDropDownListFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.CurrencyId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownListFor(model => model.CurrencyId, currencylist, "", new { htmlAttributes = new { @class = "form-control dropdown" } })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Done, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.CheckBoxFor(model => model.Done, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @type = "url", @class = "form-control" } })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label class="control-label col-md-2"></label>
-        <div class="col-md-10">
-            <input type="file" name="Files" multiple="multiple" />
-        </div>
-    </div>
-
-    @*<div class="form-group">
-            @foreach (var item in imagelist)
-            {
-                <img src="@Href(item.Text)" width="250" height="250" />
-            }
-        </div>*@
-
-    <div class="form-group">
-            @foreach (var item in imagelist)
-            {
-                <span class="zoom" style="position: relative; overflow: hidden;">
-                    <img src="@Href(item.Text)" width="300" height="300">
-                    <img role="presentation" src="@Href(item.Text)" class="zoomImg" style="position: absolute; top: -64px; left: -373.5px; opacity: 0; width: 1110px; height: 640px; border: none; max-width: none; max-height: none;">
-                </span>
-            }
-    </div>
-
-    <div class="form-group">
-        @Html.HiddenFor(model => model.LogDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.LogDate, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.HiddenFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2", @id = "userid" })
-        <div class="col-md-10">
-            @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-success" />
-        </div>
+        <!-- Column -->
     </div>
 </div>
-}
 
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+@*@model WeddingChecklistNew.Models.Checklistdo
+
+    @{
+        ViewBag.Title = "Edit";
+        SelectList imagelist = (SelectList)ViewData["listChecklistImage"];
+        var currencylist = (SelectList)ViewData["listCurrency"];
+    }
+
+    <h2>Edit</h2>
+
+    @using (Html.BeginForm("Edit", "Checklists", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <h4>Checklist</h4>
+            <hr />
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Priority, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Priority, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CurrencyId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CurrencyId, currencylist, "", new { htmlAttributes = new { @class = "form-control dropdown" } })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Done, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Done, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @type = "url", @class = "form-control" } })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2"></label>
+                <div class="col-md-10">
+                    <input type="file" name="Files" multiple="multiple" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @foreach (var item in imagelist)
+                {
+                    <img src="@Href(item.Text)" width="250" height="250" />
+                }
+            </div>
+
+            <div class="form-group">
+                @foreach (var item in imagelist)
+                {
+                    <span class="zoom" style="position: relative; overflow: hidden;">
+                        <img src="@Href(item.Text)" width="300" height="300">
+                        <img role="presentation" src="@Href(item.Text)" class="zoomImg" style="position: absolute; top: -64px; left: -373.5px; opacity: 0; width: 1110px; height: 640px; border: none; max-width: none; max-height: none;">
+                    </span>
+                }
+            </div>
+
+            <div class="form-group">
+                @Html.HiddenFor(model => model.LogDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.LogDate, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.HiddenFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2", @id = "userid" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@

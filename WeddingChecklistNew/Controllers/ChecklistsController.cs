@@ -57,6 +57,8 @@ namespace WeddingChecklistNew.Controllers
             }
             var imagelist = mAPIChecklistImagesController.GetCheckListImages().Where(x => x.CheckListId == id).Select(m => new { m.Path, m.Id });
             ViewData["listChecklistImage"] = new SelectList(imagelist, "Id", "Path");
+            var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
+            ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
             return View(checklist);
         }
 
@@ -65,14 +67,15 @@ namespace WeddingChecklistNew.Controllers
         {
             var currencylist = mAPIControllerGenel.GetCurrencies().Select(m => new { m.code, m.Id });
             ViewData["listCurrency"] = new SelectList(currencylist, "Id", "code");
-            return View();
+            Checklistdo checklistdo = new Checklistdo();
+            checklistdo.ChecklistMainId = checklistmainid;
+            return View(checklistdo);
         }
 
         // POST: Checklists/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl,Done")] int checklistmainid, Checklistdo checklistdo)
         {
             Checklist checklist;
@@ -120,7 +123,6 @@ namespace WeddingChecklistNew.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Url,Price,Priority,ChecklistMainId,CurrencyId,LogDate,UserId,ImageUrl,Done")] int checklistmainid, Checklistdo checklistdo)
         {
             Checklist checklist;
@@ -287,5 +289,6 @@ namespace WeddingChecklistNew.Controllers
                 ModelState.AddModelError(string.Empty, "You can not edit someone's list");
             }
         }
+
     }
 }
