@@ -39,8 +39,21 @@ namespace WeddingChecklistNew.Controllers
         public ActionResult Index(int checklistmainid)
         {
             string username = HttpContext.User.Identity.Name;
+            ViewBag.Search = false;
             return View(mAPIChecklistController.GetCheckLists().Where(x => x.ChecklistMainId == checklistmainid && (x.CheckListMain.Private == false || x.UserId == username)));
         }
+
+
+        //GET: Checklists/1
+        [AllowAnonymous]
+        public ActionResult Search(string searchstr)
+        {
+            string username = HttpContext.User.Identity.Name;
+            var searchlist = mAPIChecklistController.GetCheckLists().Where(x => x.Name.Contains(searchstr) || x.Url.Contains(searchstr) || x.CheckListMain.Name.Contains(searchstr) || x.CheckListMain.Definition.Contains(searchstr) && (x.CheckListMain.Private == false || x.UserId == username));
+            ViewBag.Search = true;
+            return View("Index",searchlist);
+        }
+
 
         // GET: Checklists/Details/5
         [AllowAnonymous]

@@ -254,6 +254,7 @@
     <Compile Include="Controllers\APIController\APIChecklistsController.cs" />
     <Compile Include="Controllers\APIController\APICommentsController.cs" />
     <Compile Include="Controllers\APIController\APIControllerGenel.cs" />
+    <Compile Include="Controllers\APIController\APIMailController.cs" />
     <Compile Include="Controllers\ChecklistImagesController.cs" />
     <Compile Include="Controllers\ChecklistMainsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Domain\RecentlyChecklist.cs" />
+    <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ValidationAttribute\ImageValidationAttribute.cs" />
     <Compile Include="Models\Domain\Checklistdo.cs" />
     <Compile Include="Models\Enum\clsEnum.cs" />

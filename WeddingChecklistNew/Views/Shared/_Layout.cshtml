@@ -69,7 +69,8 @@
                         <!-- ============================================================== -->
                         <li class="nav-item">
                             <form class="app-search d-none d-md-block d-lg-block">
-                                <input type="text" class="form-control" placeholder="Search & enter">
+                                <input type="text" class="form-control" placeholder="Search text" id="searchstr">
+                                <button type="button" onclick="Search()" class="btn btn-success">Search</button>
                             </form>
                         </li>
                     </ul>
@@ -158,144 +159,10 @@
             .parent()
             .zoom();
     })
+
+
+    function Search() {
+        var searchstr = $("#searchstr").val();
+        location.href = "/Checklists/Search?searchstr=" + searchstr;
+    }
 </script>
-@*<!DOCTYPE html>
-    <html>
-
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width" />
-        <title>@ViewBag.Title</title>
-        @Styles.Render("~/Content/themes/base/css")
-        @Styles.Render("~/bundles/css")
-        <!-- styles -->z
-        <link href="~/Content/Scaffold/assets/css/bootstrap-responsive.css" rel="stylesheet">
-        <link href="~/Content/Scaffold/assets/css/docs.css" rel="stylesheet">
-        <link href="~/Content/Scaffold/assets/css/prettyPhoto.css" rel="stylesheet">
-        <link href="~/Content/Scaffold/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
-        <link href="~/Content/Scaffold/assets/css/camera.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300|Open+Sans:400,300,300italic,400italic" rel="stylesheet">
-        <link href="~/Content/Scaffold/assets/css/style.css" rel="stylesheet">
-        <link href="~/Content/Scaffold/assets/color/success.css" rel="stylesheet">
-        <link href="~/Content/Site.css" rel="stylesheet" />
-        <link href="~/Content/eliteadmin/dist/css/pages/icon-page.css" rel="stylesheet" />
-        <link href="~/Content/Scaffold/assets/js/jquery.bxslider.min.css" rel="stylesheet" />
-        <link href="~/Content/eliteadmin/dist/css/pages/tab-page.css" rel="stylesheet" />
-        <link rel="shortcut icon" href="~/Content/Scaffold/assets/ico/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/Scaffold/assets/ico/apple-touch-icon-144-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/Scaffold/assets/ico/apple-touch-icon-114-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/Scaffold/assets/ico/apple-touch-icon-72-precomposed.png">
-        <link rel="apple-touch-icon-precomposed" href="~/Content/Scaffold/assets/ico/apple-touch-icon-57-precomposed.png">
-    </head>
-    <body style=" background-color: #edf1f5 !important">
-        <header class="topbar">
-            <!-- Navbar
-            ================================================== -->
-            <div class="navbar navbar-fixed-top">
-                <div class="navbar-inner">
-                    <div class="container">
-                        <!-- logo -->
-                        <a class="brand logo" href="@Url.Action("Index", "Home")">
-                            <img style="width:30px" src="~/Content/Scaffold/assets/img/icon_new.jpg" alt="" />
-                        </a>
-                        <!-- end logo -->
-                        <!-- top menu -->
-                        <div>
-                            <nav>
-                                <ul class="nav topnav">
-                                    <li class="dropdown success active">
-                                        <a href="@Url.Action("Index", "Home")"><i class="icon-home icon-white"></i> Home</a>
-                                        <ul class="dropdown-menu">
-                                            <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                                        </ul>
-                                    </li>
-                                    <li class="dropdown primary">
-                                        <a href="#"><i class="icon-star icon-white"></i> Features</a>
-                                        <ul class="dropdown-menu">
-                                            <li hidden="hidden" id="checklistmain">
-                                                <a href="/ChecklistMains/Index">
-                                                    Checklist Main
-                                                </a>
-                                            </li>
-                                             </ul>
-                                    </li>
-                                    <li class="dropdown primary">
-                                        <a href="#"><i class="icon-star icon-white"></i> Account</a>
-                                        <ul id="accountlist" class="dropdown-menu">
-                                            <li hidden="hidden" id="email">
-                                                <a id="aemail" href="/Account/ChangePassword">
-                                                    Change Password
-                                                </a>
-                                            </li>
-                                            <li hidden="hidden" id="login">
-                                                <a href="/Account/Login">
-                                                    Login
-                                                </a>
-                                            </li>
-                                            <li hidden="hidden" id="logout">
-                                                @Html.ActionLink("Logout", "Logout", "Account", new { area = "" }, null)
-                                            </li>
-
-                                            <li id="register">
-                                                <a href="/Account/Register">
-                                                    Register
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="inverse">
-                                        <a href="contact.html"><i class="icon-envelope icon-white"></i> Contact</a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- end menu -->
-                    </div>
-                </div>
-            </div>
-
-        </header>
-
-        <script src="~/Scripts/jquery-3.3.1.js"></script>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/bundles/modernizr")
-        @Scripts.Render("~/bundles/toastr")
-        @RenderSection("scripts", required: false)
-        <script src="~/Content/eliteadmin/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
-        <script src="~/Content/Scaffold/assets/js/jquery.bxslider.min.js"></script>
-        <script src="~/Content/Scaffold/assets/js/jquery.elastislide.js"></script>
-        <script src="~/Content/Scaffold/assets/js/jquery.prettyPhoto.js"></script>
-        <script src="~/Content/Scaffold/assets/js/hover/jquery-hover-effect.js"></script>
-        <script src="~/Content/Scaffold/assets/js/hover/setting.js"></script>
-        <script src="~/Content/Scaffold/assets/js/custom.js"></script>
-        <script src="~/Scripts/custom.js"></script>
-
-    <script src="~/Content/eliteadmin/dist/js/custom.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $(".datepicker").datepicker({
-                dateFormat: 'dd.mm.yy'
-            });
-            $('.zoom')
-                .wrap('<span style="display:inline-block"></span>')
-                .css('display', 'block')
-                .parent()
-                .zoom();
-            })
-    </script>
-
-
-        <div class="container m-t-50 p-l-0 p-r-0 p25" style="background-color:white!important; ">
-            @RenderBody()
-            <hr />
-            <!-- Footer
-            ================================================== -->
-            <footer> </footer>
-        </div>
-    </body>
-    </html>*@
-
-
-
