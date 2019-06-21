@@ -75,9 +75,8 @@
     };
 
     function Share() {
-        var ToAddress = "seyfiaktay89@hotmail.com";
-        var mailbody = $("html").html();
-        debugger;
+        var ToAddress = @Html.Raw(Json.Encode(User.Identity.Name));
+        var mailbody = $("#mailbody").html();
         $.ajax({
             type: "POST",
             url: "/api/Mail/SendMail",

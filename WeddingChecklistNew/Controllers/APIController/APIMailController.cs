@@ -16,10 +16,14 @@ namespace WeddingChecklistNew.Controllers.APIController
         [HttpPost]
         public IHttpActionResult SendMail(Mail mail)
         {
+            APIControllerGenel aPIControllerGenel = new APIControllerGenel();
             try
             {
                 using (SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com"))
                 {
+                    string filepath;
+                    filepath = Path.GetTempPath() + "test.pdf";
+                    File.WriteAllBytes(filepath, aPIControllerGenel.ConvertHtmlToPdfAsBytes(mail.Body));
                     MailMessage mailMessage = new MailMessage();
                     SmtpServer.Port = 587;
                     SmtpServer.UseDefaultCredentials = false;
@@ -29,7 +33,9 @@ namespace WeddingChecklistNew.Controllers.APIController
                     mailMessage.From = new MailAddress("weddingchecklst@gmail.com");
                     mailMessage.To.Add(mail.ToAddress);
                     mailMessage.Subject = mail.Subject;
-                    mailMessage.Body = mail.Body;
+                    mailMessage.Body = "Your weddinglist created enjoy honeymoon :)";
+                    Attachment attachment = new Attachment(filepath);
+                    mailMessage.Attachments.Add(attachment);
                     SmtpServer.Send(mailMessage);
                 }
                 return Ok();
@@ -39,5 +45,8 @@ namespace WeddingChecklistNew.Controllers.APIController
                 return InternalServerError(ex);
             }
         }
+
+
+        
     }
 }
