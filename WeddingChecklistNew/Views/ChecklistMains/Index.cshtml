@@ -1,4 +1,14 @@
-﻿@model IEnumerable<WeddingChecklistNew.Models.ChecklistMain>
+﻿<script src="~/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+
+@model IEnumerable<WeddingChecklistNew.Models.ChecklistMain>
 
 @{
     ViewBag.Title = "CheckList";
@@ -34,16 +44,20 @@
                             <td>@(item.Private)</td>
                             <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
-                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser?"":"hidden='hidden'")> 
-                                <i class="fa fa-pencil text-inverse m-r-5"></i> </a>
-                                <a href="@Url.Action("Details", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail"> 
-                                <i class="fa fa-search text-inverse m-r-5"></i> </a>
-                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser?"":"hidden='hidden'")> 
-                                <i class="fa fa-close text-inverse m-r-5"></i> </a>
+                                <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
+                                    <i class="fa fa-pencil text-inverse m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Details", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Detail">
+                                    <i class="fa fa-search text-inverse m-r-5"></i>
+                                </a>
+                                <a href="@Url.Action("Delete", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
+                                    <i class="fa fa-close text-inverse m-r-5"></i>
+                                </a>
                                 <a href="@Url.Action("Index", "Checklists",new { checklistmainid = item.Id })" data-toggle="tooltip" data-original-title="Go to List">
-                                <i class="fa fa-share text-inverse m-r-5"></i> </a>
+                                    <i class="fa fa-share text-inverse m-r-5"></i>
+                                </a>
                             </td>
-                          
+
                         </tr>
                     }
 
@@ -60,7 +74,14 @@
         toastr.options.timeOut = 2000; // 2s
         toastr.success('done!');
        }
-        else{ }
+        else { }
+
+
+        $('#example23').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+            ]
+        });
     })
     function Create() {
         location.href = "/ChecklistMains/Create";

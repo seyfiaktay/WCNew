@@ -1,66 +1,74 @@
-﻿@model IEnumerable<WeddingChecklistNew.Models.Checklist>
+﻿<script src="~/assets/node_modules/datatables/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+@model IEnumerable<WeddingChecklistNew.Models.Checklist>
 
 @{
     ViewBag.Title = "Index";
     bool search = ViewBag.Search;
 }
 
-<button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(!search?"":"hidden='hidden'") onclick="Create()">Create New</button>
+<button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(!search ? "" : "hidden='hidden'") onclick="Create()">Create New</button>
 <button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(!search ? "" : "hidden='hidden'") onclick="Share()">Share</button>
 <br />
 <br />
 
 <div class="card" id="mailbody">
     <div class="card-body">
-        <h4 class="card-title">Data Export</h4>
-        <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF &amp; Print</h6>
+        <h4 class="card-title">Wedding List</h4>
         <div class="table-responsive m-t-40">
 
             <div id="example23_wrapper" class="dataTables_wrapper">
                 <div id="example23_filter" class="dataTables_filter"></div>
-                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                @*<th>url</th>*@
-                                <th>Price</th>
-                                <th>Currency</th>
-                                <th>Priority</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            @*<th>url</th>*@
+                            <th>Price</th>
+                            <th>Currency</th>
+                            <th>Priority</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-                            @foreach (var item in Model)
+                        @foreach (var item in Model)
+                        {
+                            bool sameuser = false;
+                            if (item.UserId != null)
                             {
-                                bool sameuser = false;
-                                if (item.UserId != null)
-                                {
-                                    if (item.UserId == User.Identity.Name) { sameuser = true; }
-                                }
-                                <tr>
-                                    <td>@item.Name</td>
-                                    @*<td>@item.Url</td>*@
-                                    <td>@item.Price</td>
-                                    <td>@(item.Currency == null ? "" : item.Currency.code)</td>
-                                    <td>@(item.Priority)</td>
-                                    <td class="text-nowrap">
-                                        <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
-
-                                            <i class="fa fa-pencil text-inverse m-r-5"></i>
-                                        </a>
-                                        <a href="@Url.Action("Details", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Details">
-                                            <i class="fa fa-search text-inverse m-r-5"></i>
-                                        </a>
-                                        <a href="@Url.Action("Delete", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
-                                            <i class="fa fa-close text-inverse m-r-5"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                if (item.UserId == User.Identity.Name) { sameuser = true; }
                             }
+                            <tr>
+                                <td>@item.Name</td>
+                                @*<td>@item.Url</td>*@
+                                <td>@item.Price</td>
+                                <td>@(item.Currency == null ? "" : item.Currency.code)</td>
+                                <td>@(item.Priority)</td>
+                                <td class="text-nowrap">
+                                    <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
 
-                        </tbody>
-                    </table>
+                                        <i class="fa fa-pencil text-inverse m-r-5"></i>
+                                    </a>
+                                    <a href="@Url.Action("Details", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Details">
+                                        <i class="fa fa-search text-inverse m-r-5"></i>
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
+                                        <i class="fa fa-close text-inverse m-r-5"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
