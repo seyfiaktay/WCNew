@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 text-right control-label col-form-label">Product Name</label>
-                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@placeholder = "Product Name" } })
                                     </div>
                                 </div>
                                 <!--/span-->
@@ -52,7 +52,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 text-right control-label col-form-label">Priority</label>
-                                        @Html.EnumDropDownListFor(model => model.Priority, "", new { @class = "form-control" })
+                                        @Html.EnumDropDownListFor(model => model.Priority, "", new { @class = "form-control", @placeholder = "Priority" })
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -68,7 +68,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 text-right control-label col-form-label">Currency</label>
-                                        @Html.DropDownListFor(model => model.CurrencyId,currencylist,"", new { @class = "form-control" })
+                                        @Html.DropDownListFor(model => model.CurrencyId,currencylist,"", new { @class = "form-control", @placeholder = "Currency" })
                                     </div>
                                 </div>
                                 <!--/span-->
