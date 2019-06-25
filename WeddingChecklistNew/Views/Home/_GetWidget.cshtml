@@ -34,7 +34,10 @@
                 {
                     <a href="@item.Link">
                         <div class="user-img">
-                            <img src="@Href(item.ImagePath)" alt="user" class="img-circle">
+
+                            @*<img src="@Href(item.ImagePath)" alt="user" class="img-circle">*@
+                            @*C:\Users\Seyfi\Desktop\vs proje\WeddingChecklistNew\WeddingChecklistNew\assets\images\property*@
+                            <img @Html.Raw(item.ImagePath == null ? "src=" + @Href("~/assets/images/property/furniture1.png") : "src=" + @Href(item.ImagePath))>
                             <span class="profile-status online pull-right"></span>
                         </div>
                         <div class="mail-contnet">

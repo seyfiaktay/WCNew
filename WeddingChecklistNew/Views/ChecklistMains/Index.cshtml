@@ -26,7 +26,7 @@
                         <th>Name</th>
                         <th>DueDate</th>
                         <th>Definition</th>
-                        <th>Private</th>
+                        <th>User</th>
                         <th>LogDate</th>
                         <th></th>
                     </tr>
@@ -41,7 +41,7 @@
                             <td>@item.Name</td>
                             <td>@item.DueDate.ToShortDateString()</td>
                             <td>@item.Definition</td>
-                            <td>@(item.Private)</td>
+                            <td>@(item.UserId)</td>
                             <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
                                 <a href="@Url.Action("Edit", "ChecklistMains",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser ? "" : "hidden='hidden'")>

@@ -2,17 +2,18 @@
 
 <div class="card">
     @*<div class="card-body">
-        <h4 class="card-title">Recent Comments</h4>
-    </div>*@
+            <h4 class="card-title">Recent Comments</h4>
+        </div>*@
     <!-- ============================================================== -->
     <!-- Comment widgets -->
     <!-- ============================================================== -->
     <div class="comment-widgets m-b-20">
+        <h4 class="card-title">Recent Comments</h4>
         @foreach (var item in Model)
         {
             <!-- Comment Row -->
             <div class="d-flex flex-row comment-row">
-                <div class="p-2"><span class="round"><img src="~/assets/images/users/4.jpg" alt="user" width="50"></span></div>
+                <div class="p-2"><span class="round"><img src="~/assets/images/users/user1.png" alt="user" width="50"></span></div>
                 <div class="comment-text w-100">
                     <h5>@item.UserId</h5>
                     <div class="comment-footer">
@@ -24,16 +25,17 @@
                             }
                         </span>
                     </div>
-                    <p class="m-b-5 m-t-10">@item.CheckListMain.Name</p>
+                    <a class="m-b-5 m-t-10" @Html.Raw("href='/ChecklistMains/Details/" + @item.ChecklistMainId + "'")>@item.CheckListMain.Name</a>
                     <p class="m-b-5 m-t-10">@item.Text</p>
                 </div>
             </div>
         }
 
-        @if(@ViewBag.Transaction){
+        @if (@ViewBag.Transaction)
+        {
             <!-- Comment Row -->
             <div class="d-flex flex-row comment-row">
-                <div class="p-2"><span class="round"><img src="~/assets/images/users/1.jpg" alt="user" width="50"></span></div>
+                <div class="p-2"><span class="round"><img src="~/assets/images/users/user1.png" alt="user" width="50"></span></div>
                 <div class="comment-text w-100">
                     <h5>@User.Identity.Name</h5>
                     <div class="comment-footer">
