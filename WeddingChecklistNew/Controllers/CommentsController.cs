@@ -131,5 +131,14 @@ namespace WeddingChecklistNew.Controllers
             var comment = contentResult.Content;
             return comment;
         }
+
+
+        public PartialViewResult CommentViewTop()
+        {
+            List<Comment> commentList;
+            commentList = mAPICommentController.GetComments().ToList().OrderByDescending(x => x.LogDate).Take(10).ToList();
+            ViewBag.Transaction = false;
+            return PartialView("~/Views/ChecklistMains/_CommentView.cshtml", commentList);
+        }
     }
 }

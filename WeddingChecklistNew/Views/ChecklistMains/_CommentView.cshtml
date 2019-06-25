@@ -1,9 +1,9 @@
 ﻿@model List<WeddingChecklistNew.Models.Comment>
 
 <div class="card">
-    <div class="card-body">
+    @*<div class="card-body">
         <h4 class="card-title">Recent Comments</h4>
-    </div>
+    </div>*@
     <!-- ============================================================== -->
     <!-- Comment widgets -->
     <!-- ============================================================== -->
@@ -18,28 +18,33 @@
                     <div class="comment-footer">
                         <span class="date">@item.LogDate.ToString()</span>
                         <span class="action-icons">
-                            @if (item.UserId == User.Identity.Name)
+                            @if (item.UserId == User.Identity.Name && ViewBag.Transaction == true)
                             {
                                 <a href="javascript:void(0)" onclick="Delete(@item.Id)"><i class="glyphicon glyphicon-trash m-r-5"></i></a>
                             }
                         </span>
                     </div>
+                    <p class="m-b-5 m-t-10">@item.CheckListMain.Name</p>
                     <p class="m-b-5 m-t-10">@item.Text</p>
                 </div>
             </div>
         }
 
-        <!-- Comment Row -->
-        <div class="d-flex flex-row comment-row">
-            <div class="p-2"><span class="round"><img src="~/assets/images/users/1.jpg" alt="user" width="50"></span></div>
-            <div class="comment-text w-100">
-                <h5>@ViewBag.UserName</h5>
-                <div class="comment-footer">
-                    <textarea class="m-b-5 m-t-10" id="newtext"></textarea>               
+        @if(@ViewBag.Transaction){
+            <!-- Comment Row -->
+            <div class="d-flex flex-row comment-row">
+                <div class="p-2"><span class="round"><img src="~/assets/images/users/1.jpg" alt="user" width="50"></span></div>
+                <div class="comment-text w-100">
+                    <h5>@User.Identity.Name</h5>
+                    <div class="comment-footer">
+                        <textarea class="m-b-5 m-t-10" id="newtext"></textarea>
+                    </div>
                 </div>
+                <input type="button" id="newtext" onclick="Save()" class="btn btn-success" value="Save" />
             </div>
-            <input type="button" id="newtext" onclick="Save()" class="btn btn-success" value="Save" />
-        </div>
+        }
+
+
     </div>
 </div>
 

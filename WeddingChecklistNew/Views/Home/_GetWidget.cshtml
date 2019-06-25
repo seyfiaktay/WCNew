@@ -1,24 +1,28 @@
 ﻿@model WeddingChecklistNew.Models.WidgetModel
+
+
+
 <div class="card ">
+    @*<div class="card-body col-md-6">
+            <h4 class="card-title">Recent </h4>
+            <div class="message-box">
+                <div class="message-widget message-scroll">
+                    @foreach (var item in Model.ChecklistMain)
+                    {
+                        <a href="@item.Link">
+                            <div class="user-img"> <img src="~/Content/Scaffold/assets/img/dummies/80x80/img1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
+                            <div class="mail-contnet">
+                                <h5> @item.MainName</h5>
+                                <span class="mail-desc">@item.Description</span>
+                            </div>
+                        </a>
+                    }
 
-    <div class="card-body col-md-6">
-        <h4 class="card-title">Recent </h4>
-        <div class="message-box">
-            <div class="message-widget message-scroll">
-                <!-- Message -->
-                @foreach (var item in Model.ChecklistMain)
-                {
-                    <a href="@item.Link">
-                        <div class="user-img"> <img src="~/Content/Scaffold/assets/img/dummies/80x80/img1.jpg" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                        <div class="mail-contnet">
-                            <h5> @item.MainName</h5> 
-                            <span class="mail-desc">@item.Description</span> 
-                        </div>
-                    </a>
-                }
-
+                </div>
             </div>
-        </div>
+        </div>*@
+    <div id="commentspartial" class="card-body col-md-6">
+
     </div>
 
     <div class="card-body col-md-6">
@@ -35,7 +39,7 @@
                         </div>
                         <div class="mail-contnet">
                             <h5> @item.Name</h5>
-                            <span class="mail-desc">@item.Url</span> 
+                            <span class="mail-desc">@item.Url</span>
                         </div>
                     </a>
                 }
@@ -45,3 +49,6 @@
     </div>
 </div>
 
+    <script>
+        $("#commentspartial").load("/Comments/CommentViewTop");
+    </script>

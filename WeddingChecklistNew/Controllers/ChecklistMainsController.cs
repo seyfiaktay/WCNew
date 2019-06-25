@@ -134,12 +134,13 @@ namespace WeddingChecklistNew.Controllers
 
         public PartialViewResult CommentView(int id)
         {
-            ViewBag.UserName = HttpContext.User.Identity.Name;
-            ViewBag.ChecklistMainId = id; 
+            ViewBag.ChecklistMainId = id;
+            ViewBag.Transaction = true;
             List<Comment> commentList;
             commentList = mAPICommentsController.GetComments().Where(x => x.ChecklistMainId == id).ToList();
             return PartialView("_CommentView", commentList);
         }
+
 
         private ChecklistMain GetChecklistMain(int? id)
         {
