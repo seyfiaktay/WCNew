@@ -2,77 +2,69 @@
 @{
     ViewBag.Title = "Create";
 }
-<div class="card card-body col-md-6">
-    <form  @Html.Raw("action='/ChecklistMains/Create'")  enctype="multipart/form-data" id="ChecklistForm" method="post"  class="form-horizontal col-md-12" >
-        <div>
-            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h4 class="text-themecolor">List Create</h4>
         </div>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Name*</label>
-            <div class="col-sm-9">
-                @*<input type="text" class="form-control" id="Name" name="Name">*@
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-
+        <div class="col-md-7 align-self-center text-right">
+            <div class="d-flex justify-content-end align-items-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
             </div>
         </div>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">DueDate*</label>
-            <div class="col-sm-9">
-                <input type="text" class="form-control datepicker" name="DueDate" value="@(DateTime.Now.ToShortDateString())" id="DueDate" placeholder="mm/dd/yyyy">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-3 text-right control-label col-form-label">Definition</label>
-            <div class="col-sm-9">
-                <textarea class="form-control" name="Definition" id="Definition" rows="5"></textarea>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="offset-sm-3 col-sm-9">
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="Private" name="Private" onchange="CheckControl()" >
-                    <label class="custom-control-label" for="Private">Private</label>
+    </div>
+    <div class="row">
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <!-- Column -->
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" id="ChecklistForm" enctype="multipart/form-data">
+                        <div class="form-body">
+                            <h5 class="card-title">Checklist</h5>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Name</label>
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 text-right control-label col-form-label">DueDate</label>
+                                        @Html.TextBoxFor(m => m.DueDate, new { @Value = Model.DueDate.ToString("dd/MM/yyyy"), @class = "form-control datepicker" })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Definition</label>
+                                        @Html.TextAreaFor(model => model.Definition, new { @class = "form-control", @rows = "4" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 text-right control-label col-form-label">Private</label>
+                                        @Html.CheckBoxFor(model => model.Private, new { @class = "" })
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                        </div>
+                        <div class="form-actions m-t-40 text-right">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
-        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Kaydet</button>
-        <button type="button" class="btn btn-inverse waves-effect waves-light" onclick="GotoList()">Back To List</button>
-
-    </form>
+    </div>
 </div>
-<script>
-    function CheckControl() {
-        if ($('#Private').is(':checked')) {
-            $("#Private").val(true);
-        } else {
-            $("#Private").val(false);
-        }
-    }
-    function GotoList() {
-        location.href = "/CheckListMains/Index";
-    }
-    function Save() {
-        var valid = $("#frmcheck").validate();
-        debugger;
-        var data = $("#frmcheck").serialize();
-        $.ajax({
-            type: "POST",
-            url: "/ChecklistMains/Create",
-            data:data,
-            success: function (data) {
-                if (data.ResultType == 1) {
-                    toastr.success(data.Message);
-                } else {
-                    toastr.success(data.Message);
-                }
-                setTimeout(function () {
-                    location.href = "/CheckListMains/Index";
-                }, 2000);
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                toastr.error(xhr.responseText)
-            }
-        });
-    }
-</script>

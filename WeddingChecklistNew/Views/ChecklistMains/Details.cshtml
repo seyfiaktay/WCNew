@@ -32,14 +32,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Name</label>
+                                        <label class="col-sm-3 text-right control-label col-form-label">Name</label>
                                         @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                                     </div>
                                 </div>
                                 <!--/span-->
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">DueDate</label>
+                                        <label class="col-sm-3 text-right control-label col-form-label">DueDate</label>
                                         @Html.TextBoxFor(m => m.DueDate, new { @Value = Model.DueDate.ToString("dd/MM/yyyy"), @class = "form-control datepicker" })
                                     </div>
                                 </div>
@@ -48,20 +48,20 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Definition</label>
+                                        <label class="col-sm-3 text-right control-label col-form-label">Definition</label>
                                         @Html.TextAreaFor(model => model.Definition, new { @class = "form-control", @rows = "4" })
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label">Private</label>
-                                        @Html.CheckBoxFor(model => model.Private, new { @class = "form-control" })
+                                        <label class="col-sm-3 text-right control-label col-form-label">Private</label>
+                                        @Html.CheckBoxFor(model => model.Private, new { @class = "" })
                                     </div>
                                 </div>
                                 <!--/span-->
                             </div>
                         </div>
-                        <div class="form-actions m-t-40">
+                        <div class="form-actions m-t-40 text-right">
                             @Html.ActionLink("Back to List", "Index")
                         </div>
                     </form>
