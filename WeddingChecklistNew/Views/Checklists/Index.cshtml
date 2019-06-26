@@ -53,14 +53,14 @@
                                 <td>@(item.Currency == null ? "" : item.Currency.code)</td>
                                 <td>@(item.Priority)</td>
                                 <td class="text-nowrap">
-                                    <a href="@Url.Action("Edit", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
+                                    <a href="@Url.Action("Edit", "Checklists",new {checklistmainid = item.ChecklistMainId, id = item.Id })" data-toggle="tooltip" data-original-title="Edit" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
 
                                         <i class="fa fa-pencil text-inverse m-r-5"></i>
                                     </a>
-                                    <a href="@Url.Action("Details", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Details">
+                                    <a href="@Url.Action("Details", "Checklists",new {checklistmainid = item.ChecklistMainId, id = item.Id })" data-toggle="tooltip" data-original-title="Details">
                                         <i class="fa fa-search text-inverse m-r-5"></i>
                                     </a>
-                                    <a href="@Url.Action("Delete", "Checklists",new { id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
+                                    <a href="@Url.Action("Delete", "Checklists",new {checklistmainid = item.ChecklistMainId, id = item.Id })" data-toggle="tooltip" data-original-title="Delete" @Html.Raw(sameuser ? "" : "hidden='hidden'")>
                                         <i class="fa fa-close text-inverse m-r-5"></i>
                                     </a>
                                 </td>
@@ -92,7 +92,7 @@
     });
 
     function Create() {
-        var id =@Model.Select(x => x.ChecklistMainId).FirstOrDefault();
+        var id =@ViewBag.checklistmainid;
         location.href = "/Checklists/Create/" + id;
     };
 
