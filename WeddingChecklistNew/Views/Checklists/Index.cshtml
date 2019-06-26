@@ -15,7 +15,7 @@
 }
 
 <button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(!search ? "" : "hidden='hidden'") onclick="Create()">Create New</button>
-<button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(!search ? "" : "hidden='hidden'") onclick="Share()">Share</button>
+@*<button type="button" class="btn waves-effect waves-light btn-primary" @Html.Raw(!search ? "" : "hidden='hidden'") onclick="Share()">Share</button>*@
 <br />
 <br />
 
@@ -86,7 +86,13 @@
         $('#example23').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                 'excel', 'pdf', 'print'
+                'excel', 'pdf', 'print'
+                //{
+                //    text: 'Email',
+                //    action: function (e, dt, node, config) {
+                //        Share();
+                //    }
+                //}
             ]
         });
     });
@@ -96,7 +102,7 @@
         location.href = "/Checklists/Create/" + id;
     };
 
-    function Share() {
+    @*function Share() {
         var ToAddress = @Html.Raw(Json.Encode(User.Identity.Name));
         var mailbody = $("#mailbody").html();
         $.ajax({
@@ -112,6 +118,6 @@
                 toastr.error(xhr.responseText);
             }
         });
-    };
+    };*@
 
 </script>
