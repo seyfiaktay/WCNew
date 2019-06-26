@@ -69,7 +69,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-success" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="button" class="btn btn-info" value="Back to List" onclick="location.href='@Url.Action("Index", "Checklists")'" />
         </div>
     }
 </div>

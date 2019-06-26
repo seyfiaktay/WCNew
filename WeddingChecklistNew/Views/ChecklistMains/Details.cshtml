@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="form-actions m-t-40 text-right">
-                            @Html.ActionLink("Back to List", "Index")
+                            <input type="button" class="btn btn-info" value="Back to List" onclick="location.href='@Url.Action("Index", "ChecklistMains")'" />
                         </div>
                     </form>
                 </div>

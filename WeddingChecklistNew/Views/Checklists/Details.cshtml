@@ -100,8 +100,7 @@
                             </div>
                         </div>
                         <div class="form-actions m-t-40 text-right">
-                            @*@Html.ActionLink("Back to List", "Index")*@
-                            @Html.ActionLink("Back to List","Index","Checklists",new { checklistmainid = Model.ChecklistMainId },null)
+                            <input type="button" class="btn btn-info" value="Back to List" onclick="location.href='@Url.Action("Index", "Checklists",new { checklistmainid = Model.ChecklistMainId })'" />
                         </div>
                     </form>
                 </div>
