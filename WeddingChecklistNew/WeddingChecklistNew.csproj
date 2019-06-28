@@ -4712,6 +4712,7 @@
     <Content Include="Content\eliteadmin\dist\scss\widgets\topbar-mail.scss" />
     <Content Include="Content\eliteadmin\dist\scss\widgets\weather-widget.scss" />
     <Content Include="Content\eliteadmin\dist\scss\widgets\widgets.scss" />
+    <None Include="Properties\PublishProfiles\WeddingChecklistNew - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

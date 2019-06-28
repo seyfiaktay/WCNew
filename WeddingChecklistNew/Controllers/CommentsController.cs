@@ -132,7 +132,7 @@ namespace WeddingChecklistNew.Controllers
             return comment;
         }
 
-
+        [AllowAnonymous]
         public PartialViewResult CommentViewTop()
         {
             List<Comment> commentList;
