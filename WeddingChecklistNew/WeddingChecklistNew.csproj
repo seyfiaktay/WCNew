@@ -283,7 +283,7 @@
     <Compile Include="Models\Mail.cs" />
     <Compile Include="Models\ValidationAttribute\ImageValidationAttribute.cs" />
     <Compile Include="Models\Domain\Checklistdo.cs" />
-    <Compile Include="Models\Enum\clsEnum.cs" />
+    <Compile Include="Models\Enum\clsGenel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\WidgetModel.cs" />
@@ -3607,6 +3607,7 @@
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\UserFiles\Images\48216267-1e78-42d5-95a0-f23cd823eb94.log" />
     <Content Include="Content\UserFiles\Images\4c6eb6ac-4aa9-42bb-a357-3c5ddafa9294.log" />
@@ -4712,6 +4713,7 @@
     <Content Include="Content\eliteadmin\dist\scss\widgets\topbar-mail.scss" />
     <Content Include="Content\eliteadmin\dist\scss\widgets\weather-widget.scss" />
     <Content Include="Content\eliteadmin\dist\scss\widgets\widgets.scss" />
+    <None Include="Properties\PublishProfiles\WeddingChecklistNew - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\WeddingChecklistNew - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\custom.js" />
@@ -4731,7 +4733,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

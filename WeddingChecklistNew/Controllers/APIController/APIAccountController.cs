@@ -18,6 +18,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using WeddingChecklistNew.Models;
+using WeddingChecklistNew.Models.Enum;
 using WeddingChecklistNew.Providers;
 using WeddingChecklistNew.Results;
 
@@ -503,7 +504,7 @@ namespace WeddingChecklistNew.Controllers
             {
                 // Send an email with this link
                 string code = UserManager.GeneratePasswordResetToken(user.Id);
-                var callbackUrl = string.Format("http://localhost:55465/Account/ForgotPasswordEmail/?userid={0}&code={1}", user.Id, code);
+                var callbackUrl = string.Format(clsGenel.cnstWebsiteURL + "/Account/ForgotPasswordEmail/?userid={0}&code={1}", user.Id, code);
                 using (SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com"))
                 {
                     MailMessage mail = new MailMessage();

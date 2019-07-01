@@ -5,7 +5,7 @@ using System.Web;
 
 namespace WeddingChecklistNew.Models.Enum
 {
-    public static class clsEnum
+    public static class clsGenel
     {
         public enum ProductPriority
         {
@@ -15,5 +15,7 @@ namespace WeddingChecklistNew.Models.Enum
             High = 4,
             Highest = 5,
         }
+        public const string cnstWebsiteURL = "https://weddingchecklistnew.azurewebsites.net";
+        //public const string cnstWebsiteURL = "http://localhost:55465";
     }
 }

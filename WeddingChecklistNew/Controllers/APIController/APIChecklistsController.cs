@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using WeddingChecklistNew.Models;
 using WeddingChecklistNew.Models.Domain;
+using WeddingChecklistNew.Models.Enum;
 
 namespace WeddingChecklistNew.Controllers.APIController
 {
@@ -41,7 +42,7 @@ namespace WeddingChecklistNew.Controllers.APIController
         [ResponseType(typeof(void))]
         public IHttpActionResult PutChecklist(int id, Checklist checklist)
         {
-            
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -107,7 +108,7 @@ namespace WeddingChecklistNew.Controllers.APIController
                     throw;
                 }
             }
-            
+
             return CreatedAtRoute("DefaultApi", new { id = checklist.Id }, checklist);
         }
 
@@ -158,22 +159,25 @@ namespace WeddingChecklistNew.Controllers.APIController
         public List<RecentlyChecklist> GetRecentlyCheckLists()
         {
             var list = from checklist in db.CheckLists
-                        join checklistmain in db.ChecklistMains on checklist.ChecklistMainId equals checklistmain.Id
-                        join currency in db.Currencies on checklist.CurrencyId equals currency.Id
-                        where checklistmain.Private == false
-                        orderby checklist.LogDate descending
-                        select new RecentlyChecklist { Name = checklist.Name,
-                                                       Url = checklist.Url,
-                                                       Price = checklist.Price,
-                                                       CurrencyName = currency.code,
-                                                       Priority = checklist.Priority,
-                                                       ImagePath = (from cp in db.CheckListImages
-                                                                     where cp.CheckListId == checklist.Id
-                                                                     orderby cp.Id descending
-                                                                     select cp.Path).FirstOrDefault(),
-                                                       Link = "http://localhost:55465/Checklists/Details/" + checklist.Id,
-                                                       UserId = checklist.UserId
-                        };
+                       join checklistmain in db.ChecklistMains on checklist.ChecklistMainId equals checklistmain.Id
+                       join currency in db.Currencies on checklist.CurrencyId equals currency.Id into currencylj
+                       from item in currencylj.DefaultIfEmpty()
+                       where checklistmain.Private == false
+                       orderby checklist.LogDate descending
+                       select new RecentlyChecklist
+                       {
+                           Name = checklist.Name,
+                           Url = checklist.Url,
+                           Price = checklist.Price,
+                           CurrencyName = item.code,
+                           Priority = checklist.Priority,
+                           ImagePath = (from cp in db.CheckListImages
+                                        where cp.CheckListId == checklist.Id
+                                        orderby cp.Id descending
+                                        select cp.Path).FirstOrDefault(),
+                           Link = clsGenel.cnstWebsiteURL + "/Checklists/Details/" + checklist.Id,
+                           UserId = checklist.UserId
+                       };
             return list.Take(10).ToList();
         }
 
@@ -190,7 +194,7 @@ namespace WeddingChecklistNew.Controllers.APIController
                            MainName = checklistmain.Name,
                            DueDate = checklistmain.DueDate,
                            Description = checklistmain.Definition,
-                           Link = "http://localhost:55465/Checklists/Index/" + checklistmain.Id,
+                           Link = clsGenel.cnstWebsiteURL + "/Checklists/Index/" + checklistmain.Id,
                            UserId = checklistmain.UserId
                        };
             return list.Take(10).ToList();

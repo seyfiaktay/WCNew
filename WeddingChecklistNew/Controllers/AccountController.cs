@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using log4net;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,14 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
 using WeddingChecklistNew.Models;
+using WeddingChecklistNew.Models.Enum;
 
 namespace WeddingChecklistNew.Controllers
 {
     public class AccountController : Controller
     {
         private APIAccountController aPIAccountController = new APIAccountController();
-
+        private static readonly ILog Logger = LogManager.GetLogger(System.Environment.MachineName);
         public void InitializeController(RequestContext context)
         {
             base.Initialize(context);
@@ -88,7 +90,7 @@ namespace WeddingChecklistNew.Controllers
         {
             try
             {
-                string baseAddress = "http://localhost:55465";
+                string baseAddress = clsGenel.cnstWebsiteURL;
                 using (var client = new HttpClient())
                 {
                     var form = new Dictionary<string, string>
@@ -106,24 +108,23 @@ namespace WeddingChecklistNew.Controllers
                     HttpCookie httpCookie = new HttpCookie("token", token.AccessToken);
                     httpCookie.Expires = DateTime.Now.AddDays(14);
                     Response.Cookies.Add(httpCookie);
-
                     var encryptedValue = Convert.ToBase64String(MachineKey.Protect(Encoding.UTF8.GetBytes(model.Email), "ProtectCookie"));
                     HttpCookie httpCookieUser = new HttpCookie("email", encryptedValue);
                     httpCookieUser.Expires = DateTime.Now.AddDays(14);
                     Response.Cookies.Add(httpCookieUser);
-
                     return View();
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                Logger.Error("login işleminde hata oluştu.",ex);
                 return View("Error");
             }
         }
 
         public string GetLoginUserName()
         {
-            string baseAddress = "http://localhost:55465";
+            string baseAddress = clsGenel.cnstWebsiteURL;
             using (var client = new HttpClient())
             {
                 string token = Request.Cookies["token"].Value.ToString();

@@ -64,7 +64,7 @@ namespace WeddingChecklistNew
                 Server.ClearError();
                 Response.Redirect(String.Format("~/Error/{0}/?message={1}", "General", "An error occured"));
             }
-            Logger.Error(User.Identity.Name + " kullanıcısında hata oluştu.",exception);
+            Logger.Error(User.Identity.Name + " kullanıcısında hata oluştu.", exception);
         }
 
         protected void Application_PostAuthenticateRequest(Object sender, EventArgs e)
