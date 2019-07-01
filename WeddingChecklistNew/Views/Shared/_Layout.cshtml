@@ -83,7 +83,13 @@
                         </li>
 
                         <li class="nav-item dropdown u-pro">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/assets/images/users/user1.png" alt="user" class=""> <span class="hidden-md-down">Mark &nbsp;<i class="fa fa-angle-down"></i></span> </a>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/assets/images/users/user1.png" alt="user" class=""> 
+                            <span class="hidden-md-down">
+                                 &nbsp;
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </span> 
+                            </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
                                 <a href="/Account/ChangePassword" hidden="hidden" id="email" class="dropdown-item"><i class="ti-user"></i>@User.Identity.Name</a>
@@ -101,9 +107,21 @@
             </nav>
         </header>
 
-        <div class="page-wrapper p30">
-            @RenderBody()
+        <div class="row">
+            <div class="page-wrapper p30 col-md-10">
+                @RenderBody()
+            </div>
+            <div class="col-md-2">
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                        google_ad_client: "ca-pub-2358927868888601",
+                        enable_page_level_ads: true
+                    });
+                </script>
+            </div>
         </div>
+        
         <footer class="footer">
             © 2019 Wedding List
         </footer>

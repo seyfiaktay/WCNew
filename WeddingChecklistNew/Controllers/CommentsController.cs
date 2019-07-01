@@ -138,6 +138,7 @@ namespace WeddingChecklistNew.Controllers
             List<Comment> commentList;
             commentList = mAPICommentController.GetComments().ToList().OrderByDescending(x => x.LogDate).Take(10).ToList();
             ViewBag.Transaction = false;
+            ViewBag.ChecklistMainId = -1;
             return PartialView("~/Views/ChecklistMains/_CommentView.cshtml", commentList);
         }
     }
