@@ -76,8 +76,8 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="/ChecklistMains/Index">
-                                CheckList <i class="ti-pencil"></i>
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark"  id="checklistmain" href="/ChecklistMains/Index">
+                                Wedding List <i class="ti-pencil"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </a>
                         </li>
@@ -86,18 +86,19 @@
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="~/assets/images/users/user1.png" alt="user" class=""> 
                             <span class="hidden-md-down">
-                                 &nbsp;
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </span> 
+                                @User.Identity.Name
+                                &nbsp;
+                                <i class="fa fa-angle-down"></i>
+                            </span> 
                             </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
-                                <a href="/Account/ChangePassword" hidden="hidden" id="email" class="dropdown-item"><i class="ti-user"></i>@User.Identity.Name</a>
-                                <a href="/Account/Login" hidden="hidden" id="login" class="dropdown-item"><i class="ti-user"></i>Login</a>
+                                <a href="/Account/ChangePassword" id="email" class="dropdown-item"><i class="ti-user"></i>Change Password</a>
+                                <a href="/Account/Login"  id="login" class="dropdown-item"><i class="ti-user"></i>Login</a>
                                 <!-- text-->
-                                <a href="/Account/Logout" hidden="hidden" id="logout" class="dropdown-item"><i class="ti-wallet"></i> Logout</a>
+                                <a href="/Account/Logout"  id="logout" class="dropdown-item"><i class="ti-wallet"></i> Logout</a>
                                 <!-- text-->
-                                <a href="/Account/Register" id="register" class="dropdown-item"><i class="ti-email"></i> Register</a>
+                                <a href="/Account/Register"  id="register" class="dropdown-item"><i class="ti-email"></i> Register</a>
                                 <!-- text-->
 
                             </div>
@@ -158,13 +159,18 @@
         var x = document.cookie;
         var token = x.includes("token");
         if (token == false) {
-            //toastr.error("Unauthorized Request");
-            $("#login").removeAttr("hidden");
+            $("#checklistmain").attr("hidden", "hidden");
+            $("#logout").attr("hidden", "hidden");
+            $("#email").attr("hidden", "hidden");
+            $("#login").removeattr("hidden");
+            $("#register").removeattr("hidden");
         }
         else {
-            $("#email").removeAttr("hidden");
-            $("#logout").removeAttr("hidden");
-            $("#checklistmain").removeAttr("hidden");
+            $("#login").attr("hidden", "hidden");
+            $("#register").attr("hidden", "hidden");
+            $("#checklistmain").removeattr("hidden");
+            $("#logout").removeattr("hidden");
+            $("#email").removeattr("hidden");
         }
 
         $(".datepicker").datepicker({
