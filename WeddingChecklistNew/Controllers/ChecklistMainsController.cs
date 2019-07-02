@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using WeddingChecklistNew.Controllers.APIController;
+using WeddingChecklistNew.Controllers.Class;
 using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
@@ -29,6 +30,7 @@ namespace WeddingChecklistNew.Controllers
         [AllowAnonymous]
         public ActionResult Details(int? id)
         {
+            clsGenel.commentsCount = 0;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -132,14 +134,7 @@ namespace WeddingChecklistNew.Controllers
         }
 
 
-        public PartialViewResult CommentView(int id)
-        {
-            ViewBag.ChecklistMainId = id;
-            ViewBag.Transaction = true;
-            List<Comment> commentList;
-            commentList = mAPICommentsController.GetComments().Where(x => x.ChecklistMainId == id).ToList();
-            return PartialView("_CommentView", commentList);
-        }
+        
 
 
         private ChecklistMain GetChecklistMain(int? id)

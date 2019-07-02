@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Http.Results;
 using System.Web.Mvc;
 using WeddingChecklistNew.Controllers.APIController;
+using WeddingChecklistNew.Controllers.Class;
 using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers
@@ -139,6 +140,17 @@ namespace WeddingChecklistNew.Controllers
             commentList = mAPICommentController.GetComments().ToList().OrderByDescending(x => x.LogDate).Take(10).ToList();
             ViewBag.Transaction = false;
             ViewBag.ChecklistMainId = -1;
+            return PartialView("~/Views/ChecklistMains/_CommentView.cshtml", commentList);
+        }
+
+
+        public PartialViewResult CommentView(int id)
+        {
+            ViewBag.ChecklistMainId = id;
+            ViewBag.Transaction = true;
+            List<Comment> commentList;
+            clsGenel.commentsCount = clsGenel.commentsCount + clsGenel.commentsPageCount;
+            commentList = mAPICommentController.GetComments().Where(x => x.ChecklistMainId == id).OrderByDescending(x=>x.LogDate).Take(clsGenel.commentsCount).ToList();
             return PartialView("~/Views/ChecklistMains/_CommentView.cshtml", commentList);
         }
     }

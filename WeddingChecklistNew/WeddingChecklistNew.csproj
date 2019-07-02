@@ -264,6 +264,7 @@
     <Compile Include="Controllers\ChecklistImagesController.cs" />
     <Compile Include="Controllers\ChecklistMainsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />
+    <Compile Include="Controllers\Class\clsGenel.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

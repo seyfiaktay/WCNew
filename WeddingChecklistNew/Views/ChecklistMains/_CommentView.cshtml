@@ -19,9 +19,10 @@
                     <div class="comment-footer">
                         <span class="date">@item.LogDate.ToString()</span>
                         <span class="action-icons">
+
                             @if (item.UserId == User.Identity.Name && ViewBag.Transaction == true)
                             {
-                                <a href="javascript:void(0)" onclick="Delete(@item.Id)"><i class="glyphicon glyphicon-trash m-r-5"></i></a>
+                                <a href="javascript:void(0)" onclick="Delete(@item.Id)"><i class="fa fa-close text-inverse m-r-5 commentdeletebutton"></i></a>
                             }
                         </span>
                     </div>
@@ -44,9 +45,8 @@
                 </div>
                 <input type="button" id="newtext" onclick="Save()" class="btn btn-success" value="Save" />
             </div>
+            <input type="button" id="loadmore" onclick="LoadMore()" class="btn btn-success" value="Load More" />
         }
-
-
     </div>
 </div>
 
@@ -59,7 +59,7 @@
             data: { text: $("#newtext").val(), ChecklistMainId: checklistmainid, Type : 1 },
             success: function (data) {
                 toastr.success("done!");
-                $("#commentpartial").load("/ChecklistMains/CommentView", { id: checklistmainid });
+                $("#commentpartial").load("/Comments/CommentView", { id: checklistmainid });
             },
             error: function (xhr, textStatus, errorThrown) {
                 toastr.error(xhr.responseText)
@@ -79,11 +79,16 @@
                 }
                 else { toastr.error(data.message); }
                 
-                $("#commentpartial").load("/ChecklistMains/CommentView", { id: checklistmainid });
+                $("#commentpartial").load("/Comments/CommentView", { id: checklistmainid });
             },
             error: function (xhr, textStatus, errorThrown) {
                 toastr.error(xhr.responseText)
             }
         });
+    }
+
+    function LoadMore() {
+        var checklistmainid = @ViewBag.ChecklistMainId;
+        $("#commentpartial").load("/Comments/CommentView", { id: checklistmainid });
     }
 </script>
