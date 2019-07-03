@@ -70,7 +70,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 text-right control-label col-form-label">Priority</label>
-                                        @Html.EnumDropDownListFor(model => model.Priority,"",new { @class = "form-control" })
+                                        @Html.EnumDropDownListFor(model => model.Priority, "", new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -86,7 +86,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-sm-3 text-right control-label col-form-label">Currency</label>
-                                        @Html.DropDownListFor(model => model.CurrencyId, currencylist, "", new {@class = "form-control" })
+                                        @Html.DropDownListFor(model => model.CurrencyId, currencylist, "", new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <!--/span-->
@@ -121,10 +121,9 @@
 
 
                         </div>
-                        <div class="form-actions m-t-40">
+                        <div class="form-actions m-t-40 text-right">
                             <button type="submit" class="btn btn-success">Save</button>
                             <input type="button" class="btn btn-info" value="Back to List" onclick="location.href='@Url.Action("Index", "Checklists")'" />
-
                         </div>
                     </form>
                 </div>

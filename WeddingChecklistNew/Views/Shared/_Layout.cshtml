@@ -23,6 +23,13 @@
     <link href="~/assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
     <script src="~/assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({
+                        google_ad_client: "ca-pub-2358927868888601",
+                        enable_page_level_ads: true
+                    });
+    </script>
 </head>
 
 <body class="skin-blue fix-header single-column card-no-border fix-sidebar">
@@ -112,13 +119,7 @@
                 @RenderBody()
             </div>
             <div class="col-md-2">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({
-                        google_ad_client: "ca-pub-2358927868888601",
-                        enable_page_level_ads: true
-                    });
-                </script>
+               
             </div>
         </div>
         
@@ -161,15 +162,15 @@
             $("#checklistmain").attr("hidden", "hidden");
             $("#logout").attr("hidden", "hidden");
             $("#email").attr("hidden", "hidden");
-            $("#login").removeattr("hidden");
-            $("#register").removeattr("hidden");
+            $("#login").removeAttr("hidden");
+            $("#register").removeAttr("hidden");
         }
         else {
             $("#login").attr("hidden", "hidden");
             $("#register").attr("hidden", "hidden");
-            $("#checklistmain").removeattr("hidden");
-            $("#logout").removeattr("hidden");
-            $("#email").removeattr("hidden");
+            $("#checklistmain").removeAttr("hidden");
+            $("#logout").removeAttr("hidden");
+            $("#email").removeAttr("hidden");
         }
 
         $(".datepicker").datepicker({

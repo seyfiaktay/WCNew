@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-using static WeddingChecklistNew.Models.Enum.clsGenel;
+using static WeddingChecklistNew.Controllers.Class.clsGenel;
 
 namespace WeddingChecklistNew.Models
 {

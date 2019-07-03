@@ -17,8 +17,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
+using WeddingChecklistNew.Controllers.Class;
 using WeddingChecklistNew.Models;
-using WeddingChecklistNew.Models.Enum;
 
 namespace WeddingChecklistNew.Controllers
 {

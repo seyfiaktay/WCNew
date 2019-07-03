@@ -8,9 +8,9 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using WeddingChecklistNew.Controllers.Class;
 using WeddingChecklistNew.Models;
 using WeddingChecklistNew.Models.Domain;
-using WeddingChecklistNew.Models.Enum;
 
 namespace WeddingChecklistNew.Controllers.APIController
 {
