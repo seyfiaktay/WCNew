@@ -40,7 +40,7 @@
                         <tr>
                             <td>@item.Name</td>
                             <td>@item.DueDate.ToShortDateString()</td>
-                            <td>@item.Definition</td>
+                            <td>@item.Definition.Substring(0,(item.Definition.Length < 40 ? item.Definition.Length : 40))</td>
                             <td>@(item.UserId)</td>
                             <td>@(item.LogDate.Value != null ? item.LogDate.Value.ToShortDateString() : "")</td>
                             <td class="text-nowrap">
