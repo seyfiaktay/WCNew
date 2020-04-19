@@ -254,7 +254,6 @@
     <Compile Include="Controllers\APIController\APIChecklistsController.cs" />
     <Compile Include="Controllers\APIController\APICommentsController.cs" />
     <Compile Include="Controllers\APIController\APIControllerGenel.cs" />
-    <Compile Include="Controllers\APIController\APIMailController.cs" />
     <Compile Include="Controllers\ChecklistImagesController.cs" />
     <Compile Include="Controllers\ChecklistMainsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
@@ -499,28 +500,40 @@ namespace WeddingChecklistNew.Controllers
         [AllowAnonymous]
         public IHttpActionResult SendForgotPasswordEmail(string email)
         {
-            var user = UserManager.FindByEmail(email);
-            if (user != null)
+            try
             {
-                // Send an email with this link
-                string code = UserManager.GeneratePasswordResetToken(user.Id);
-                var callbackUrl = string.Format(clsGenel.cnstWebsiteURL + "/Account/ForgotPasswordEmail/?userid={0}&code={1}", user.Id, code);
-                using (SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com"))
+                var user = UserManager.FindByEmail(email);
+                if (user != null)
                 {
-                    MailMessage mail = new MailMessage();
-                    SmtpServer.Port = 587;
-                    SmtpServer.UseDefaultCredentials = false;
-                    SmtpServer.Credentials = new System.Net.NetworkCredential("weddingchecklst@gmail.com", "sa1306070009");
-                    SmtpServer.EnableSsl = true;
-                    SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    mail.From = new MailAddress("weddingchecklst@gmail.com");
-                    mail.To.Add(user.Email);
-                    mail.Subject = "Reset Password";
-                    mail.Body = "Please reset your password by clicking <a href= " + callbackUrl + ">";
-                    SmtpServer.Send(mail);
+                    // Send an email with this link
+                    string smtpServer = ConfigurationSettings.AppSettings.Get("smtpServer");
+                    string emailUserName = ConfigurationSettings.AppSettings.Get("emailUserName");
+                    string emailPassword = ConfigurationSettings.AppSettings.Get("emailPassword");
+                    string fromEmailAddress = ConfigurationSettings.AppSettings.Get("fromEmailAddress");
+                    int port = Convert.ToInt32(ConfigurationSettings.AppSettings.Get("port"));
+
+                    string code = UserManager.GeneratePasswordResetToken(user.Id);
+                    var callbackUrl = string.Format(clsGenel.cnstWebsiteURL + "/Account/ForgotPasswordEmail/?userid={0}&code={1}", user.Id, code);
+                    using (SmtpClient SmtpServer = new SmtpClient(smtpServer))
+                    {
+                        MailMessage mail = new MailMessage();
+                        SmtpServer.Port = port;
+                        SmtpServer.UseDefaultCredentials = false;
+                        SmtpServer.Credentials = new System.Net.NetworkCredential(emailUserName, emailPassword);
+                        SmtpServer.EnableSsl = true;
+                        SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        mail.From = new MailAddress(fromEmailAddress);
+                        mail.To.Add(user.Email);
+                        mail.Subject = "Reset Password";
+                        mail.Body = "Please reset your password by clicking <a href= " + callbackUrl + ">";
+                        SmtpServer.Send(mail);
+                    }
+                    return Ok();
                 }
-                //UserManager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                return Ok();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("An error occured when sending email. Details:" + ex.Message);
             }
             return NotFound();
         }
