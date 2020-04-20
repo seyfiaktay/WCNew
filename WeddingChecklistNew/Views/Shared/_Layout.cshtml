@@ -82,29 +82,39 @@
                     </ul>
                     <ul class="navbar-nav my-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark"  id="checklistmain" href="/ChecklistMains/Index">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" id="checklistmain" href="/ChecklistMains/Index">
                                 Wedding List <i class="ti-pencil"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" id="about" href="/About/Index">
+                                About
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark" id="contact" href="/Contact/Create">
+                                Contact us
                             </a>
                         </li>
 
                         <li class="nav-item dropdown u-pro">
                             <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="~/assets/images/users/user1.png" alt="user" class=""> 
-                            <span class="hidden-md-down">
-                                @User.Identity.Name
-                                &nbsp;
-                                <i class="fa fa-angle-down"></i>
-                            </span> 
+                                <img src="~/assets/images/users/user1.png" alt="user" class="">
+                                <span class="hidden-md-down">
+                                    @User.Identity.Name
+                                    &nbsp;
+                                    <i class="fa fa-angle-down"></i>
+                                </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right animated flipInY">
                                 <!-- text-->
                                 <a href="/Account/ChangePassword" id="email" class="dropdown-item"><i class="ti-user"></i>Change Password</a>
-                                <a href="/Account/Login"  id="login" class="dropdown-item"><i class="ti-user"></i>Login</a>
+                                <a href="/Account/Login" id="login" class="dropdown-item"><i class="ti-user"></i>Login</a>
                                 <!-- text-->
-                                <a href="/Account/Logout"  id="logout" class="dropdown-item"><i class="ti-wallet"></i> Logout</a>
+                                <a href="/Account/Logout" id="logout" class="dropdown-item"><i class="ti-wallet"></i> Logout</a>
                                 <!-- text-->
-                                <a href="/Account/Register"  id="register" class="dropdown-item"><i class="ti-email"></i> Register</a>
+                                <a href="/Account/Register" id="register" class="dropdown-item"><i class="ti-email"></i> Register</a>
                                 <!-- text-->
 
                             </div>

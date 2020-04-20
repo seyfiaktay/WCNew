@@ -247,6 +247,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\APIController\APIAccountController.cs" />
     <Compile Include="Controllers\APIController\APIChecklistImagesController.cs" />
@@ -254,11 +255,13 @@
     <Compile Include="Controllers\APIController\APIChecklistsController.cs" />
     <Compile Include="Controllers\APIController\APICommentsController.cs" />
     <Compile Include="Controllers\APIController\APIControllerGenel.cs" />
+    <Compile Include="Controllers\APIController\APINotificationController.cs" />
     <Compile Include="Controllers\ChecklistImagesController.cs" />
     <Compile Include="Controllers\ChecklistMainsController.cs" />
     <Compile Include="Controllers\ChecklistsController.cs" />
     <Compile Include="Controllers\Class\clsGenel.cs" />
     <Compile Include="Controllers\CommentsController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -4764,6 +4767,8 @@
     <Content Include="Views\Home\_GetSlider.cshtml" />
     <Content Include="Views\Home\_GetWidget.cshtml" />
     <Content Include="Views\ChecklistMains\_CommentView.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\Contact\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

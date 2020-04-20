@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Contact us</h2>
+<div class="row form-horizontal">
+    <form id="contactUs">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Email</label>
+            <div class="col-md-10">
+                <input type="email" name="email" required data-req="Email is Required" value="" id="email" />
+            </div>
+            <label class="col-md-2 control-label">User Name</label>
+            <div class="col-md-10">
+                <input type="text" name="userName" required data-req="User Name is Required" value="" id="userName" />
+            </div>
+            <label class="col-md-2 control-label">Comment</label>
+            <div class="col-md-10">
+                <input type="text" name="comment" required data-req="Comment is Required" value="" id="comment" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" onclick="Save()" class="btn btn-success" value="Send Email" />
+            </div>
+        </div>
+    </form>
+
+</div>
+<script>
+    function Save() {
+        $("#contactUs").validate({
+            rules: {
+                email : "required",
+                userName: "required",
+                comment: "required"
+            },
+            messages: {
+                required: 'Please enter valid value'
+            },
+            showErrors: function (errorMap, errorList) {
+                this.defaultShowErrors();
+            },
+            submitHandler: function () {
+                var userName = $("#userName").val();
+                var comment = $("#comment").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Notification/SendEmail?toEmail=info@createweddinglist.com&subject=" + userName + "&body=" + comment,
+                    success: function (data) {
+                        toastr.success("email sent!");
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        toastr.error(xhr.responseText)
+                    }
+                });
+            }
+        });
+    }
+
+</script>
+
+
+
+
+
+
+ 
