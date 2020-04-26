@@ -44,15 +44,19 @@
                 <div class="steamline m-t-40">
                     @foreach (var item in Model.Checklists)
                     {
-                        <div class="sl-item">
-                            <div class="sl-left">
-                                <img class="img-circle" @Html.Raw(item.ImagePath == null ? "src=" + @Href("~/assets/images/property/furniture1.png") : "src=" + @Href(item.ImagePath))>
+                        <a href="@item.Link">
+                            <div class="sl-item">
+                                <div class="sl-left">
+                                    <img class="img-circle" @Html.Raw(item.ImagePath == null ? "src=" + @Href("~/assets/images/property/furniture1.png") : "src=" + @Href(item.ImagePath))>
+                                </div>
+                                <div class="sl-right">
+                                    <div class="font-medium">@item.Name</div>
+                                    <div class="desc">
+                                        <a href="@item.Url"> @item.Url</a>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="sl-right">
-                                <div class="font-medium">@item.Name</div>
-                                <div class="desc">@item.Url</div>
-                            </div>
-                        </div>
+                        </a>                        
                     }
                 </div>
             </div>
