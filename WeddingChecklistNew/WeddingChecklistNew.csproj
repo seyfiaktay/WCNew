@@ -264,6 +264,7 @@
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PrivacyController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -4770,6 +4771,7 @@
     <Content Include="Views\ChecklistMains\_CommentView.cshtml" />
     <Content Include="Views\About\Index.cshtml" />
     <Content Include="Views\Contact\Create.cshtml" />
+    <Content Include="Views\Privacy\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
