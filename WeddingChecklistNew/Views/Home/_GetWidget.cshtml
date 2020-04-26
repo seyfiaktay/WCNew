@@ -1,8 +1,66 @@
 ﻿@model WeddingChecklistNew.Models.WidgetModel
 
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="steamline m-t-40">
+                    <div class="sl-item">
+                        <div class="sl-left bg-success"> <i class="ti-user"></i></div>
+                        <div class="sl-right">
+                            <div class="font-medium">Do you have a marriage plan near time ?</div>
+                            <div class="desc">If yes, you can plan anything on this site</div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-left bg-info"><i class="fa fa-image"></i></div>
+                        <div class="sl-right">
+                            <div class="font-medium">Do you wonder what couples buy for marriage ?</div>
+                            <div class="desc">If yes, you can make a list on this site </div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-left bg-info"><i class="fa fa-image"></i></div>
+                        <div class="sl-right">
+                            <div class="font-medium">Do you need help about marriage ? ?</div>
+                            <div class="desc">If yes, you can see others list </div>
+                        </div>
+                    </div>
+                    <div class="sl-item">
+                        <div class="sl-left bg-info"><i class="fa fa-image"></i></div>
+                        <div class="sl-right">
+                            <div class="font-medium">Do you wonder which brands are popular in checklist ?</div>
+                            <div class="desc">If yes, you can order most populer brands </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Product List</h5>
+                <div class="steamline m-t-40">
+                    @foreach (var item in Model.Checklists)
+                    {
+                        <div class="sl-item">
+                            <div class="sl-left">
+                                <img class="img-circle" @Html.Raw(item.ImagePath == null ? "src=" + @Href("~/assets/images/property/furniture1.png") : "src=" + @Href(item.ImagePath))>
+                            </div>
+                            <div class="sl-right">
+                                <div class="font-medium">@item.Name</div>
+                                <div class="desc">@item.Url</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-
-<div class="card ">
+<div class=" ">
     @*<div class="card-body col-md-6">
             <h4 class="card-title">Recent </h4>
             <div class="message-box">
@@ -21,25 +79,18 @@
                 </div>
             </div>
         </div>*@
-    <div class="card-body col-md-6">
-        <h4><strong>Do you have a marriage plan near time ?</strong></h4>
-        <h4><strong>Do you wonder what couples buy for marriage ?</strong></h4>
-        <h4><strong>Do you need help about marriage ?</strong></h4>
-        <h4><strong>Do you wonder which brands are popular in checklist ?</strong></h4>
-    </div>
 
-    <div class="card-body col-md-6">
+
+    @*<div class="card-body col-md-6">
         <h4 class="card-title">Product List</h4>
         <div class="message-box">
             <div class="message-widget message-scroll">
-                <!-- Message -->
+               
                 @foreach (var item in Model.Checklists)
                 {
                     <a href="@item.Link">
                         <div class="user-img">
 
-                            @*<img src="@Href(item.ImagePath)" alt="user" class="img-circle">*@
-                            @*C:\Users\Seyfi\Desktop\vs proje\WeddingChecklistNew\WeddingChecklistNew\assets\images\property*@
                             <img @Html.Raw(item.ImagePath == null ? "src=" + @Href("~/assets/images/property/furniture1.png") : "src=" + @Href(item.ImagePath))>
                             <span class="profile-status online pull-right"></span>
                         </div>
@@ -52,9 +103,5 @@
 
             </div>
         </div>
-    </div>
+    </div>*@
 </div>
-
-    @*<script>
-        $("#commentspartial").load("/Comments/CommentViewTop");
-    </script>*@
