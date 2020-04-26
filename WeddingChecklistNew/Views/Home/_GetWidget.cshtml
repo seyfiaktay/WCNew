@@ -44,7 +44,7 @@
                 <div class="steamline m-t-40">
                     @foreach (var item in Model.Checklists)
                     {
-                        <a href="@item.Link">
+                        <a href="@item.Link" style="color:black !important">
                             <div class="sl-item">
                                 <div class="sl-left">
                                     <img class="img-circle" @Html.Raw(item.ImagePath == null ? "src=" + @Href("~/assets/images/property/furniture1.png") : "src=" + @Href(item.ImagePath))>
