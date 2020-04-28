@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Mail;
 using System.Web.Http;
+using WeddingChecklistNew.Models;
 
 namespace WeddingChecklistNew.Controllers.APIController
 {
@@ -18,7 +19,7 @@ namespace WeddingChecklistNew.Controllers.APIController
         }
         [HttpPost]
         [Route("SendEmail")]
-        public IHttpActionResult SendEmail(string toEmail, string subject, string body)
+        public IHttpActionResult SendEmail(Mail mailAddress)
         {
             try
             {
@@ -37,9 +38,9 @@ namespace WeddingChecklistNew.Controllers.APIController
                     SmtpServer.EnableSsl = true;
                     SmtpServer.DeliveryMethod = SmtpDeliveryMethod.Network;
                     mail.From = new MailAddress(fromEmailAddress);
-                    mail.To.Add(toEmail);
-                    mail.Subject = subject;
-                    mail.Body = body;
+                    mail.To.Add(mailAddress.ToAddress);
+                    mail.Subject = mailAddress.Subject;
+                    mail.Body = mailAddress.Body;
                     SmtpServer.Send(mail);
                 }
                 return Ok();

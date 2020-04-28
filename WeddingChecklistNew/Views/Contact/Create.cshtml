@@ -86,7 +86,8 @@
                 var comment = $("#comment").val();
                 $.ajax({
                     type: "POST",
-                    url: "/api/Notification/SendEmail?toEmail=info@createweddinglist.com&subject=" + userName + "&body=" + comment,
+                    url: "/api/Notification/SendEmail",
+                    data: { ToAddress: 'info@createweddinglist.com', Subject: userName, Body:comment },
                     success: function (data) {
                         toastr.success("email sent!");
                     },
